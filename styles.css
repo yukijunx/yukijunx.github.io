@@ -128,3 +128,9 @@ a:visited {
 /* * {
     outline: 1px solid red;
 } */
+img:not(.logo) {
+    filter: grayscale(100%) sepia(100%) hue-rotate(320deg);
+}
+#BestSongs {
+    filter: brightness(130%) contrast(85%);
+}
