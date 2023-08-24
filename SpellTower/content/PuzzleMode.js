@@ -868,9 +868,10 @@ window.onload = () => {
                 await this.getHigh();
                 await this.getTrie();
                 await this.getGame();
-                setTimeout(async ()=>{
+                
                     this.setHintGiver();
                     this.hintGiver.generateOptions();
+                    setTimeout(async ()=>{
                     await this.enableSlide();
                     console.log('Initialization complete!');
                 },2000)
