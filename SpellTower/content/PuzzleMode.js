@@ -55,12 +55,12 @@ window.onload = () => {
         },
         methods: {
 
-// CORE GAME PLAY
+            // CORE GAME PLAY
 
             /**
              * Get the highest record from the server and save it in highestRecord.
              */
-            getHigh: async function(){
+            getHigh: async function () {
                 await fetch('https://fixed-silver-cough.glitch.me/getHigh', {
                     method: "get",
                     headers: {
@@ -69,9 +69,9 @@ window.onload = () => {
                 })
                     .then((res) => res.json())
                     .then((resjson) => {
-                        if (resjson.key != 'nodata'){
+                        if (resjson.key != 'nodata') {
                             this.highestRecord = parseInt(resjson.key.highscore);
-                        }else{
+                        } else {
                             this.highestRecord = this.game.score;
                         }
                     })
@@ -107,7 +107,7 @@ window.onload = () => {
              * Upload current game data to the database.
              */
             saveGame: async function () {
-                if (!this.saveEnabled){
+                if (!this.saveEnabled) {
                     return;
                 }
                 this.buttonRunning.save = true;
@@ -138,9 +138,9 @@ window.onload = () => {
              * Save the current score to the database.
              */
             saveHigh: async function () {
-                if (this.game.score > this.highestRecord){
+                if (this.game.score > this.highestRecord) {
                     this.highestRecord = this.game.score;
-                    let newHigh = {'_id':2, 'highscore': parseInt(this.game.score)};
+                    let newHigh = { '_id': 2, 'highscore': parseInt(this.game.score) };
                     let newHighJSON = JSON.stringify(newHigh);
                     fetch('https://fixed-silver-cough.glitch.me/saveHigh', {
                         method: 'post',
@@ -155,7 +155,7 @@ window.onload = () => {
                         })
                         .catch(err => { console.log('save high score error: ', err) })
                 }
-                
+
             },
 
             /**
@@ -170,7 +170,7 @@ window.onload = () => {
                     return;
                 };
                 console.log("Starting a new game!")
-                this.resetAll();
+                // this.resetAll();
                 this.game = new Game(new Board(), this.trie);
                 this.fiveRandomRows();
                 this.saveGame();
@@ -303,11 +303,11 @@ window.onload = () => {
                                 let redStr = this.game.currentBoard.getWordNeighbours(this.chosenCoordinates);
                                 let red = redStr.map(innerArray => innerArray.map(Number));
                                 let deleting = this.chosenCoordinates.concat(red);
-                                let [tempScore,tempCell] = this.saveTempWord();
+                                let [tempScore, tempCell] = this.saveTempWord();
                                 try {
                                     await this.game.playWord(this.chosenCoordinates);
                                     await this.saveHigh();
-                                    if (tempScore >= this.game.bestWord.score){
+                                    if (tempScore >= this.game.bestWord.score) {
                                         this.game.bestWord.score = tempScore;
                                         this.game.bestWord.cell = tempCell;
                                     }
@@ -414,7 +414,7 @@ window.onload = () => {
                             this.gamelabel = `Minimum length is not satisfied!`;
                         }
                     } else {
-                        this.chosenScore = [0,1];
+                        this.chosenScore = [0, 1];
                     }
                 }
             },
@@ -423,14 +423,14 @@ window.onload = () => {
              * Return the information of the current chosen score.
              * @returns [Score of the word, Array of cells of the word]
              */
-            saveTempWord: function(){
-                let thisScore = this.chosenScore[0]*this.chosenScore[1];
+            saveTempWord: function () {
+                let thisScore = this.chosenScore[0] * this.chosenScore[1];
                 let thisWordCells = [];
-                for (let i = 0; i<this.chosenCoordinates.length; i++){
+                for (let i = 0; i < this.chosenCoordinates.length; i++) {
                     let coord = this.chosenCoordinates[i];
                     thisWordCells.push(this.game.currentBoard.rows[coord[0]][coord[1]])
                 };
-                return [thisScore,thisWordCells]
+                return [thisScore, thisWordCells]
             },
 
             /**
@@ -445,7 +445,7 @@ window.onload = () => {
                 // a new game or back to main menu
             },
 
-// HINT
+            // HINT
 
             /**
              * Set up the hint giver.
@@ -522,7 +522,7 @@ window.onload = () => {
             },
 
 
-// VISUAL
+            // VISUAL
 
             /**
              * Check if a tile is the last one of the current chosen word.
@@ -649,7 +649,7 @@ window.onload = () => {
                 }
             },
 
-// ANIMATIONS
+            // ANIMATIONS
 
             /**
              * Update the new board to the html DOM.
@@ -680,7 +680,7 @@ window.onload = () => {
 
                 return transposedMatrix;
             },
-            
+
             /**
              * lift everything by one unit up and refresh the board
              */
@@ -808,29 +808,29 @@ window.onload = () => {
                     tile.style.removeProperty('display');
                 });
             },
-            
 
-// OTHER FUNCTIONS
 
-            getWordDefinition: async function(word,ind,size){
+            // OTHER FUNCTIONS
+
+            getWordDefinition: async function (word, ind, size) {
                 let def = document.getElementById(`${size}def${ind}`);
                 const WORDurl = `https://wordsapiv1.p.rapidapi.com/words/${word}/definitions`;
                 const WORDoptions = {
-                	method: 'GET',
-                	headers: {
-                		'X-RapidAPI-Key': '0eb5495b80msh0d410c2fd2f965dp1cdf41jsn770a74cb75a9',
-                		'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
-                	}
+                    method: 'GET',
+                    headers: {
+                        'X-RapidAPI-Key': '0eb5495b80msh0d410c2fd2f965dp1cdf41jsn770a74cb75a9',
+                        'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
+                    }
                 };
                 try {
                     const response = await fetch(WORDurl, WORDoptions);
                     const result = await response.json();
-                    if (result.definitions && result.definitions.length!=0){
+                    if (result.definitions && result.definitions.length != 0) {
                         def.innerHTML = result.definitions[0].definition
-                    }else{
+                    } else {
                         def.innerHTML = 'No available definition...'
                     }
-                    
+
                 } catch (error) {
                     console.error(error);
                 }
@@ -859,7 +859,7 @@ window.onload = () => {
                     })
                 })
             },
-              
+
 
         },
         mounted: async function () {
@@ -868,19 +868,19 @@ window.onload = () => {
                 await this.getHigh();
                 await this.getTrie();
                 await this.getGame();
-                
-                    this.setHintGiver();
-                    this.hintGiver.generateOptions();
-                    setTimeout(async ()=>{
+
+                this.setHintGiver();
+                this.hintGiver.generateOptions();
+                setTimeout(async () => {
                     await this.enableSlide();
                     console.log('Initialization complete!');
-                },2000)
+                }, 2000)
             } catch (error) {
                 console.error('Error during initialization:', error);
             }
             window.addEventListener('resize', this.getSvgPoints);
         },
-        
+
     });
     app.mount('body');
 };

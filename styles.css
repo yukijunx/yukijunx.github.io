@@ -27,8 +27,8 @@ body {
     padding-left: 20px;
     padding-right: 20px;
     position: sticky;
-    position:-webkit-sticky;
-    top:0;
+    position: -webkit-sticky;
+    top: 0;
     align-self: flex-start;
     /* right:0; */
 }
@@ -48,14 +48,17 @@ body {
     text-align: left;
     max-width: 100%;
 }
-.item img{
+
+.item img {
     max-width: 100%;
 }
-.item-overview, .item-date{
+
+.item-overview,
+.item-date {
     padding-left: 25px;
 }
 
-.formore{
+.formore {
     text-decoration: underline;
     margin-top: 15px;
 }
@@ -77,16 +80,21 @@ body {
     text-align: justify;
     word-spacing: -0.2em;
 }
+
 .row-corner {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: -5px;
 }
-.name, .overview-title, .formore {
+
+.name,
+.overview-title,
+.formore {
     text-decoration: underline;
 }
-.logo img{
+
+.logo img {
     height: 20px;
     margin-bottom: -3px;
 }
@@ -138,6 +146,7 @@ a:visited {
 img:not(.logo) {
     filter: grayscale(100%) sepia(100%) hue-rotate(320deg);
 }
+
 #BestSongs {
     filter: brightness(130%) contrast(85%);
 }
