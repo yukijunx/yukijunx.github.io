@@ -60,7 +60,7 @@ body {
 
 .formore {
     text-decoration: underline;
-    margin-top: 15px;
+    margin-top: 7vw;
 }
 
 .dotted {
@@ -92,6 +92,9 @@ body {
 .overview-title,
 .formore {
     text-decoration: underline;
+}
+.overview-title{
+    margin-bottom: 10px;
 }
 
 .logo img {

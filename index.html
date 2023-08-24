@@ -9,22 +9,35 @@
 </head>
 
 <body>
-    <!-- <script>
-        document.addEventListener("DOMContentLoaded", function() {
-    const visitorCountElement = document.getElementById("visitorCount");
-
-    // Make an API request to the server
-    fetch("https://fixed-silver-cough.glitch.me/test")
-        .then(response => response.text())
-        .then(data => {
-            const num = data;
-            console.log(`You are the ${data}th visitor`) ;
-        })
-        .catch(error => {
-            console.error("Error fetching visitor count:", error);
-        });
-});
-    </script> -->
+    <script>
+        let visitorCount = undefined;
+        let countSpan = document.getElementById('count');
+        async function getVisitorCount() {
+            fetch("https://fixed-silver-cough.glitch.me/visit")
+                .then(response => response.text())
+                .then(data => {
+                    let num = data;
+                    let numLast = num[num.length - 1];
+                    let lastDigit = parseInt(numLast);
+                    if (lastDigit == 1){
+                        countSpan.innerHTML = `${num}st`;
+                    } else if (lastDigit == 2){
+                        countSpan.innerHTML = `${num}nd`;
+                    } else if (lastDigit == 3 ){
+                        countSpan.innerHTML = `${num}rd`;
+                    } else {
+                        countSpan.innerHTML = `${num}th`;
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching visitor count:", error);
+                });
+        };
+        window.onload = (event) => {
+            getVisitorCount();
+        }
+    </script>
+    
     <div class="body-container">
         <div class="column" id="column-left">
             <div class="row row-top name">
@@ -34,32 +47,33 @@
             <div class="row">
                 <div class="item"><img src="resources/SpellTower.jpg"></div>
                 <div class="item item-overview">
-                    <div class="overview-title">Overview 1</div>
+                    <div class="overview-title">Overview</div>
                     <div>
-                        Like: fermentation, the desert, incorporeal cities, moons, ghouls, dissolving, 
-                        unnatural landscapes. This bundle features new work from Sally Smith,
-                         Amy Sinclair and Victor Hughes, alongside highly anticipated releases from Side Pull and Fish Oil.
+                        Greetings to my MSc dissertation project! Here, I've created a web-based rendition of the much-loved word-finding game <span style="font-style: italic;">SpellTower</span>. 
+                        I've taken charge of developing the main game mechanics, including the game engine and the user interface. The hint feature driven by a clever AI, however, is the work of my teammate. 
+                        Feel free to give it a try – I'm certain you'll enjoy a few rounds!
                     </div>
                     <div class="formore">
-                        <a href="/SpellTower/content/index.html" >
+                        <a href="/SpellTower/content/index.html">
                             Explore the site...
                         </a>
                     </div>
                 </div>
-                <div class="item item-date">01-01-2022</div>
+                <div class="item item-date">15-08-2023</div>
             </div>
             <div class="dotted"></div>
             <div class="row">
                 <div class="item"><img src="resources/GuessTheCat.jpg"></div>
                 <div class="item item-overview">
-                    <div class="name">Overview 1</div>
+                    <div class="overview-title">Overview 1</div>
                     <div>
-                        Like: fermentation, the desert, incorporeal cities, moons, ghouls, dissolving, 
+                        Like: fermentation, the desert, incorporeal cities, moons, ghouls, dissolving,
                         unnatural landscapes. This bundle features new work from Sally Smith,
-                         Amy Sinclair and Victor Hughes, alongside highly anticipated releases from Side Pull and Fish Oil.
+                        Amy Sinclair and Victor Hughes, alongside highly anticipated releases from Side Pull and Fish
+                        Oil.
                     </div>
                     <div class="formore">
-                        <a href="/SpellTower/content/index.html" >
+                        <a href="/SpellTower/content/index.html">
                             Explore the site...
                         </a>
                     </div>
@@ -70,14 +84,15 @@
             <div class="row">
                 <div class="item"><img src="resources/Emojitar.jpg"></div>
                 <div class="item item-overview">
-                    <div class="name">Overview 1</div>
+                    <div class="overview-title">Overview 1</div>
                     <div>
-                        Like: fermentation, the desert, incorporeal cities, moons, ghouls, dissolving, 
+                        Like: fermentation, the desert, incorporeal cities, moons, ghouls, dissolving,
                         unnatural landscapes. This bundle features new work from Sally Smith,
-                         Amy Sinclair and Victor Hughes, alongside highly anticipated releases from Side Pull and Fish Oil.
+                        Amy Sinclair and Victor Hughes, alongside highly anticipated releases from Side Pull and Fish
+                        Oil.
                     </div>
                     <div class="formore">
-                        <a href="/SpellTower/content/index.html" >
+                        <a href="/SpellTower/content/index.html">
                             Explore the site...
                         </a>
                     </div>
@@ -88,14 +103,15 @@
             <div class="row">
                 <div class="item" id="BestSongs"><img src="resources/BestSongs.jpg"></div>
                 <div class="item item-overview">
-                    <div class="name">Overview 1</div>
+                    <div class="overview-title">Overview 1</div>
                     <div>
-                        Like: fermentation, the desert, incorporeal cities, moons, ghouls, dissolving, 
+                        Like: fermentation, the desert, incorporeal cities, moons, ghouls, dissolving,
                         unnatural landscapes. This bundle features new work from Sally Smith,
-                         Amy Sinclair and Victor Hughes, alongside highly anticipated releases from Side Pull and Fish Oil.
+                        Amy Sinclair and Victor Hughes, alongside highly anticipated releases from Side Pull and Fish
+                        Oil.
                     </div>
                     <div class="formore">
-                        <a href="/SpellTower/content/index.html" >
+                        <a href="/SpellTower/content/index.html">
                             Explore the site...
                         </a>
                     </div>
@@ -112,12 +128,14 @@
             <div>
                 <div class="title">INFORMATION</div>
                 <div class="information">
-                    Welcome to my personal page, I'm thrilled to have you here :)
+                    Welcome to my personal page! You are the <span id="count">?</span> visitor, I'm thrilled to have you here :)
                 </div>
                 <p></p>
                 <div class="information">
-                    I graduated from Durham University with an MMath for my undergraduate studies, and later earned a postgraduate MSc in Computing and Information Technology from the University of St Andrews.
-                    Feel free to explore the work I've accomplished so far here, and remember that I'm dedicated to continually refining and enhancing them whenever I find a moment of respite. 
+                    I graduated from Durham University with an MMath for my undergraduate studies, and later earned a
+                    postgraduate MSc in Computing and Information Technology from the University of St Andrews.
+                    Feel free to explore the work I've accomplished so far here, and remember that I'm dedicated to
+                    continually refining and enhancing them whenever I find a moment of respite.
                     Thanks for dropping by and I hope you find something intriguing!
                 </div>
             </div>
@@ -126,11 +144,13 @@
                 <table align="left">
                     <tr>
                         <td>NODES</td>
-                        <td><img class="logo" src="/resources/rightarrow.png"><a href="mailto:xuechun.xin@hotmail.com">Email</a></td>
+                        <td><img class="logo" src="/resources/rightarrow.png"><a
+                                href="mailto:xuechun.xin@hotmail.com">Email</a></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><img class="logo" src="/resources/rightarrow.png"><a href="https://www.linkedin.com/in/xinxuechun/">LinkedIn</a></td>
+                        <td><img class="logo" src="/resources/rightarrow.png"><a
+                                href="https://www.linkedin.com/in/xinxuechun/">LinkedIn</a></td>
                     </tr>
                 </table>
             </div>

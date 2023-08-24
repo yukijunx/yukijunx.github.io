@@ -1,22 +1,22 @@
 :root {
     --color-font:black;
-    --color-tileisword: #B8DCF0;
-    --color-tiledelete: #E0EDF5;
+    --color-tileisword: #EDF2AA;
+    --color-tiledelete: #f2f4d7;
 
-    --color-tile: #E6E1F9;
-    --color-tiledouble: #c8bdef;
-    --color-tilewholerow: #8D7DCB;
-    --color-button: #B8DCF0;
-    --color-midhead: #bbc2fb;
-    --color-midword: #e2e4f5;
+    --color-tile: #F7E3DE;
+    --color-tiledouble: #F1CAB9;
+    --color-tilewholerow: #D38674;
+    --color-button: #EDF2AA;
+    --color-midhead: #f3b376;
+    --color-midword: #f1d8bb;
     --midwidth: 33%;
 }
 .gamearea{
-    background: radial-gradient(circle at 100% 100%, #ffffff 0, #ffffff 20px, transparent 20px) 0% 0%/30px 30px no-repeat,
-    radial-gradient(circle at 0 100%, #ffffff 0, #ffffff 20px, transparent 20px) 100% 0%/30px 30px no-repeat,
-    radial-gradient(circle at 100% 0, #ffffff 0, #ffffff 20px, transparent 20px) 0% 100%/30px 30px no-repeat,
-    radial-gradient(circle at 0 0, #ffffff 0, #ffffff 20px, transparent 20px) 100% 100%/30px 30px no-repeat,
-    linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 20px) calc(100% - 60px) no-repeat,
-    linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 60px) calc(100% - 20px) no-repeat,
-    linear-gradient(55deg, #97d5f3 18%, #909ef9 50%, #C19DF5 90%) 93% 45%/111% 112%;
+background: radial-gradient(circle at 100% 100%, #ffffff 0, #ffffff 20px, transparent 20px) 0% 0%/30px 30px no-repeat,
+            radial-gradient(circle at 0 100%, #ffffff 0, #ffffff 20px, transparent 20px) 100% 0%/30px 30px no-repeat,
+            radial-gradient(circle at 100% 0, #ffffff 0, #ffffff 20px, transparent 20px) 0% 100%/30px 30px no-repeat,
+            radial-gradient(circle at 0 0, #ffffff 0, #ffffff 20px, transparent 20px) 100% 100%/30px 30px no-repeat,
+            linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 20px) calc(100% - 60px) no-repeat,
+            linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 60px) calc(100% - 20px) no-repeat,
+            linear-gradient(54deg, #eaf397 18%, #f3b376 50%, rgba(241,185,185,1) 90%) 93% 45%/111% 112%;
 }

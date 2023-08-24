@@ -1,23 +1,22 @@
 :root {
     --color-font:black;
-    --color-tileisword: #E1F7BE;
-    --color-tiledelete: #EBF5DC;
+    --color-tileisword: #B8DCF0;
+    --color-tiledelete: #E0EDF5;
 
-    --color-tile: #ddf2f0;
-    --color-tiledouble: #afe8dd;
-    --color-tilewholerow: #60c4b8;
-    --color-button: #dae8a0;
-    --color-midhead: #a0f1a8;
-    --color-midword: #ddf2df;
+    --color-tile: #E6E1F9;
+    --color-tiledouble: #c8bdef;
+    --color-tilewholerow: #8D7DCB;
+    --color-button: #B8DCF0;
+    --color-midhead: #bbc2fb;
+    --color-midword: #e2e4f5;
     --midwidth: 33%;
 }
 .gamearea{
     background: radial-gradient(circle at 100% 100%, #ffffff 0, #ffffff 20px, transparent 20px) 0% 0%/30px 30px no-repeat,
-            radial-gradient(circle at 0 100%, #ffffff 0, #ffffff 20px, transparent 20px) 100% 0%/30px 30px no-repeat,
-            radial-gradient(circle at 100% 0, #ffffff 0, #ffffff 20px, transparent 20px) 0% 100%/30px 30px no-repeat,
-            radial-gradient(circle at 0 0, #ffffff 0, #ffffff 20px, transparent 20px) 100% 100%/30px 30px no-repeat,
-            linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 20px) calc(100% - 60px) no-repeat,
-            linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 60px) calc(100% - 20px) no-repeat,
-            linear-gradient(228deg, #d0f397 18%, #89f594 50%, #9DF5F0 90%) 93% 45%/111% 112%;
-
+    radial-gradient(circle at 0 100%, #ffffff 0, #ffffff 20px, transparent 20px) 100% 0%/30px 30px no-repeat,
+    radial-gradient(circle at 100% 0, #ffffff 0, #ffffff 20px, transparent 20px) 0% 100%/30px 30px no-repeat,
+    radial-gradient(circle at 0 0, #ffffff 0, #ffffff 20px, transparent 20px) 100% 100%/30px 30px no-repeat,
+    linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 20px) calc(100% - 60px) no-repeat,
+    linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 60px) calc(100% - 20px) no-repeat,
+    linear-gradient(55deg, #97d5f3 18%, #909ef9 50%, #C19DF5 90%) 93% 45%/111% 112%;
 }

@@ -856,25 +856,10 @@ window.onload = () => {
                 })
             },
 
-            async wakeServer() {
-                await fetch('https://fixed-silver-cough.glitch.me/wake', {
-                    method: "get",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                })
-                    .then((res) => res.text())
-                    .then(function (res) {
-                        console.log(res);
-                    })
-                    .catch(err => { console.log('Waking server error: ', err) });
-            },
-
         },
         mounted: async function () {
             this.getColour();
             try {
-                await this.wakeServer();
                 await this.getHigh();
                 await this.getTrie();
                 await this.getGame();
