@@ -868,10 +868,12 @@ window.onload = () => {
                 await this.getHigh();
                 await this.getTrie();
                 await this.getGame();
-                this.setHintGiver();
-                this.hintGiver.generateOptions();
-                await this.enableSlide();
-                console.log('Initialization complete!');
+                setTimeout(async function(){
+                    this.setHintGiver();
+                    this.hintGiver.generateOptions();
+                    await this.enableSlide();
+                    console.log('Initialization complete!');
+                },2000)
             } catch (error) {
                 console.error('Error during initialization:', error);
             }
