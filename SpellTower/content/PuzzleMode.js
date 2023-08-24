@@ -868,7 +868,7 @@ window.onload = () => {
                 await this.getHigh();
                 await this.getTrie();
                 await this.getGame();
-                setTimeout(async function(){
+                setTimeout(async ()=>{
                     this.setHintGiver();
                     this.hintGiver.generateOptions();
                     await this.enableSlide();
