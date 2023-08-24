@@ -172,9 +172,7 @@ window.onload = () => {
                 console.log("Starting a new game!")
                 // this.resetAll();
                 this.game = new Game(new Board(), this.trie);
-                console.log(this.game);
                 this.fiveRandomRows();
-                console.log(this.game);
                 this.saveGame();
                 this.setHintGiver();
                 this.hintGiver.generateOptions();
@@ -872,13 +870,11 @@ window.onload = () => {
                 await this.getGame();
                 this.setHintGiver();
                 this.hintGiver.generateOptions();
+                await this.enableSlide();
+                console.log('Initialization complete!');
             } catch (error) {
                 console.error('Error during initialization:', error);
             };
-            setTimeout(async () => {
-                await this.enableSlide();
-                console.log('Initialization complete!');
-            }, 5000)
             window.addEventListener('resize', this.getSvgPoints);
         },
 
