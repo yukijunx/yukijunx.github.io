@@ -26,12 +26,6 @@ class NotAWordError extends Error {
     }
 }
 
-// const minLengthBounds = {
-//     4: [2000, 5000],
-//     5: [3500, 7000],
-//     6: [5000, Number.MAX_SAFE_INTEGER]
-// }
-
 const minLengthBounds = {
     4: [0, 1000],
     5: [0, 2000],

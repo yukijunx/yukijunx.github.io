@@ -111,11 +111,15 @@ window.onload = () => {
                     return;
                 }
                 this.buttonRunning.save = true;
+                let tempGameData = Game.fromJSON(JSON.parse(JSON.stringify(this.game)));
+                tempGameData.trie = undefined;
+                console.log(tempGameData);
                 let gamedata = {
                     _id: 1,
-                    game: this.game
+                    game: tempGameData
                 };
                 let gameJSON = JSON.stringify(gamedata);
+                console.log(gameJSON);
                 fetch('https://fixed-silver-cough.glitch.me/save', {
                     method: 'post',
                     headers: {
