@@ -113,13 +113,11 @@ window.onload = () => {
                 this.buttonRunning.save = true;
                 let tempGameData = Game.fromJSON(JSON.parse(JSON.stringify(this.game)));
                 tempGameData.trie = undefined;
-                console.log(tempGameData);
                 let gamedata = {
                     _id: 1,
                     game: tempGameData
                 };
                 let gameJSON = JSON.stringify(gamedata);
-                console.log(gameJSON);
                 fetch('https://fixed-silver-cough.glitch.me/save', {
                     method: 'post',
                     headers: {
@@ -295,7 +293,7 @@ window.onload = () => {
                         this.shake(document.getElementById("br-loading-container"));
                         return
                     } else {
-                        console.log('Playing the word...')
+                        console.log('Trying to play the word...')
                         if (this.game.usedWords.includes(this.chosenWord)) {
                             // Shake gamelabel
                             this.checkWords();
@@ -865,11 +863,25 @@ window.onload = () => {
                 })
             },
 
+            async wakeServer() {
+                await fetch('https://fixed-silver-cough.glitch.me/wake', {
+                    method: "get",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                })
+                    .then((res) => res.text())
+                    .then(function (res) {
+                        console.log(res);
+                    })
+                    .catch(err => { console.log('Waking server error: ', err) });
+            },
 
         },
         mounted: async function () {
             this.getColour();
             try {
+                await this.wakeServer();
                 await this.getHigh();
                 await this.getTrie();
                 await this.getGame();
