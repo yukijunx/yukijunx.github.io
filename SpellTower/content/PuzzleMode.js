@@ -870,13 +870,13 @@ window.onload = () => {
                 await this.getGame();
                 this.setHintGiver();
                 this.hintGiver.generateOptions();
-                setTimeout(async () => {
-                    await this.enableSlide();
-                    console.log('Initialization complete!');
-                }, 5000)
             } catch (error) {
                 console.error('Error during initialization:', error);
-            }
+            };
+            setTimeout(async () => {
+                await this.enableSlide();
+                console.log('Initialization complete!');
+            }, 5000)
             window.addEventListener('resize', this.getSvgPoints);
         },
 
