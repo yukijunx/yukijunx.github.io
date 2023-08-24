@@ -55,6 +55,11 @@ body {
     padding-left: 25px;
 }
 
+.formore{
+    text-decoration: underline;
+    margin-top: 15px;
+}
+
 .dotted {
     background-image: linear-gradient(to right, var(--color) 55%, rgba(255, 255, 255, 0) 20%);
     background-position: bottom;
@@ -72,13 +77,13 @@ body {
     text-align: justify;
     word-spacing: -0.2em;
 }
-.row-corner{
+.row-corner {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: -5px;
 }
-.name {
+.name, .overview-title, .formore {
     text-decoration: underline;
 }
 .logo img{
@@ -109,6 +114,8 @@ a:visited {
     color: inherit;
     text-decoration: none;
 }
+
+
 
 /* Media query for smaller screens */
 @media (max-width: 768px) {

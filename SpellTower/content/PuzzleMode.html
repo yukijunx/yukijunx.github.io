@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>SpellTower</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/vue@next"></script>
+    <link rel="stylesheet" href="colours0.css" id="colour">
+    <link rel="stylesheet" href="PM.css">
+    <link rel="stylesheet" href="PM1.css">
+    <link rel="stylesheet" href="PM2.css">
+    <script type="module" src="https://yukijunx.github.io/SpellTower/content/PuzzleMode.js" defer></script>
+    <!-- Animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/EasePack.min.js"></script>
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p&display=swap" rel="stylesheet">
+</head>
+
+<body v-cloak>
+
+    <div id="background-image"></div>
+    <div id="loading-container" v-if="loading">
+        <div id="loading-animation"></div>
+    </div>
+
+    <div id="body-container" :class="{'w3-cell-row':true, 'wait-cursor': buttonRunning.save}" v-else>
+        <div id="left-buttons-container">
+            <div class="left-buttons" id="back-button" onclick="window.location.href = 'http://localhost:3000';">
+                <img src="https://yukijunx.github.io/SpellTower/resources/return.png" id="back-img">
+            </div>
+            <div class="left-buttons" id="instruction-button" v-on:click="instruction=true">
+                <img src="https://yukijunx.github.io/SpellTower/resources/help.png" id="help-img">
+            </div>
+            <div class="left-buttons" id="colour-button" v-on:click="changeColour">
+                <img src="https://yukijunx.github.io/SpellTower/resources/palette.png" id="palette-img">
+            </div>
+            <div class="left-buttons" id="info-button" v-on:click="displayInfo = !displayInfo">
+                <img src="https://yukijunx.github.io/SpellTower/resources/info-on.png" v-if="!displayInfo" >
+                <img src="https://yukijunx.github.io/SpellTower/resources/info-off.png" v-if="displayInfo" >
+            </div>
+            <div class="left-buttons save-toggle" v-if="!saveEnabled" v-on:click="saveEnabled=!saveEnabled">
+                <img src="https://yukijunx.github.io/SpellTower/resources/save_off.png">
+            </div>
+            <div class="left-buttons save-toggle" v-if="saveEnabled" v-on:click="saveEnabled=!saveEnabled">
+                <img src="https://yukijunx.github.io/SpellTower/resources/save_on.png">
+            </div>
+
+        </div>
+
+
+        <div class="col col-left">
+            <div id="infoleft-big" v-if="displayInfo">
+                <div class="game-information">
+                    <div id="info-usedBox"><span class="info">USED WORD LIST: </span></div>
+                    <div class="info-usedList">
+                        <div class="info-usedList-content">
+                            <div v-for="(word,ind) in game.usedWords"
+                             class="usedWord"
+                             @mouseenter="getWordDefinition(word,ind,'b')">
+                                {{ word }}
+                                <span class="hoveringText" :id=`bdef${ind}`></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="infoleft-small" v-if="displayInfo">
+                <div class="game-information">
+                    <div id="info-highestScore"><span class="info">HIGHEST SCORE: </span></div>
+                    {{highestRecord}}
+                    <div id="info-numberPlayed"><span class="info">NUMBER OF WORD PLAYED: </span></div>
+                    {{game.usedWords.length}}
+                    <div id="info-bestWord"><span class="info">BEST WORD: </span></div>
+                    <div>
+                        <span v-for="cell in game.bestWord.cell" 
+                        :class="{'double-info':cell.double, 'wholeRow-info':cell.wholeRow }">
+                        {{cell._letter}}
+                        </span>
+                         ({{game.bestWord.score}})
+                    </div>
+                </div>
+                <div class="game-information">
+                    <div id="info-usedBox"><span class="info">USED WORD LIST: </span></div>
+                    <div class="info-usedList">
+                        <div class="info-usedList-content">
+                            <div v-for="(word,ind) in game.usedWords"
+                             class="usedWord"
+                             @mouseenter="getWordDefinition(word,ind,'s')">
+                                {{ word }}
+                                <span class="hoveringText" :id=`sdef${ind}`></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col col-mid">
+            <div class="gamearea">
+                <div class="game-top" id="title">SPELLTOWER</div>
+
+                <div class="game-second">
+                    <div :class="{'game-word':true, 'grey':!(isWord)}">
+                        <span>{{chosenWord}}</span>
+                        <span v-if="chosenScore[0]!=0" id="score">({{chosenScore[0]}})</span>
+                        <span v-if="chosenScore[1]!=1" id="multiplier">&times;{{chosenScore[1]}}</span>
+                    </div>
+                    <div class="game-label" id="gamelabel">{{gamelabel}}</div>
+                </div>
+
+                <div class="game-score">SCORE: {{game.score}}</div>
+                <div id="addrow" v-on:click="newRow()" :class="{'game-button':true, 'banned':buttonRunning.animation,
+                'wait-cursor': buttonRunning.save}">
+                    ADD A ROW
+                    <img src="https://yukijunx.github.io/SpellTower/resources/addone.png" id="addrow-img">
+                </div>
+                <div id="hint" v-on:click="hintButton()" :class="{'game-button':true, 'banned':buttonRunning.animation,
+                'wait-cursor': buttonRunning.save}">
+                    HINT
+                    <img src="https://yukijunx.github.io/SpellTower/resources/tips.png" id="hint-img">
+                </div>
+                <div id="newgame" v-on:click="newGame()" :class="{'game-button':true, 'banned':buttonRunning.animation,
+                'wait-cursor': buttonRunning.save}">
+                    NEW GAME
+                    <img src="https://yukijunx.github.io/SpellTower/resources/redo.png" id="redo-img">
+                </div>
+
+                <svg class="svg-container" id="svg-container">
+                    <polygon v-for="(svg,i) in svgPoints" :points="svgPoints[i]" class="svg-polygon"></polygon>
+                </svg>
+
+                <div
+                    :class="{'game-board': true, 'game-board-0': true,
+                'little-dangerous': game.currentBoard.rows.slice(0,3).some(row => row.some(cell => cell._letter != '?')),
+                'dangerous': game.currentBoard.rows.slice(0,2).some(row => row.some(cell => cell._letter != '?')),
+                'very-dangerous': game.currentBoard.rows.slice(0,1).some(row => row.some(cell => cell._letter != '?'))}">
+
+                    <div id="grid-container" :class="{'wait-cursor': buttonRunning.save}">
+                        <div v-for="(col,i) in transposeRows" :key="i" class="grid-row">
+                            <div v-for="(cell,j) in col" :key=`${i}-${j}-{cell.letter}` :data-cell="cell._letter"
+                                :id="`${j}-${i}`" :class="{'grid-cell': true, 'double': cell.double, 'wholeRow': cell.wholeRow, 'isWord':isWord,
+                            'last': isLastElement([j,i]),
+                            'wait-cursor': buttonRunning.save,
+                            'chosen': chosenCoordinates.some(coord => coord[0] === j && coord[1] === i),
+                            'neighbour': redNeighbours.some(coord => coord[0] === j && coord[1] === i),
+                            'bottomleft': i === 0 && j === col.length - 1,
+                            'bottomright':j === col.length - 1 && i === transposeRows.length - 1}">
+                                <span v-if="cell.minLength != 3 && cell._letter !=='0'" id="min-length">{{
+                                    cell.minLength }}</span>
+                                <span v-if="cell._letter !== '0'">{{ cell._letter }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div id="br-loading-container">
+                <img src="https://yukijunx.github.io/SpellTower/resources/loading.png" id="loadingimg"
+                    :class="{'visible': buttonRunning.save}">
+            </div>
+
+        </div>
+
+        <div class="col col-right">
+            <div id="inforight" v-if="displayInfo">
+                <div class="game-information">
+                    <div id="info-highestScore"><span class="info">HIGHEST SCORE: </span></div>
+                    {{highestRecord}}
+                    <div id="info-numberPlayed"><span class="info">NUMBER OF WORD PLAYED: </span></div>
+                    {{game.usedWords.length}}
+                    <div id="info-bestWord"><span class="info">BEST WORD: </span></div>
+                    <div>
+                        <span v-for="cell in game.bestWord.cell" 
+                        :class="{'double-info':cell.double, 'wholeRow-info':cell.wholeRow }">
+                        {{cell._letter}}
+                        </span>
+                         ({{game.bestWord.score}})
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="instruction-container" v-if="instruction && !loading">
+        <div id="instruction-content">
+            <p id="instru-title">Puzzle Mode</p>
+            <p>
+                Try to clear the screen by using the letters to create words!
+                You can select adjacent and diagonal tiles to create words, which clears those tiles from the screen.
+                For each word you removed from the board, another row is added from the bottom to the screen.
+                The game ends when the tiles touches the ceiling.
+                The game does not punish for an invalid word, feel free to try words out!
+            </p>
+            <p>Including a tile in <span style="background-color: var(--color-tiledouble);">brighter</span> colour makes
+                the score of the word double.</p>
+            <p>Including a tile in <span style="background-color: var(--color-tilewholerow); color: white">darker</span>
+                colour in a word clears the whole row of that tile.</p>
+            <p>Black tiles can only be cleared by using its adjacent tiles.</p>
+            <p>Tiles with a small number in the top right corner means that it has a minimum word length requirement.</p>
+
+            <div class="divider"></div>
+
+            <div id="button-instruction">
+                <div class="instru-row">
+                    <div class="left-buttons fordisplay">
+                        <img src="https://yukijunx.github.io/SpellTower/resources/return-b.png">
+                    </div>
+                    <span>Go back to the main menu.</span>
+                </div>
+                <div class="instru-row">
+                    <div class="left-buttons fordisplay">
+                        <img src="https://yukijunx.github.io/SpellTower/resources/palette-b.png">
+                    </div>
+                    <span>Change colour theme.</span>
+                </div>
+                <div class="instru-row">
+                    <div class="left-buttons fordisplay">
+                        <img src="https://yukijunx.github.io/SpellTower/resources/info-onb.png">
+                    </div>
+                    <span>/</span>
+                    <div class="left-buttons fordisplay">
+                        <img src="https://yukijunx.github.io/SpellTower/resources/info-offb.png">
+                    </div>
+                    <span>Open/Close the game details.</span>
+                </div>
+                <div class="instru-row">
+                    <div class="left-buttons fordisplay">
+                        <img src="https://yukijunx.github.io/SpellTower/resources/addone.png">
+                    </div>
+                    <span>Add another row.</span>
+                </div>
+                <div class="instru-row">
+                    <div class="left-buttons fordisplay">
+                        <img src="https://yukijunx.github.io/SpellTower/resources/tips.png">
+                    </div>
+                    <span>Get a hint. Hint word will be shown at the word input area, and will be highlighted on the board.</span>
+                </div>
+                <div class="instru-row">
+                    <div class="left-buttons fordisplay">
+                        <img src="https://yukijunx.github.io/SpellTower/resources/redo.png">
+                    </div>
+                    <span>Start a new game.</span>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <p>
+                The game auto-saves every time you play a word, so you can leave anytime and come back later!
+                You cannot take other actions during the game is saving, which is indicated by a loading circle at the
+                bottom right corner of the board.
+            </p>
+            <p>Enjoy your word-hunting!</p>
+        </div>
+
+        <div class="left-buttons" id="close-instruction" v-on:click="instruction=false">
+            <img src="https://yukijunx.github.io/SpellTower/resources/close.png" id="close-img">
+        </div>
+
+    </div>
+
+</body>
+
+</html>

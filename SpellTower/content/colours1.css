@@ -1,0 +1,22 @@
+:root {
+    --color-font:black;
+    --color-tileisword: #EDF2AA;
+    --color-tiledelete: #f2f4d7;
+
+    --color-tile: #F7E3DE;
+    --color-tiledouble: #F1CAB9;
+    --color-tilewholerow: #D38674;
+    --color-button: #EDF2AA;
+    --color-midhead: #f3b376;
+    --color-midword: #f1d8bb;
+    --midwidth: 33%;
+}
+.gamearea{
+background: radial-gradient(circle at 100% 100%, #ffffff 0, #ffffff 20px, transparent 20px) 0% 0%/30px 30px no-repeat,
+            radial-gradient(circle at 0 100%, #ffffff 0, #ffffff 20px, transparent 20px) 100% 0%/30px 30px no-repeat,
+            radial-gradient(circle at 100% 0, #ffffff 0, #ffffff 20px, transparent 20px) 0% 100%/30px 30px no-repeat,
+            radial-gradient(circle at 0 0, #ffffff 0, #ffffff 20px, transparent 20px) 100% 100%/30px 30px no-repeat,
+            linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 20px) calc(100% - 60px) no-repeat,
+            linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 60px) calc(100% - 20px) no-repeat,
+            linear-gradient(54deg, #eaf397 18%, #f3b376 50%, rgba(241,185,185,1) 90%) 93% 45%/111% 112%;
+}

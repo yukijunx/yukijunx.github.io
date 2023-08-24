@@ -1,0 +1,415 @@
+/* CSS that determines layout */
+
+html,
+body,
+#body-container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    position: relative;
+    font-family: 'M PLUS 1p', sans-serif;
+    /* font-family: 'Dyslexic'; */
+}
+
+[v-cloak] {
+    display: none;
+}
+
+@font-face {
+    font-family: 'Dyslexic';
+    src: url('/SpellTower/resources/LexieReadable-Regular.ttf') format('opentype');
+}
+
+html,
+body {
+    z-index: -1;
+}
+
+
+.wait-cursor {
+    cursor: wait
+}
+
+.wait-cursor,
+.game-board .wait-cursor {
+    cursor: wait;
+}
+
+#body-container {
+    display: flex;
+    flex-wrap: wrap;
+    z-index: 1;
+}
+
+.col-left,
+.col-mid,
+.col-right {
+    height: 100vh;
+}
+
+.col-left,
+.col-right {
+    z-index: 2;
+    display: flex;
+}
+
+.col-left {
+    flex-basis: calc((100% - var(--midwidth)) / 2 - 2.5%);
+    z-index:90;
+}
+
+.col-right {
+    flex-basis: calc((100% - var(--midwidth)) / 2);
+}
+
+.col-mid {
+    display: flex;
+    flex-basis: var(--midwidth);
+    align-items: center;
+    z-index: 3;
+    position: relative;
+}
+
+@media (min-width: 800px) and (max-width: 1280px) {
+    #body-container {
+        flex-direction: block;
+    }
+
+    .col {
+        flex-basis: 100%;
+    }
+
+    .col-mid {
+        order: -1;
+        max-width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .col-right {
+        display:none;
+        order: 1;
+    }
+    .col-left{
+        order:2;
+    }
+
+    .gamearea {
+        margin: 12vmin;
+    }
+
+}
+
+@media (max-width: 799px) {
+    #body-container {
+        flex-direction: block;
+        overflow-x: hidden;
+    }
+
+    .col {
+        flex-basis: 100%;
+    }
+
+    .col-mid {
+        order: -1;
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .col-right {
+        display:none;
+        order: 1;
+    }
+    .col-left{
+        order:2;
+    }
+
+    .gamearea {
+        margin-left: 4vmin;
+        margin-right: 14vmin;
+    }
+
+    #left-buttons-container {
+        flex-direction: column;
+        left: unset;
+        top: unset;
+    }
+
+}
+
+
+.gamearea {
+    /* overflow: visible; */
+    position: relative;
+    width: 100%;
+    height: 95vh;
+    border-radius: 3vh;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 5px 0px, rgba(17, 17, 26, 0.2) 0px 0px 15px;
+}
+
+.game-top {
+    width: 100%;
+    height: 6%;
+    border-top-left-radius: 3vh;
+    border-top-right-radius: 3vh;
+    /* Responsive text size */
+    font-size: 3vmin;
+    letter-spacing: 0.8vmin;
+    /* To center the text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-second {
+    height: 11.5%;
+}
+
+.game-word {
+    width: 100%;
+    height: 65.21%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5vmin;
+}
+
+.game-word span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.game-word.grey {
+    /* filter: brightness(90%); */
+    opacity: 0.25;
+}
+
+#score {
+    font-size: 3vmin;
+}
+
+#multiplier {
+    font-size: 3vmin;
+}
+
+.game-label {
+    width: 100%;
+    height: 34.78%;
+    /* Responsive text size */
+    font-size: 2vmin;
+    /* To center the text */
+    display: flex;
+    align-items: top;
+    justify-content: center;
+}
+
+.game-board {
+    width: 100%;
+    border-bottom-left-radius: 3vh;
+    border-bottom-right-radius: 3vh;
+}
+
+.game-board-0 {
+    height: 82.5%;
+    position: relative;
+}
+
+/* .game-board-1 {
+    position: absolute;
+    bottom: 0;
+    height: calc(100%/12*11);
+    background-color: var(--color-midsecondceil);
+}
+
+.game-board-2 {
+    position: absolute;
+    bottom: 0;
+    height: calc(100%/11*10);
+    background-color: var(--color-midmainboard);
+} */
+
+.game-score {
+    border-top-right-radius: 1.5vh;
+    border-bottom-right-radius: 1.5vh;
+    padding: 1.5%;
+    /* Position it */
+    position: absolute;
+    top: 6%;
+    left: 100%;
+    /* Responsive Size */
+    white-space: nowrap;
+    font-size: 2vmin;
+}
+
+.game-button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-top-right-radius: 1.5vh;
+    border-bottom-right-radius: 1.5vh;
+    /* Position it */
+    position: absolute;
+    height: 4vmin;
+    /* Responsive Size */
+    white-space: nowrap;
+    font-size: 1.8vmin;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    z-index: -1;
+    user-select: none;
+}
+
+.game-button:hover {
+    filter: brightness(95%);
+}
+
+.game-button img {
+    height: 2.5vmin;
+    width: 2.5vmin;
+    margin-left: 0.5vmin;
+}
+
+#addrow {
+    top: 17.5%;
+    width: 15vmin;
+    left: calc(100% - 15vmin + 3.2vmin)
+}
+
+#addrow:hover {
+    transform: translateX(calc(15vmin - 3.3vmin));
+}
+
+#hint {
+    top: calc(17.5% + 4vmin);
+    width: 9vmin;
+    left: calc(100% - 9vmin + 3.2vmin);
+}
+
+#hint:hover {
+    transform: translateX(calc(9vmin - 3.3vmin));
+}
+
+.game-button.banned {
+    cursor: not-allowed;
+}
+
+.game-button.wait-cursor {
+    cursor: wait;
+}
+
+#newgame {
+    top: calc(17.5% + 8vmin);
+    width: 14vmin;
+    left: calc(100% - 14vmin + 3.2vmin);
+}
+
+#newgame:hover {
+    transform: translateX(calc(14vmin - 3.3vmin));
+}
+
+#grid-container {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    /* gap: 0.4vmin; */
+    position: absolute;
+    bottom: 0;
+    /* padding: 0.4vmin; */
+    border-bottom-left-radius: 3vh;
+    border-bottom-right-radius: 3vh;
+}
+
+.grid-row {
+    width: 100%;
+    display: grid;
+    grid-template-rows: repeat(12, minmax(0, 1fr));
+    /* gap: 0.4vmin; */
+}
+
+#min-length {
+    position: absolute;
+    font-size: 1.8vmin;
+    top: 0.2vmin;
+    right: 0.2vmin;
+}
+
+.grid-cell {
+    transition: background-color 0.2s ease;
+    transition: transform 0.2s ease;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    visibility: visible;
+    cursor: pointer;
+    font-size: 3.8vmin;
+    border-radius: 0.4vmin;
+    margin: 0.1vmin;
+    user-select: none;
+}
+
+/* Invisible null tiles */
+.grid-cell[data-cell="?"] {
+    cursor: default;
+    opacity: 0;
+}
+
+.grid-cell[data-cell="?"].wait-cursor {
+    cursor: wait;
+}
+
+/* Black tile & Black and double tile*/
+.grid-cell[data-cell="0"],
+.grid-cell.double[data-cell="0"] {
+    cursor: default;
+    background-color: #3a3a3a;
+}
+
+/* Black tile when in neighbour to be eliminated */
+.grid-cell[data-cell="0"].neighbour,
+.grid-cell.double[data-cell="0"].neighbour {
+    cursor: default;
+}
+
+
+
+.grid-cell.chosen.isWord.last {
+    animation: breathe 2.5s ease-in-out infinite;
+    z-index: 99;
+}
+
+@keyframes breathe {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.grid-cell.bottomleft {
+    border-bottom-left-radius: 3vh;
+}
+
+.grid-cell.bottomright {
+    border-bottom-right-radius: 3vh;
+}
+
+
+/* Shadow for tiles selected and being eliminated */
+.grid-cell.neighbour,
+.grid-cell.chosen,
+.grid-cell:hover:not([data-cell="0"]) {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 6px 6px;
+    z-index: 98;
+}
+
+/* * {
+    outline: 1px solid red;
+} */

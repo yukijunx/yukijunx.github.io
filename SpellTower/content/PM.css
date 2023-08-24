@@ -1,0 +1,118 @@
+/* CSS that effects colours */
+
+body {
+    color: var(--color-font);
+    background-color: #3a3a3a;
+}
+
+.gamearea {
+    border-radius: 30px;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.game-top {
+    background-color: var(--color-midhead);
+    /*     box-sizing: border-box;
+    border: 0.6vmin solid var(--color-midhead);
+    padding: 0.2vmin; */
+}
+
+#multiplier {
+    color: var(--color-button);
+}
+
+.game-second {
+    background-color: var(--color-midword);
+    /* border-bottom: 0.6vmin solid var(--color-midhead); */
+}
+
+.game-score,
+.game-button {
+    background-color: var(--color-button);
+    box-sizing: border-box;
+    border: 2px solid var(--color-button);
+    padding: 2px;
+}
+
+.game-board {
+    background: linear-gradient(to bottom, var(--color-midhead), #f5f5f5 4%)
+}
+
+.grid-cell {
+    background-color: var(--color-tile);
+    /*     box-sizing: border-box;
+    border: 1px solid var(--color-midhead); */
+}
+
+/* Black tile when in neighbour to be eliminated */
+.grid-cell[data-cell="0"].neighbour,
+.grid-cell.double[data-cell="0"].neighbour {
+    /* background-color: var(--color-tiledelete); */
+    filter: brightness(200%);
+
+}
+
+/* Double tile */
+.grid-cell.double {
+    background-color: var(--color-tiledouble);
+
+}
+
+/* Whole-row tile */
+.grid-cell.wholeRow {
+    background-color: var(--color-tilewholerow);
+    color: white;
+}
+
+/* neighbour tile */
+.grid-cell.neighbour {
+    background-color: var(--color-tiledelete);
+    color: var(--color-font)
+}
+
+/* Valid chosen word tile */
+.chosen.isWord {
+    background-color: var(--color-tileisword);
+    /* color:white; */
+}
+
+/* Not Valid chosen word tile */
+.grid-cell.chosen {
+    filter: brightness(90%)
+}
+
+.svg-polygon {
+    fill: #f1f1f1;
+}
+
+.left-buttons {
+    /* background-color: var(--color-button); */
+    box-sizing: border-box;
+    border: 2px solid var(--color-midword);
+    padding: 2px;
+}
+
+.info{
+    color:white;
+}
+
+.game-information {
+    border:solid 2px lightgrey;
+    color:lightgrey;
+    border-radius: 2vh;
+    padding:1vmin;
+    opacity: 0.8;
+}
+
+.double-info{
+    color: var(--color-tiledouble);
+}
+.wholeRow-info{
+    color: var(--color-tilewholerow);
+}
+
+.save-toggle{
+    border:none;
+    padding:0;
+}

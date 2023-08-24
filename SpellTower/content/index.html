@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>SpellTower</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="colours0.css" id="colour">
+    <link rel="stylesheet" href="index.css">
+    <script type="module">
+        import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+        createApp({
+            data: function () {
+                return {
+                    credit: false
+                }
+            },
+            methods: {
+                getColour: function () {
+                    var theme = sessionStorage.getItem('theme');
+                    if (theme) {
+                        let colourtheme = document.getElementById('colour');
+                        let themeNumber = parseInt(theme);
+                        colourtheme.href = `colours${themeNumber}.css`;
+                    }
+                }
+            },
+            mounted: function () {
+                this.getColour()
+            },
+        })
+            .mount('body')
+    </script>
+</head>
+
+<body v-cloak>
+    <div id="background-image"></div>
+    <div class="container">
+        <div class="content" id="main" v-if="!credit">
+            <div id="title">SPELLTOWER</div>
+            <div id="menu">
+                <div class="menu" onclick="window.location.href = 'https://yukijunx.github.io/SpellTower/content/PuzzleMode.html';">
+                    <img src="https://yukijunx.github.io/SpellTower/resources/right.png" class="arrow">
+                    <div>PUZZLE MODE</div>
+                </div>
+                <div class="menu">
+                    <img src="https://yukijunx.github.io/SpellTower/resources/right.png" class="arrow">
+                    <div v-on:click="credit = true">CREDITS</div>
+                </div>
+            </div>
+        </div>
+        <div class="content" id="credit" v-if="credit">
+            <div class="left-buttons" v-on:click="credit=false">
+                <img src="https://yukijunx.github.io/SpellTower/resources/return.png" id="back-img">
+            </div>
+            
+            <table>
+                <tr>
+                    <th>Researchers</th>
+                    <th class="wide"></th>
+                    <th>Supervisor</th>
+                </tr>
+                <tr>
+                    <td></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td>Xuechun Xin</td>
+                    <td class="wide">Gabriel Cox</td>
+                    <td>Professor Ian Gent</td>
+                </tr>
+                <tr>
+                    <td>xx28@st-andrews.ac.uk</td>
+                    <td class="wide">gjc6@st-andrews.ac.uk</td>
+                    <td>ian.gent@st-andrews.ac.uk</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="wide"></td>
+                    <td>+44 (0)1334463247</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>

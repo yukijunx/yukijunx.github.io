@@ -1,0 +1,346 @@
+/* Other CSS that determines mainly animations */
+
+/* loading page */
+#loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#loading-animation {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #fff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* background image */
+#background-image {
+    background-image: url("/SpellTower/resources/1.png");
+    background-repeat: repeat;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 8%;
+    animation: carousel 90s linear infinite;
+}
+
+@keyframes carousel {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: -791px 791px;
+    }
+}
+
+/* red warning line */
+.game-board-0.little-dangerous {
+    border-top: 0.5vmin solid transparent;
+    animation: blink 2s infinite;
+}
+
+.game-board-0.dangerous {
+    border-top: 0.5vmin solid transparent;
+    animation: blink 1.5s infinite;
+}
+
+.game-board-0.very-dangerous {
+    border-top: 0.5vmin solid transparent;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% {
+        border-top-color: transparent;
+    }
+
+    50% {
+        border-top-color: rgb(183, 54, 54);
+        /* Adjust the color as needed */
+    }
+
+    100% {
+        border-top-color: transparent;
+    }
+}
+
+/* word selection indicator */
+.svg-container {
+    z-index: 100;
+    height: 82.5%;
+    position: absolute;
+    width: 100%;
+    opacity: 65%;
+    pointer-events: none;
+    /* background-color: lime; */
+}
+
+
+
+/* saving icon  */
+#br-loading-container {
+    position: absolute;
+    bottom: 0;
+    left: 100%;
+}
+
+#loadingimg {
+    width: 4vmin;
+    margin: 3vmin;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 2s linear;
+    animation: rotate 4s infinite linear;
+}
+
+#loadingimg.visible {
+    opacity: 1;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* left buttons */
+#left-buttons-container {
+    display: flex;
+    position: absolute;
+    left: 2vw;
+    top: 2.6vh;
+    z-index: 99;
+}
+
+.left-buttons {
+    margin: 0.5vmin;
+    width: 3.8vmin;
+    height: 3.8vmin;
+    border-radius: 1.5vh;
+    cursor: pointer;
+    position: relative;
+}
+
+.left-buttons:hover {
+    filter: brightness(95%);
+}
+
+.left-buttons:active {
+    transform: translateY(3px);
+}
+
+.left-buttons img {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    height: 2.5vmin;
+    width: 2.5vmin;
+}
+
+/* instruction page */
+#instruction-container {
+    position: absolute;
+    top: 0;
+    background-color: lightgrey;
+    opacity: 0.9;
+    width: 100%;
+    z-index: 50;
+}
+
+#instruction-content {
+    width: 80%;
+    margin-top: 2vw;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-y: scroll;
+}
+
+#close-instruction {
+    position: absolute;
+    top: 2.5vh;
+    right: 2vw;
+    background-color: transparent;
+}
+
+@media (max-width:1280px) {
+    #instruction-container {
+        display: flex;
+        flex-direction: column;
+        height: 200vh ;
+    }
+}
+
+.divider {
+    border-top: 2px solid black;
+    width: 100%;
+    margin-top: 1.5vmin;
+    margin-bottom: 1.5vmin;
+}
+
+.fordisplay {
+    cursor: default;
+    pointer-events: none;
+    margin-right: 1vmin;
+}
+
+.instru-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1vmin
+}
+
+#instruction-content p,
+.instru-row span {
+    font-size: 2.4vmin;
+}
+
+#instruction-content #instru-title {
+    font-size: 3.8vmin;
+    font-weight: bold;
+    margin-top: 2.4vh;
+}
+
+#infoleft-big {
+    margin-left: 2.2vw;
+    margin-top: 10vh;
+    max-height: 84vh;
+    width: 24vw;
+}
+
+#inforight {
+    width: 23vw;
+    margin-left: 10vw;
+    margin-top: 15vh;
+}
+
+#infoleft-small {
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.game-information {
+    max-height: 100%;
+    padding: 1.5vmin;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    font-size: 2vmin;
+}
+
+#info-highestScore,
+#info-numberPlayed,
+#info-bestWord,
+#info-usedBox {
+    font-size: 2.5vmin;
+    max-height: 10%;
+}
+
+.info-usedList {
+    margin-top: 1.2vmin;
+    margin-bottom: 1.2vmin;
+    max-height: 100%;
+    overflow-y: scroll;
+}
+
+.info-usedList-content {
+    column-count: 3;
+}
+
+#info-usedList-content div {
+    display: inline-block;
+}
+
+@media (min-width: 800px) and (max-width: 1280px) {
+    .col-left {
+        height: auto;
+        padding-bottom: 5vh;
+    }
+
+    .game-information {
+        margin-top: 5%;
+    }
+
+    #infoleft-big {
+        display: none;
+    }
+
+    #infoleft-small {
+        display: initial;
+        width: 70%;
+    }
+
+    .info-usedList-content {
+        column-count: 6;
+    }
+
+}
+
+@media (max-width: 799px) {
+    .col-left {
+        height: auto;
+        padding-bottom: 5vh;
+    }
+
+    .game-information {
+        margin-top: 5%;
+    }
+
+    #infoleft-big {
+        display: none;
+    }
+
+    #infoleft-small {
+        display: initial;
+        width: 90%;
+    }
+
+    .info-usedList-content {
+        column-count: 6;
+    }
+}
+
+.usedWord:hover>.hoveringText {
+    display: block;
+}
+
+.hoveringText {
+    color: black;
+    background-color: var(--color-button);
+    margin-left: 1.2vw;
+    position: absolute;
+    font-style: italic;
+    font-size: 2vmin;
+    display: none;
+}
+
+.usedWord {
+    cursor: help;
+}

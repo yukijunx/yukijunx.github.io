@@ -1,0 +1,143 @@
+html,
+body {
+    color: rgb(72, 72, 72);
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-color: var(--color-midhead);
+    z-index: -1;
+    font-family: 'M PLUS 1p', sans-serif;
+    overflow: hidden;
+}
+
+#background-image {
+    background-image: url("/SpellTower/resources/1.png");
+    background-repeat: repeat;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 25%;
+    pointer-events: none;
+    animation: carousel 60s linear infinite;
+}
+
+@keyframes carousel {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: -791px 791px;
+    }
+}
+
+#title,
+.menu {
+    /* center everything */
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* color: var(--color-tile); */
+}
+
+#title {
+    /* position title */
+    margin-top: 20vh;
+    max-width: 75vw;
+    font-size: 8vmin;
+    letter-spacing: 3vmin;
+}
+
+#menu {
+    /* position menu block */
+    margin-top: 25vh;
+    font-size: 3vmin;
+    letter-spacing: 1.4vmin;
+}
+
+.menu {
+    /* gap between each options */
+    margin: 1.4vmin;
+}
+
+.menu:hover {
+    /* color: var(--color-tile); */
+    cursor: pointer;
+    filter: brightness(90%);
+}
+
+.arrow {
+    max-width: 5vmin;
+    margin-bottom: 1vmin;
+    margin-right: 1vmin;
+    visibility: hidden;
+}
+
+.menu:hover .arrow {
+    /* when hover over options arrows come out */
+    visibility: visible;
+}
+
+.left-buttons {
+    box-sizing: border-box;
+    border: 2px solid var(--color-midword);
+    padding: 2px;
+    margin: 0.5vmin;
+    width: 3.8vmin;
+    height: 3.8vmin;
+    border-radius: 1.5vh;
+    cursor: pointer;
+    position: absolute;
+    top: 5vmin;
+}
+
+.left-buttons:hover {
+    filter: brightness(95%);
+}
+
+.left-buttons:active {
+    transform: translateY(3px);
+}
+
+.left-buttons img {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    height: 2.5vmin;
+    width: 2.5vmin;
+}
+
+#credit {
+    width: 80%;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    margin-top: 25vmin;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 1vmin;
+    text-align: left;
+}
+
+th {
+    font-size: x-large;
+}
+
+.wide {
+    width: 40%;
+}
+
+[v-cloak] { display:none; }
