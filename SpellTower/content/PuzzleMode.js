@@ -135,6 +135,7 @@ window.onload = () => {
                     .finally(() => {
                         this.buttonRunning.save = false;
                         this.hintGiver.generateOptions();
+                        this.loading = false;
                     })
             },
 
