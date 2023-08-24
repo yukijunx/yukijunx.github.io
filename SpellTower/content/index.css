@@ -140,4 +140,46 @@ th {
     width: 40%;
 }
 
-[v-cloak] { display:none; }
+body {
+    position: relative;
+}
+
+.back {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+    width: 50%;
+    border: 1px solid red;
+}
+
+.logo {
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.logo img {
+    height: 20px;
+    margin-bottom: -3px;
+}
+
+.label {
+    transition: all 0.5s ease-in-out;
+    margin-left: 12px;
+    opacity: 0;
+}
+
+.logo:hover+.label {
+    display: block;
+    opacity: 1;
+}
+
+.logo:hover {
+    transform: rotate(45deg);
+}
+
+
+[v-cloak] {
+    display: none;
+}
