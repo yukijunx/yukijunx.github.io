@@ -172,7 +172,9 @@ window.onload = () => {
                 console.log("Starting a new game!")
                 // this.resetAll();
                 this.game = new Game(new Board(), this.trie);
+                console.log(this.game);
                 this.fiveRandomRows();
+                console.log(this.game);
                 this.saveGame();
                 this.setHintGiver();
                 this.hintGiver.generateOptions();
