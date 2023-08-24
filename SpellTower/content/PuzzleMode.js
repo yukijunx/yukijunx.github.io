@@ -817,26 +817,19 @@ window.onload = () => {
 
             getWordDefinition: async function (word, ind, size) {
                 let def = document.getElementById(`${size}def${ind}`);
-                const WORDurl = `https://wordsapiv1.p.rapidapi.com/words/${word}/definitions`;
-                const WORDoptions = {
-                    method: 'GET',
+                await fetch(`https://fixed-silver-cough.glitch.me/definition/${word}`, {
+                    method: "get",
                     headers: {
-                        'X-RapidAPI-Key': '0eb5495b80msh0d410c2fd2f965dp1cdf41jsn770a74cb75a9',
-                        'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
-                    }
-                };
-                try {
-                    const response = await fetch(WORDurl, WORDoptions);
-                    const result = await response.json();
-                    if (result.definitions && result.definitions.length != 0) {
-                        def.innerHTML = result.definitions[0].definition
-                    } else {
-                        def.innerHTML = 'No available definition...'
-                    }
-
-                } catch (error) {
-                    console.error(error);
-                }
+                        "Content-Type": "application/json"
+                    },
+                })
+                    .then((res) => res.text())
+                    .then(function(res) {
+                            console.log(res);
+                            def.innerHTML = res;
+                        }
+                    )
+                    .catch(err => { console.log('Getting definition error... ', err) });
             },
 
             enableSlide() {
