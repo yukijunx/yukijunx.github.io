@@ -5,62 +5,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>WELCOME :)</title>
+    <script type="module">
+        import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+        createApp({
+            data: function () {
+                return {
+                    personalInfo: false,
+                }
+            },
+            methods: {
+                getVisitorCount: async function(){
+                    let visitorCount = undefined;
+                    let countSpan = document.getElementById('count');
+                    fetch("https://fixed-silver-cough.glitch.me/visit")
+                        .then(response => response.text())
+                        .then(data => {
+                            let num = data;
+                            let numLast = num[num.length - 1];
+                            let lastDigit = parseInt(numLast);
+                            if (lastDigit == 1) {
+                                countSpan.innerHTML = `${num}st`;
+                            } else if (lastDigit == 2) {
+                                countSpan.innerHTML = `${num}nd`;
+                            } else if (lastDigit == 3) {
+                                countSpan.innerHTML = `${num}rd`;
+                            } else {
+                                countSpan.innerHTML = `${num}th`;
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error fetching visitor count:", error);
+                        });
+                }
+            },
+            mounted: function () {
+                this.getVisitorCount();
+            },
+        })
+        .mount('body')
+    </script>
 </head>
 
 <body>
-    <script>
-        document.addEventListener("DOMContentLoaded", async function() {
-            let visitorCount = undefined;
-            let countSpan = document.getElementById('count');
-            fetch("https://fixed-silver-cough.glitch.me/visit")
-                .then(response => response.text())
-                .then(data => {
-                    let num = data;
-                    let numLast = num[num.length - 1];
-                    let lastDigit = parseInt(numLast);
-                    if (lastDigit == 1){
-                        countSpan.innerHTML = `${num}st`;
-                    } else if (lastDigit == 2){
-                        countSpan.innerHTML = `${num}nd`;
-                    } else if (lastDigit == 3 ){
-                        countSpan.innerHTML = `${num}rd`;
-                    } else {
-                        countSpan.innerHTML = `${num}th`;
-                    }
-                })
-                .catch(error => {
-                    console.error("Error fetching visitor count:", error);
-                });
-        });
-    </script>
-    
     <div class="body-container">
-        <div class="column" id="column-left">
+        <div class="column" id="column-left" v-if="!personalInfo">
+            <div class="info" v-on:click="personalInfo=true">
+                <span class="material-symbols-outlined">menu</span>
+            </div>
             <div class="row row-top name">
                 INDEX
             </div>
             <div class="dotted"></div>
             <div class="row">
-                <div class="item"><img src="resources/SpellTower.jpg"></div>
+                <div class="item"><img class="project-img" src="resources/SpellTower.jpg"></div>
                 <div class="item item-overview">
-                    <div class="overview-title">Overview</div>
+                    <div class="overview-title">SpellTower</div>
                     <div>
-                        Greetings to my MSc dissertation project! Here, I've created a web-based rendition of the much-loved word-finding game <span style="font-style: italic;">SpellTower</span>. 
-                        I've taken charge of developing the main game mechanics, including the game engine and the user interface. The hint feature driven by a clever AI, however, is the work of my teammate. 
+                        Greetings to my MSc dissertation project! Here, I've created a web-based rendition of the
+                        much-loved word-finding game <span style="font-style: italic;">SpellTower</span>.
+                        I've taken charge of developing the main game mechanics, including the game engine and the user
+                        interface. The hint feature driven by a clever AI, however, is the work of my teammate.
                         Feel free to give it a try – I'm certain you'll enjoy a few rounds!
                     </div>
                     <div class="formore">
-                        <a href="/SpellTower/content/index.html">
+                        <span class="material-symbols-outlined">devices</span>
+                        <a class="explorelink" href="/SpellTower/content/index.html">
                             Explore the site...
                         </a>
                     </div>
                 </div>
-                <div class="item item-date">15-08-2023</div>
+                <div class="item third-container">
+                    <div class="item-date">15-08-2023</div>
+                    <div class="language">
+                        <span class="material-symbols-outlined">javascript</span>
+                        <span class="material-symbols-outlined">html</span>
+                        <span class="material-symbols-outlined">css</span>
+                    </div>
+                </div>
             </div>
             <div class="dotted"></div>
             <div class="row">
-                <div class="item"><img src="resources/GuessTheCat.jpg"></div>
+                <div class="item"><img class="project-img" src="resources/GuessTheCat.jpg"></div>
                 <div class="item item-overview">
                     <div class="overview-title">Overview 1</div>
                     <div>
@@ -70,26 +98,7 @@
                         Oil.
                     </div>
                     <div class="formore">
-                        <a href="/SpellTower/content/index.html">
-                            Explore the site...
-                        </a>
-                    </div>
-                </div>
-                <div class="item item-date">01-01-2022</div>
-            </div>
-            <div class="dotted"></div>
-            <div class="row">
-                <div class="item"><img src="resources/Emojitar.jpg"></div>
-                <div class="item item-overview">
-                    <div class="overview-title">Overview 1</div>
-                    <div>
-                        Like: fermentation, the desert, incorporeal cities, moons, ghouls, dissolving,
-                        unnatural landscapes. This bundle features new work from Sally Smith,
-                        Amy Sinclair and Victor Hughes, alongside highly anticipated releases from Side Pull and Fish
-                        Oil.
-                    </div>
-                    <div class="formore">
-                        <a href="/SpellTower/content/index.html">
+                        <a class="explorelink" href="/SpellTower/content/index.html">
                             Explore the site...
                         </a>
                     </div>
@@ -98,7 +107,7 @@
             </div>
             <div class="dotted"></div>
             <div class="row">
-                <div class="item" id="BestSongs"><img src="resources/BestSongs.jpg"></div>
+                <div class="item"><img class="project-img" src="resources/Emojitar.jpg"></div>
                 <div class="item item-overview">
                     <div class="overview-title">Overview 1</div>
                     <div>
@@ -108,7 +117,26 @@
                         Oil.
                     </div>
                     <div class="formore">
-                        <a href="/SpellTower/content/index.html">
+                        <a class="explorelink" href="/SpellTower/content/index.html">
+                            Explore the site...
+                        </a>
+                    </div>
+                </div>
+                <div class="item item-date">01-01-2022</div>
+            </div>
+            <div class="dotted"></div>
+            <div class="row">
+                <div class="item" id="BestSongs"><img class="project-img" src="resources/BestSongs.jpg"></div>
+                <div class="item item-overview">
+                    <div class="overview-title">Overview 1</div>
+                    <div>
+                        Like: fermentation, the desert, incorporeal cities, moons, ghouls, dissolving,
+                        unnatural landscapes. This bundle features new work from Sally Smith,
+                        Amy Sinclair and Victor Hughes, alongside highly anticipated releases from Side Pull and Fish
+                        Oil.
+                    </div>
+                    <div class="formore">
+                        <a class="explorelink" href="/SpellTower/content/index.html">
                             Explore the site...
                         </a>
                     </div>
@@ -116,7 +144,10 @@
                 <div class="item item-date">01-01-2022</div>
             </div>
         </div>
-        <div class="column" id="column-right">
+        <div class="column" id="column-right" :class={'hide-right':!personalInfo}>
+            <div class="info" v-on:click="personalInfo=false">
+                <span class="material-symbols-outlined">close</span>
+            </div>
             <div class="row row-top row-corner">
                 <div class="name">XUECHUN XIN</div>
                 <div class="logo"><img class="logo" src="resources/bone.png"></div>
@@ -125,7 +156,8 @@
             <div>
                 <div class="title">INFORMATION</div>
                 <div class="information">
-                    Welcome to my personal page! You are the <span id="count">?</span> visitor, I'm thrilled to have you here :)
+                    Welcome to my personal page! You are the <span id="count">?</span> visitor, I'm thrilled to have you
+                    here :)
                 </div>
                 <p></p>
                 <div class="information">
@@ -141,13 +173,17 @@
                 <table align="left">
                     <tr>
                         <td>NODES</td>
-                        <td><img class="logo" src="/resources/rightarrow.png"><a
-                                href="mailto:xuechun.xin@hotmail.com">Email</a></td>
+                        <td>
+                            <img class="logo" src="/resources/rightarrow.png">
+                            <a href="mailto:xuechun.xin@hotmail.com">Email</a>
+                        </td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><img class="logo" src="/resources/rightarrow.png"><a
-                                href="https://www.linkedin.com/in/xinxuechun/">LinkedIn</a></td>
+                        <td>
+                            <img class="logo" src="/resources/rightarrow.png">
+                            <a href="https://www.linkedin.com/in/xinxuechun/">LinkedIn</a>
+                        </td>
                     </tr>
                 </table>
             </div>
