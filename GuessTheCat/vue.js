@@ -348,6 +348,7 @@ window.onload = () => {
                 await this.fetchInfo();
                 this.rollAnswer();
                 this.updateHintList();
+                this.gamepage = true;
             }
 
         },
