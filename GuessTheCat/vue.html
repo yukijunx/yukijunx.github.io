@@ -10,7 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Handjet&family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script type="module" src="vue.js"></script>
 </head>
 
@@ -21,8 +22,29 @@
         </div>
 
         <div class="leaderboard" v-cloak v-if="leaderboard">
-            <div v-on:click="leaderboard = false"><span class="close material-symbols-outlined">close</span></div>
-            Leaderboard
+            <div v-on:click="leaderboard = !leaderboard"><span class="close material-symbols-outlined">close</span></div>
+            <div class="smalltitle">Leaderboard</div>
+            <table>
+                <tr>
+                    <th>Number of Breeds</th>
+                    <td :class="{highscoreclass: highscore[0]}">4</td>
+                    <td :class="{highscoreclass: highscore[0]}">8</td>
+                    <td :class="{highscoreclass: highscore[0]}">12</td>
+                    <td :class="{highscoreclass: highscore[0]}">16</td>
+                </tr>
+                <tr>
+                    <th>Best Score</th>
+                    <td :class="{highscoreclass: highscore[0]}">{{record[0]}}</td>
+                    <td :class="{highscoreclass: highscore[0]}">{{record[0]}}</td>
+                    <td :class="{highscoreclass: highscore[0]}">{{record[0]}}</td>
+                    <td :class="{highscoreclass: highscore[0]}">{{record[0]}}</td>
+                </tr>
+            </table>
+            <div v-show="gameover">
+                <button v-on:click="gamepage=false">main menu</button>
+                <button v-on:click="newGameButton()">new game</button>
+            </div>
+            
         </div>
 
         <div class="menu" v-cloak v-if="!gamepage">
@@ -36,62 +58,81 @@
                     <div>Leaderboard</div>
                 </div>
             </div>
-            <!-- <transition name="fade"> -->
-                <div class="option-col" id="right" :class='{hide: !(area_newgame || area_pickdiff)}' @mouseenter="enterAreapickdiff()" @mouseleave="leaveAreapickdiff()">
-                    Pick the number of breeds to guess from:
-                    <ul>
-                        <li class="withicon">
-                            <span class="paw material-symbols-outlined">pets</span>
-                            <div>5</div>
-                        </li>
-                        <li class="withicon">
-                            <span class="paw material-symbols-outlined">pets</span>
-                            <div>10</div>
-                        </li>
-                        <li class="withicon">
-                            <span class="paw material-symbols-outlined">pets</span>
-                            <div>15</div>
-                        </li>
-                        <li class="withicon">
-                            <span class="paw material-symbols-outlined">pets</span>
-                            <div>20</div>
-                        </li>
-                    </ul>
-                </div>
-            <!-- </transition> -->
+
+            <div class="option-col" id="right" :class='{hide: !(area_newgame || area_pickdiff)}'
+                @mouseenter="enterAreapickdiff()" @mouseleave="leaveAreapickdiff()">
+                Pick the number of breeds to guess from:
+                <ul>
+                    <li class="withicon">
+                        <span class="paw material-symbols-outlined">pets</span>
+                        <div v-on:click="selectedNum=4; newGameButton()">4</div>
+                    </li>
+                    <li class="withicon">
+                        <span class="paw material-symbols-outlined">pets</span>
+                        <div v-on:click="selectedNum=8; newGameButton()">8</div>
+                    </li>
+                    <li class="withicon">
+                        <span class="paw material-symbols-outlined">pets</span>
+                        <div v-on:click="selectedNum=12; newGameButton()">12</div>
+                    </li>
+                    <li class="withicon">
+                        <span class="paw material-symbols-outlined">pets</span>
+                        <div v-on:click="selectedNum=16; newGameButton()">16</div>
+                    </li>
+                </ul>
+            </div>
+
         </div>
 
 
 
         <div class="button-container" v-cloak v-if="gamepage">
             <div class="button" v-on:click="backtomenu()"><span class="material-symbols-outlined">undo</span></div>
-            <div class="button" v-on:click="leaderboard = true"><span class="material-symbols-outlined">leaderboard</span></div>
-            <div class="button" v-on:click="instruction = true"><span class="material-symbols-outlined">help</span></div>
+            <div class="button" v-on:click="leaderboard = true"><span
+                    class="material-symbols-outlined">leaderboard</span></div>
+            <div class="button" v-on:click="instruction = true"><span class="material-symbols-outlined">help</span>
+            </div>
         </div>
 
         <div class="game" v-cloak v-if="gamepage">
             <div class="instruction" v-cloak v-if="instruction">
-                <div class="close" v-on:click="instruction = false"><span class="material-symbols-outlined">close</span></div>
+                <div class="close" v-on:click="instruction = !instruction"><span class="material-symbols-outlined">close</span>
+                </div>
                 Instruction page...
             </div>
             <div class="line">
                 <div>My cat is one of the following breeds...</div>
-                <div class="hint">Give me a hint!</div>
+                <div class="hint" v-on:click="hintButton()">Give me a hint!</div>
             </div>
             <div class="catcards">
-
+                <div v-for="(breed, i) in BreedsStore"  class="card" 
+                :key="i" :id="IdStore[i]" 
+                :class="{ correct: rightClass.includes(breed), incorrect: wrongClass.includes(breed) }"
+                v-on:click="cardButton(IdStore[i])">
+                    <div class="cardpic" :style="{ backgroundImage: 'url(' + fetchImg(IdStore[i]) + ')' }"></div>
+                    <div class="cardname">{{BreedsStore[i]}}</div>
+                    <div class="cardchar">
+                        <div v-for="(char,j) in TempeStore[i]" :key="j">{{char}}</div>
+                    </div>
+                </div>
             </div>
             <div class="question-container">
                 <div class="question-left">Ask questions...</div>
                 <div class="question-right">
                     Is your cat 
+                    <select v-model="selectedChar">
+                        <option v-for="(option, i) in TempeOpt">{{ option }}</option>
+                    </select>
                     <button>Ask</button>
                 </div>
             </div>
             <div class="question-container">
                 <div class="question-left">Make a guess...</div>
                 <div class="question-right">
-                    I think your cat is  
+                    I think your cat is 
+                    <select v-model="selectedBreed">
+                        <option v-for="(option, i) in BreedsStore">{{ option }}</option>
+                    </select>
                     <button>Guess</button>
                 </div>
             </div>
