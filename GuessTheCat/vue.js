@@ -335,6 +335,7 @@ window.onload = () => {
              * Start a new game.
              */
             newGameButton: async function() {
+                this.gamepage = true;
                 this.TempeStore = [];
                 this.TempeOpt = [];
                 this.BreedsStore = [];
@@ -346,9 +347,9 @@ window.onload = () => {
                 this.highscore = [false,false,false,false];
                 console.log('starting new game...')
                 await this.fetchInfo();
+                console.log(this.AllStore,this.GameInfo)
                 this.rollAnswer();
                 this.updateHintList();
-                this.gamepage = true;
             }
 
         },
