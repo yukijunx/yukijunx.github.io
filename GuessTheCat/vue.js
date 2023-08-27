@@ -147,6 +147,7 @@ window.onload = () => {
                     .then((res) => res.json())
                     .then((resjson) => {
                         let RandIndexList = [];
+                        console.log('fetch info running')
                         for (let i = 0; i < this.SelectedNum;) {
                             let RandIndex = Math.floor(Math.random() * resjson.length);
                             if (!RandIndexList.includes(RandIndex)) {
@@ -155,6 +156,7 @@ window.onload = () => {
                                 i++;
                             };
                         };
+                        console.log('fetchinfo',this.AllStore)
                     })
                     .then(this.updateStore())
                     .catch(err => { console.log('Getting cat image error... ', err) });
