@@ -865,7 +865,9 @@ window.onload = () => {
                 await this.getGame();
                 this.setHintGiver();
                 this.hintGiver.generateOptions();
-                await this.enableSlide();
+                setTimeout(() => {
+                    this.enableSlide();
+                }, 2000)
                 console.log('Initialization complete!');
             } catch (error) {
                 console.error('Error during initialization:', error);

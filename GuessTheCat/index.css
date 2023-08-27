@@ -1,0 +1,141 @@
+h1 {
+	text-align: center;
+	font-size:70pt;
+    font-family: "Chalkduster", "fantasy";
+	margin-top: 1%;
+	margin-bottom: -60pt
+}
+h2 {
+	text-align: center;
+	font-size:50pt;
+    font-family: "Chalkduster", "fantasy";
+	margin-bottom: -20pt
+}
+h3 {
+	text-align: center;
+	font-size:16pt;
+    font-family: "Chalkduster", "fantasy";
+    margin-bottom: 50pt;
+}
+body{
+    font-family: "Chalkduster", "fantasy";
+	font-variant: small-caps;
+	font-size: 22pt
+}
+button {
+    margin-right: 10pt;
+    height: 30px;
+    background: black;
+    color: white;
+    cursor: pointer;
+    border-radius: 12px;
+    border:black;
+    text-decoration: none;
+	font-family: inherit;
+    vertical-align: middle;
+}
+button:hover {
+    background-color: darkgray;
+}
+button:active {
+    transform: translateY(2px);
+}
+table {
+    width: 75%;
+    margin-top:12pt;
+    margin-left: auto;
+    margin-right: auto;
+}
+td, th{
+    font-family: "Trattatello", "fantasy";
+	text-align: center;
+	vertical-align:text-bottom;
+	border-collapse: collapse;
+	border-bottom: 1px solid black;
+	height: 40px;
+	font-size: 18pt;
+}
+tr:nth-child(odd){background-color: #f2f2f2}
+form{
+	width: 590px;
+}
+#NumberForm{
+    width: 75%;
+	margin-left: auto;
+    margin-right: auto;
+}
+input{
+    cursor: pointer
+}
+.catcard{
+    cursor: pointer;
+    height: fit-content;
+    overflow: hidden;
+    margin: 0;
+    position: relative;
+	border: 5px solid black;
+}
+.catcard img{
+    display:block;
+	width: 100%;
+}
+#carddiv {
+	margin:auto;
+	width: 75%;
+    display: grid;
+	grid-template-columns: auto auto auto auto auto;
+    gap:15px;
+}
+.catcardtempe{
+    font-family: "Trattatello", "fantasy";
+	padding-left: 5px;
+	padding-right: 5px;
+    font-size: 16px;
+}
+.catcardname{
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	margin-top: 4px;
+	margin-bottom: -12pt;
+}
+#QuesDiv{
+    position: relative;
+    margin:auto;
+    width: 75%;
+}
+.thelabel{
+    margin-bottom: -10px;
+}
+select{
+    margin-right: 10pt;
+}
+hr{
+    width: 75%;
+    border:none;
+    border-top: 3px dashed darkgray;
+}
+#HintButton{
+    position: absolute;
+    right:0px;
+    top:0px;
+}
+#QuitButton{
+    position: absolute;
+    right:0px;
+    top:40px;
+}
+.wrong{
+    cursor: default;
+    transform: rotateY(360deg);
+    transition-duration: 0.35s;
+    opacity: 20%;
+    border: 5px solid tomato;
+    background-color: tomato;
+}
+.correct{
+    transform: rotateY(360deg);
+    transition-duration: 0.35s;
+    border: 5px solid seagreen;
+    background-color: seagreen;
+}
