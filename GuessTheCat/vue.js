@@ -165,8 +165,8 @@ window.onload = () => {
              */
             fetchImg: async function () {
                 for (let i =0; i < this.IdStore.length; i++){
-                    consolg.log('getting image '+i+' ...');
-                    await fetch(`https://fixed-silver-cough.glitch.me/catimage/${this.IdStore[i]}`, {
+                    console.log('getting image '+i+' ...');
+                    await fetch(`https://fixed-silver-cough.glitch.me/catimage/${IdStore[i]}`, {
                         method: "get",
                         headers: {
                             "Content-Type": "application/json"

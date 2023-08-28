@@ -162,9 +162,9 @@ li {
 .cardchar{
     width:100%;
     height:25%;
-    display: grid;
+    /* display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 5px;
+    gap: 5px; */
 }
 .correct{
 /* green */
