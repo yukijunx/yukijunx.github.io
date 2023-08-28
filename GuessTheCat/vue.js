@@ -137,7 +137,7 @@ window.onload = () => {
                 this.HintList = [];
                 this.selectedChar = undefined;
                 this.selectedBreed = undefined;
-                console.log(this.AllStore)
+                console.log('updatestore',this.AllStore)
                 for (let i = 0; i < this.AllStore.length; i++) {
                     this.BreedsStore.push(this.AllStore[i]["name"]);
                     this.TempeStore.push(this.AllStore[i]["temperament"]);
@@ -159,7 +159,6 @@ window.onload = () => {
                 })
                     .then((res) => res.json())
                     .then((resjson) => {
-                        console.log(resjson);
                         let RandIndexList = [];
                         for (let i = 0; i < this.selectedNum;) {
                             let RandIndex = Math.floor(Math.random() * resjson.length);
@@ -169,6 +168,7 @@ window.onload = () => {
                                 i++;
                             };
                         };
+                        console.log('fetchinfo',this.AllStore)
                         this.updateStore();
                     })
                     .catch(err => { console.log('Getting cat image error... ', err) });
