@@ -159,6 +159,7 @@ window.onload = () => {
                 })
                     .then((res) => res.json())
                     .then((resjson) => {
+                        console.log(resjson);
                         let RandIndexList = [];
                         for (let i = 0; i < this.selectedNum;) {
                             let RandIndex = Math.floor(Math.random() * resjson.length);
