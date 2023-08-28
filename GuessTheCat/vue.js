@@ -147,9 +147,10 @@ window.onload = () => {
                     .then((res) => res.json())
                     .then((resjson) => {
                         let RandIndexList = [];
-                        console.log('fetch info running')
+                        console.log('fetch info running',resjson)
                         for (let i = 0; i < this.SelectedNum;) {
                             let RandIndex = Math.floor(Math.random() * resjson.length);
+                            console.log(RandIndex)
                             if (!RandIndexList.includes(RandIndex)) {
                                 this.AllStore.push(resjson[RandIndex]);
                                 RandIndexList.push(RandIndex);
@@ -338,6 +339,7 @@ window.onload = () => {
              */
             newGameButton: async function() {
                 this.gamepage = true;
+                this.AllStore = [];
                 this.TempeStore = [];
                 this.TempeOpt = [];
                 this.BreedsStore = [];
