@@ -71,6 +71,7 @@ window.onload = () => {
                     .then((res) => res.json())
                     .then((resjson) => {
                         this.record = resjson;
+                        console.log(this.record)
                     })
                     .catch(err => { console.log('get cat record error: ', err) })
             },
