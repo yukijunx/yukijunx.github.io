@@ -17,6 +17,13 @@
 
 <body>
     <div id="body-container">
+        <div class="back">
+            <div class="logo" onclick="window.location.href = 'https://yukijunx.github.io/';">
+                <div><span class="material-symbols-outlined">pet_supplies</span></div>
+            </div>
+            <span class="label">Back to my personal page!</span>
+        </div>
+
         <div class="title">
             GUESS THE CAT
         </div>
@@ -124,7 +131,7 @@
                     <select v-model="selectedChar">
                         <option v-for="(option, i) in TempeOpt">{{ option }}</option>
                     </select>
-                    <button>Ask</button>
+                    <button v-on:click="askButton()">Ask</button>
                 </div>
             </div>
             <div class="question-container">
@@ -134,7 +141,7 @@
                     <select v-model="selectedBreed">
                         <option v-for="(option, i) in BreedsStore">{{ option }}</option>
                     </select>
-                    <button>Guess</button>
+                    <button v-on:click="guessButton">Guess</button>
                 </div>
             </div>
         </div>

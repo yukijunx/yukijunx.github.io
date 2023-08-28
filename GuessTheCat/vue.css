@@ -25,6 +25,11 @@ html::before {
     filter: brightness(0.25);
 }
 
+#body-container{
+    position: relative;
+    height:95vh;
+}
+
 .left {
     display: flex;
     flex-direction: column;
@@ -42,7 +47,7 @@ html::before {
 
 .option-col {
     padding-right: 20px;
-    width: 30%;
+    width: 20%;
 }
 
 .option-col ul {
@@ -51,6 +56,7 @@ html::before {
 }
 
 .right-label {
+    margin-top:5px;
     margin-left: 20px;
 }
 
@@ -217,4 +223,40 @@ td {
 
 [v-cloak] {
     display: none;
+}
+
+
+.back {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 30px;
+    left: 42px;
+    width: 50%;
+}
+
+.logo {
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.logo div {
+    transform: scale(200%);
+    margin-bottom: -10px;
+}
+
+.label {
+    transition: all 0.5s ease-in-out;
+    margin-left: 26px;
+    opacity: 0;
+    font-size:32px;
+}
+
+.logo:hover+.label {
+    display: block;
+    opacity: 1;
+}
+
+.logo:hover {
+    transform: rotate(45deg);
 }
