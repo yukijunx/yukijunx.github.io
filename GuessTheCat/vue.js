@@ -157,8 +157,8 @@ window.onload = () => {
                             };
                         };
                         console.log('fetchinfo',this.AllStore)
+                        this.updateStore();
                     })
-                    .then(this.updateStore())
                     .catch(err => { console.log('Getting cat image error... ', err) });
             },
             /**
