@@ -37,6 +37,7 @@ html::before {
 .menu {
     display: flex;
     flex-direction: row;
+    font-size:42px;
 }
 
 .option-col {
@@ -73,6 +74,7 @@ li {
 
 #right {
     transition: all 0.2s ease-in-out;
+    font-size:36px;
 }
 
 .game,

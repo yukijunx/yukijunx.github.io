@@ -101,14 +101,18 @@ window.onload = () => {
              */
             tidyTempe: function () {
                 let TempeList = [];
+                console.log('tidytempe running');
                 for (let i = 0; i < this.TempeStore.length; i++) {
                     let SplittedTempe = this.TempeStore[i].split(",");
                     for (let j = 0; j < SplittedTempe.length; j++) {
                         TempeList.push(this.formatted(SplittedTempe[j]));
                     }
                 };
+                console.log('tempelist',TempeList)
                 TempeList.forEach(function (x) { this.TempeInfo[x] = (this.TempeInfo[x] || 0) + 1; });
+                console.log('tempeinfo',TempeInfo)
                 for (let keys in this.TempeInfo) {
+                    console.log('inside tidytempe',keys)
                     this.TempeOpt.push(keys);
                 };
             },
@@ -302,6 +306,7 @@ window.onload = () => {
                 if (this.gameover){
                     return;
                 }
+                console.log('guessing...')
                 this.GameInfo["NumberOfGuess"]++;
                 if (this.formatted(this.selectedBreed) == this.formatted(this.GameInfo["CorrectAnswer"])) {
                     this.rightClass.push(this.selectedBreed);
@@ -333,6 +338,7 @@ window.onload = () => {
                 if (this.gameover){
                     return;
                 }
+                console.log('asking...')
                 let ind = this.BreedsStore.indexOf(this.GameInfo["CorrectAnswer"]);
                 if (this.formatted(this.TempeStore[ind]).includes(this.formatted(this.selectedChar))) {
                     alert("Yes, my cat is " + this.selectedChar + " !");
