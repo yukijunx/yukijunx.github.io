@@ -61,23 +61,23 @@
 
             <div class="option-col" id="right" :class='{hide: !(area_newgame || area_pickdiff)}'
                 @mouseenter="enterAreapickdiff()" @mouseleave="leaveAreapickdiff()">
-                Pick the number of breeds to guess from:
+                <div class="right-label">Pick the number of breeds to guess from:</div>
                 <ul>
                     <li class="withicon">
                         <span class="paw material-symbols-outlined">pets</span>
-                        <div v-on:click="selectedNum=4; newGameButton()">4</div>
+                        <div v-on:click="selectedNum=4; area_newgame=false; area_pickdiff=false; newGameButton()">4</div>
                     </li>
                     <li class="withicon">
                         <span class="paw material-symbols-outlined">pets</span>
-                        <div v-on:click="selectedNum=8; newGameButton()">8</div>
+                        <div v-on:click="selectedNum=8; area_newgame=false; area_pickdiff=false; newGameButton()">8</div>
                     </li>
                     <li class="withicon">
                         <span class="paw material-symbols-outlined">pets</span>
-                        <div v-on:click="selectedNum=12; newGameButton()">12</div>
+                        <div v-on:click="selectedNum=12; area_newgame=false; area_pickdiff=false; newGameButton()">12</div>
                     </li>
                     <li class="withicon">
                         <span class="paw material-symbols-outlined">pets</span>
-                        <div v-on:click="selectedNum=16; newGameButton()">16</div>
+                        <div v-on:click="selectedNum=16; area_newgame=false; area_pickdiff=false; newGameButton()">16</div>
                     </li>
                 </ul>
             </div>

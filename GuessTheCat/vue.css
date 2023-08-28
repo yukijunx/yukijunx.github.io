@@ -37,15 +37,21 @@ html::before {
 .menu {
     display: flex;
     flex-direction: row;
-    font-size:42px;
+    font-size: 42px;
 }
 
 .option-col {
     padding-right: 20px;
+    width: 30%;
 }
 
 .option-col ul {
     padding: 0;
+    margin-top: 15px;
+}
+
+.right-label {
+    margin-left: 20px;
 }
 
 li {
@@ -74,7 +80,8 @@ li {
 
 #right {
     transition: all 0.2s ease-in-out;
-    font-size:36px;
+    font-size: 36px;
+    width: 60%;
 }
 
 .game,
@@ -143,7 +150,8 @@ li {
     margin-left: -10px;
     margin-right: -10px;
 }
-.card{
+
+.card {
     height: 42vh;
     width: calc(25% - 20px);
     margin: 10px;
@@ -151,6 +159,7 @@ li {
     border: 2px solid white;
     border-radius: 4px;
 }
+
 .cardpic {
     width: 100%;
     height: 60%;
@@ -158,37 +167,43 @@ li {
     background-size: cover;
     background-position: center;
 }
-.cardname{
-    width:100%;
-    height:15%;
+
+.cardname {
+    width: 100%;
+    height: 15%;
 }
-.cardchar{
-    width:100%;
-    height:25%;
+
+.cardchar {
+    width: 100%;
+    height: 25%;
     /* display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 5px; */
 }
-.correct{
-/* green */
+
+.correct {
+    /* green */
 }
-.incorrect{
-/* red */
+
+.incorrect {
+    /* red */
     pointer-events: none;
 }
 
-table{
+table {
     text-align: left;
     width: 100%;
 }
-th{
+
+th {
     width: 40%;
 }
-td{
-    width:15%;
+
+td {
+    width: 15%;
 }
 
-.smalltitle{
+.smalltitle {
     font-size: 36px;
 }
 

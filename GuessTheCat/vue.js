@@ -109,8 +109,12 @@ window.onload = () => {
                     }
                 };
                 console.log('tempelist',TempeList)
-                TempeList.forEach(function (x) { this.TempeInfo[x] = (this.TempeInfo[x] || 0) + 1; });
-                console.log('tempeinfo',TempeInfo)
+                for (const x of TempeList) {
+                    console.log(x)
+                    this.TempeInfo[x] = (this.TempeInfo[x] || 0) + 1;
+                };
+                // TempeList.forEach(function (x) { this.TempeInfo[x] = (this.TempeInfo[x] || 0) + 1; });
+                console.log('tempeinfo',this.TempeInfo)
                 for (let keys in this.TempeInfo) {
                     console.log('inside tidytempe',keys)
                     this.TempeOpt.push(keys);
