@@ -83,7 +83,7 @@ window.onload = () => {
                     newrec = this.record;
                 };
                 await fetch(`https://fixed-silver-cough.glitch.me/catnewrecord/${newrec[0]}/${newrec[1]}/${newrec[2]}/${newrec[3]}`, {
-                    method: "get",
+                    method: "post",
                     headers: {
                         "Content-Type": "application/json"
                     },
