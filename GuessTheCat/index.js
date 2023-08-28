@@ -70,7 +70,6 @@ window.onload = () => {
                     .then((res) => res.json())
                     .then((resjson) => {
                         this.record = resjson;
-                        console.log('getRecord',resjson,this.record)
                     })
                     .catch(err => { console.log('get cat record error: ', err) })
             },
@@ -148,7 +147,6 @@ window.onload = () => {
              * Fetch selected number of cats and store the informations.
              */
             fetchInfo: async function () {
-                console.log('fetchinfo starts running')
                 this.GameInfo["NumberOfBreeds"] = this.selectedNum;
                 await fetch(`https://fixed-silver-cough.glitch.me/catinfo`, {
                     method: "get",
@@ -158,7 +156,6 @@ window.onload = () => {
                 })
                     .then((res) => res.json())
                     .then((resjson) => {
-                        console.log('fetchInfo',resjson)
                         let RandIndexList = [];
                         for (let i = 0; i < this.selectedNum;) {
                             let RandIndex = Math.floor(Math.random() * resjson.length);
@@ -168,7 +165,6 @@ window.onload = () => {
                                 i++;
                             };
                         };
-                        console.log(this.AllStore)
                         this.updateStore();
                     })
                     .catch(err => {
@@ -177,7 +173,6 @@ window.onload = () => {
             },
 
             fetchImg: async function () {
-                console.log('fetchimg starts running')
                 const fetchPromises = this.IdStore.map(async (currentid, i) => {
                     console.log('getting image...');
                     try {
@@ -356,7 +351,6 @@ window.onload = () => {
              * Start a new game.
              */
             newGameButton: async function () {
-                console.log(this.selectedNum)
                 this.instruction = false;
                 this.leaderboard = false;
                 this.gamepage = true;
