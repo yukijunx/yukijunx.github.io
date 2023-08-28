@@ -149,6 +149,8 @@ window.onload = () => {
              */
             fetchInfo: async function () {
                 this.GameInfo["NumberOfBreeds"] = this.selectedNum;
+                const maxRetries = 3;
+                let retries = 0;
                 await fetch(`https://fixed-silver-cough.glitch.me/catinfo`, {
                     method: "get",
                     headers: {
@@ -168,10 +170,19 @@ window.onload = () => {
                         };
                         this.updateStore();
                     })
-                    .catch(err => { console.log('Getting cat image error... ', err) });
+                    .catch(err => {
+                        if (retries < maxRetries) {
+                            retries++;
+                            setTimeout(this.fetchInfo, 3000);
+                        } else {
+                            console.error('Max retries reached', err);
+                        }
+                    });
             },
 
             fetchImg: async function () {
+                const maxRetries = 3;
+                let retries = 0;
                 const fetchPromises = this.IdStore.map(async (currentid, i) => {
                     console.log('getting image...');
                     try {
@@ -181,17 +192,19 @@ window.onload = () => {
                                 "Content-Type": "application/json"
                             },
                         });
-
                         const resjson = await response.json();
-
                         if (resjson.length === 0) {
                             return "noimage.jpg";
                         } else {
                             return resjson[0].url;
                         }
                     } catch (err) {
-                        console.log('Getting ' + currentid + ' cat image error... ', err);
-                        return "noimage.jpg";
+                        if (retries < maxRetries) {
+                            retries++;
+                            setTimeout(this.fetchInfo, 3000);
+                        } else {
+                            console.error('Max retries reached', err);
+                        }
                     }
                 });
                 this.ImgStore = await Promise.all(fetchPromises);
@@ -302,6 +315,7 @@ window.onload = () => {
                 for (let i = 0; i < this.AllStore.length; i++) {
                     if (this.AllStore[i]["name"] == this.selectedBreed) {
                         this.AllStore.splice(i, 1);
+                        this.ImgStore.splice(i, 1);
                         this.wrongClass.push(this.BreedsStore[i]);
                         alert("No, my cat is not " + this.selectedBreed + "!");
                     }
