@@ -174,7 +174,7 @@ window.onload = () => {
                     .catch(err => {
                         if (retries < maxRetries) {
                             retries++;
-                            setTimeout(this.fetchInfo, 3000);
+                            setTimeout(this.fetchInfo(), 3000);
                         } else {
                             console.error('Max retries reached', err);
                         }
@@ -202,7 +202,7 @@ window.onload = () => {
                     } catch (err) {
                         if (retries < maxRetries) {
                             retries++;
-                            setTimeout(this.fetchInfo, 3000);
+                            setTimeout(this.fetchInfo(), 3000);
                         } else {
                             console.error('Max retries reached', err);
                         }
