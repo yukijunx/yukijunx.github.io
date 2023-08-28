@@ -31,7 +31,7 @@ window.onload = () => {
                 selectedBreed: undefined,
                 rightClass: [],
                 wrongClass: [],
-                record: ['?', '?', '?', '?'],
+                record: ["/", "/", "/", "/"],
                 highscore: [false, false, false, false],
             }
         },
@@ -77,8 +77,8 @@ window.onload = () => {
             },
             postRecord: async function (x) {
                 let newrec = undefined;
-                if (x == '?') {
-                    newrec = ['?', '?', '?', '?']
+                if (x == "/") {
+                    newrec = ["/", "/", "/", "/"]
                 } else {
                     newrec = this.record;
                 };
@@ -271,7 +271,7 @@ window.onload = () => {
                 };
                 let finalscore = parseInt(this.GameInfo["NumberOfAsk"]) + parseInt(this.GameInfo["NumberOfHint"]) + parseInt(this.GameInfo["NumberOfGuess"]);
                 let correspondInd = this.GameInfo["NumberOfBreeds"] / 4 - 1;
-                if (this.record[correspondInd] == '?' || finalscore < this.record[correspondInd]) {
+                if (this.record[correspondInd] == "/" || finalscore < this.record[correspondInd]) {
                     console.log(finalscore, correspondInd);
                     this.record[correspondInd] = finalscore;
                     this.highscore[correspondInd] = true;
