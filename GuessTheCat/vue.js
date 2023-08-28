@@ -137,6 +137,7 @@ window.onload = () => {
                 this.HintList = [];
                 this.selectedChar = undefined;
                 this.selectedBreed = undefined;
+                console.log(this.AllStore)
                 for (let i = 0; i < this.AllStore.length; i++) {
                     this.BreedsStore.push(this.AllStore[i]["name"]);
                     this.TempeStore.push(this.AllStore[i]["temperament"]);
