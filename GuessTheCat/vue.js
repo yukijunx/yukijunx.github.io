@@ -71,7 +71,6 @@ window.onload = () => {
                     .then((res) => res.json())
                     .then((resjson) => {
                         this.record = resjson;
-                        console.log(this.record)
                     })
                     .catch(err => { console.log('get cat record error: ', err) })
             },
@@ -82,7 +81,6 @@ window.onload = () => {
                 } else {
                     newrec = this.record;
                 };
-                console.log(newrec, JSON.stringify({ 'data': newrec }))
                 await fetch(`https://fixed-silver-cough.glitch.me/catnewrecord`, {
                     method: 'post',
                     headers: {
@@ -175,7 +173,7 @@ window.onload = () => {
 
             fetchImg: async function () {
                 const fetchPromises = this.IdStore.map(async (currentid, i) => {
-                    console.log('getting image ' + i + ' ...');
+                    console.log('getting image...');
                     try {
                         const response = await fetch(`https://fixed-silver-cough.glitch.me/catimage/${currentid}`, {
                             method: "get",
@@ -271,12 +269,9 @@ window.onload = () => {
                 };
                 let finalscore = parseInt(this.GameInfo["NumberOfAsk"]) + parseInt(this.GameInfo["NumberOfHint"]) + parseInt(this.GameInfo["NumberOfGuess"]);
                 let correspondInd = this.GameInfo["NumberOfBreeds"] / 4 - 1;
-                console.log('vic',this.record[correspondInd] == "/", finalscore < this.record[correspondInd])
                 if (this.record[correspondInd] == "/" || finalscore < this.record[correspondInd]) {
-                    console.log(finalscore, correspondInd);
                     this.record[correspondInd] = finalscore;
                     this.highscore[correspondInd] = true;
-                    console.log(this.record, this.highscore)
                     this.postRecord();
                 }
                 this.leaderboard = true;

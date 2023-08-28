@@ -36,20 +36,20 @@
                 <tr>
                     <th>Number of Breeds</th>
                     <td :class="{highscoreclass: highscore[0]}">4</td>
-                    <td :class="{highscoreclass: highscore[0]}">8</td>
-                    <td :class="{highscoreclass: highscore[0]}">12</td>
-                    <td :class="{highscoreclass: highscore[0]}">16</td>
+                    <td :class="{highscoreclass: highscore[1]}">8</td>
+                    <td :class="{highscoreclass: highscore[2]}">12</td>
+                    <td :class="{highscoreclass: highscore[3]}">16</td>
                 </tr>
                 <tr>
                     <th>Best Score</th>
                     <td :class="{highscoreclass: highscore[0]}">{{record[0]}}</td>
-                    <td :class="{highscoreclass: highscore[0]}">{{record[0]}}</td>
-                    <td :class="{highscoreclass: highscore[0]}">{{record[0]}}</td>
-                    <td :class="{highscoreclass: highscore[0]}">{{record[0]}}</td>
+                    <td :class="{highscoreclass: highscore[1]}">{{record[1]}}</td>
+                    <td :class="{highscoreclass: highscore[2]}">{{record[2]}}</td>
+                    <td :class="{highscoreclass: highscore[3]}">{{record[3]}}</td>
                 </tr>
             </table>
             <div>
-                <button v-on:click="postRecord('?')">clear record</button>
+                <button v-on:click="postRecord("/")">clear record</button>
                 <button v-show="gameover" v-on:click="gamepage=false">main menu</button>
                 <button v-show="gameover" v-on:click="newGameButton()">new game</button>
             </div>
