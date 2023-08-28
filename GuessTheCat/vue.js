@@ -77,23 +77,18 @@ window.onload = () => {
             },
             postRecord: async function (x) {
                 let newrec = undefined;
-                if (x = '?') {
+                if (x == '?') {
                     newrec = ['?', '?', '?', '?']
                 } else {
                     newrec = this.record;
                 };
-                await fetch(`https://fixed-silver-cough.glitch.me/catnewrecord/${newrec[0]}/${newrec[1]}/${newrec[2]}/${newrec[3]}`, {
-                    method: "post",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                })
+                await fetch(`https://fixed-silver-cough.glitch.me/catnewrecord/${newrec[0]}/${newrec[1]}/${newrec[2]}/${newrec[3]}`)
                     .then((res) => res.text())
                     .then(function (res) {
                         console.log(res);
                     })
                     .catch(err => { console.log('post cat record error: ', err) });
-                this.getRecord();
+                await this.getRecord();
             },
 
             /**
