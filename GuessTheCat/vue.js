@@ -354,20 +354,35 @@ window.onload = () => {
              * Start a new game.
              */
             newGameButton: async function () {
-                this.leaderboard = false;
-                this.gamepage = true;
-                this.instruction = true;
-                this.AllStore = [];
-                this.ImgStore = [];
-                this.TempeStore = [];
-                this.TempeOpt = [];
-                this.BreedsStore = [];
-                this.IdStore = [];
-                this.TempeInfo = {};
-                this.HintList = [];
-                this.selectedChar = undefined;
-                this.selectedBreed = undefined;
-                this.highscore = [false, false, false, false];
+                this.instruction=false;
+                this.leaderboard=false;
+                this.gamepage= true;
+                this.area_newgame= false;
+                this.area_pickdiff= false;
+                this.AllStore= [];
+                this.TempeStore= [];
+                this.TempeOpt= [];
+                this.BreedsStore= [];
+                this.IdStore= [];
+                this.TempeInfo= {};
+                this.HintList= [];
+                this.correctIndex= undefined;
+                this.GameInfo= {
+                    "CorrectAnswer": "",
+                    "NumberOfBreeds": 0,
+                    "NumberOfGuess": 0,
+                    "NumberOfHint": 0,
+                    "NumberOfAsk": 0
+                };
+                this.selectedNum= undefined;
+                this.ImgStore= [];
+                this.gameover= false;
+                this.selectedChar= undefined;
+                this.selectedBreed= undefined;
+                this.rightClass= [];
+                this.wrongClass= [];
+                this.record= ["/", "/", "/", "/"];
+                this.highscore= [false, false, false, false];
                 console.log('starting new game...')
                 await this.fetchInfo();
                 await this.fetchImg();
