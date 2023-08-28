@@ -82,10 +82,13 @@ window.onload = () => {
                 } else {
                     newrec = this.record;
                 };
-                console.log(newrec,JSON.stringify(newrec))
+                console.log(newrec, JSON.stringify({ 'data': newrec }))
                 await fetch(`https://fixed-silver-cough.glitch.me/catnewrecord`, {
                     method: 'post',
-                    body: JSON.stringify({'data':newrec})
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 'data': newrec })
                 })
                     .then((res) => res.text())
                     .then(function (res) {
