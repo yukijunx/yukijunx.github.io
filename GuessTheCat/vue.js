@@ -397,6 +397,7 @@ window.onload = () => {
                 this.record = ["/", "/", "/", "/"];
                 this.highscore = [false, false, false, false];
                 console.log('starting new game...')
+                await this.getRecord();
                 await this.fetchInfo();
                 await this.fetchImg();
                 this.rollAnswer();

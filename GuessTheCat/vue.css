@@ -208,6 +208,7 @@ li {
 }
 
 .correct {
+    border-color: rgb(180, 250, 180);
     background-color: rgb(180, 250, 180);
     color: black;
 }
