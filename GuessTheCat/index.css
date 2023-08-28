@@ -1,141 +1,285 @@
-h1 {
-	text-align: center;
-	font-size:70pt;
-    font-family: "Chalkduster", "fantasy";
-	margin-top: 1%;
-	margin-bottom: -60pt
-}
-h2 {
-	text-align: center;
-	font-size:50pt;
-    font-family: "Chalkduster", "fantasy";
-	margin-bottom: -20pt
-}
-h3 {
-	text-align: center;
-	font-size:16pt;
-    font-family: "Chalkduster", "fantasy";
-    margin-bottom: 50pt;
-}
-body{
-    font-family: "Chalkduster", "fantasy";
-	font-variant: small-caps;
-	font-size: 22pt
-}
-button {
-    margin-right: 10pt;
-    height: 30px;
-    background: black;
+html {
+    position: relative;
+    /* Ensure that the pseudo-element is positioned relative to the html element */
+    font-family: 'Handjet', cursive;
     color: white;
+    font-size: 22px;
+}
+
+html::before {
+    content: "";
+    /* Create a pseudo-element */
+    position: fixed;
+    /* Position the pseudo-element fixed to cover the viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    /* Place the pseudo-element below the content */
+
+    background-size: cover;
+    background-image: url(/GuessTheCat/background.jpg);
+    background-repeat: repeat;
+    /* Tile the background image */
+    filter: brightness(0.25);
+}
+
+#body-container {
+    position: relative;
+    height: 95vh;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+}
+
+.option {
     cursor: pointer;
-    border-radius: 12px;
-    border:black;
-    text-decoration: none;
-	font-family: inherit;
-    vertical-align: middle;
 }
-button:hover {
-    background-color: darkgray;
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    font-size: 42px;
 }
-button:active {
-    transform: translateY(2px);
+
+.option-col {
+    padding-right: 20px;
+    width: 20%;
 }
-table {
-    width: 75%;
-    margin-top:12pt;
-    margin-left: auto;
-    margin-right: auto;
+
+.option-col ul {
+    padding: 0;
+    margin-top: 15px;
 }
-td, th{
-    font-family: "Trattatello", "fantasy";
-	text-align: center;
-	vertical-align:text-bottom;
-	border-collapse: collapse;
-	border-bottom: 1px solid black;
-	height: 40px;
-	font-size: 18pt;
+
+.right-label {
+    margin-top: 5px;
+    margin-left: 20px;
 }
-tr:nth-child(odd){background-color: #f2f2f2}
-form{
-	width: 590px;
-}
-#NumberForm{
-    width: 75%;
-	margin-left: auto;
-    margin-right: auto;
-}
-input{
-    cursor: pointer
-}
-.catcard{
+
+li {
+    list-style-type: none;
     cursor: pointer;
+}
+
+.withicon {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.paw {
+    visibility: hidden;
+}
+
+.withicon:hover .paw {
+    visibility: visible;
+}
+
+.hide {
+    visibility: hidden;
+    opacity: 0;
+}
+
+#right {
+    transition: all 0.2s ease-in-out;
+    font-size: 36px;
+    width: 60%;
+}
+
+.numoption {
+    width: 80%;
+}
+
+.numoption:hover {
+    background-color: rgba(211, 211, 211, 0.4);
+}
+
+.game,
+.menu {
+    margin: 20px;
+    position: relative;
+}
+
+.instruction {
+    position: absolute;
+    color: black;
+    background-color: lightgray;
+    width: 40%;
     height: fit-content;
-    overflow: hidden;
-    margin: 0;
-    position: relative;
-	border: 5px solid black;
+    top: 10%;
+    left: 30%;
+    z-index: 98;
+    padding: 5px;
 }
-.catcard img{
-    display:block;
-	width: 100%;
+
+.leaderboard {
+    position: absolute;
+    color: black;
+    background-color: lightgray;
+    width: 40%;
+    max-height: 40%;
+    top: 30%;
+    left: 30%;
+    z-index: 99;
+    padding: 5px;
 }
-#carddiv {
-	margin:auto;
-	width: 75%;
-    display: grid;
-	grid-template-columns: auto auto auto auto auto;
-    gap:15px;
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
 }
-.catcardtempe{
-    font-family: "Trattatello", "fantasy";
-	padding-left: 5px;
-	padding-right: 5px;
-    font-size: 16px;
+
+.button-container {
+    position: absolute;
+    display: flex;
+    right: 20px;
+    top: 30px;
 }
-.catcardname{
-	padding-left: 5px;
-	padding-right: 5px;
-	text-align: center;
-	margin-top: 4px;
-	margin-bottom: -12pt;
+
+.button {
+    margin-left: 10px;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
 }
-#QuesDiv{
-    position: relative;
-    margin:auto;
-    width: 75%;
+
+.title {
+    margin: 20px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 5vw;
+    margin-top: 30px;
+    margin-bottom: 40px;
 }
-.thelabel{
+
+.line,
+.question-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.hint {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+.catcards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+.card {
+    height: 42vh;
+    width: calc(25% - 20px);
+    margin: 10px;
+    box-sizing: border-box;
+    border: 2px solid white;
+    border-radius: 4px;
+}
+
+.cardpic {
+    width: 100%;
+    height: 60%;
+    background-image: url('noimage.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.cardname {
+    height: 15%;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow:scroll;
+    max-width: 100%; 
+}
+
+.cardchar {
+    width: 100%;
+    height: 25%;
+    /* display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px; */
+}
+
+.correct {
+    border-color: rgb(180, 250, 180);
+    background-color: rgb(180, 250, 180);
+    color: black;
+}
+
+.highscoreclass {
+    color: goldenrod;
+}
+
+table {
+    text-align: left;
+    width: 100%;
+}
+
+th {
+    width: 40%;
+}
+
+td {
+    width: 15%;
+}
+
+.smalltitle {
+    font-size: 36px;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+}
+
+[v-cloak] {
+    display: none;
+}
+
+
+.back {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 30px;
+    left: 42px;
+    width: 50%;
+}
+
+.logo {
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.logo div {
+    transform: scale(200%);
     margin-bottom: -10px;
 }
-select{
-    margin-right: 10pt;
+
+.label {
+    transition: all 0.5s ease-in-out;
+    margin-left: 26px;
+    opacity: 0;
+    font-size: 32px;
 }
-hr{
-    width: 75%;
-    border:none;
-    border-top: 3px dashed darkgray;
+
+.logo:hover+.label {
+    display: block;
+    opacity: 1;
 }
-#HintButton{
-    position: absolute;
-    right:0px;
-    top:0px;
-}
-#QuitButton{
-    position: absolute;
-    right:0px;
-    top:40px;
-}
-.wrong{
-    cursor: default;
-    transform: rotateY(360deg);
-    transition-duration: 0.35s;
-    opacity: 20%;
-    border: 5px solid tomato;
-    background-color: tomato;
-}
-.correct{
-    transform: rotateY(360deg);
-    transition-duration: 0.35s;
-    border: 5px solid seagreen;
-    background-color: seagreen;
+
+.logo:hover {
+    transform: rotate(45deg);
 }
