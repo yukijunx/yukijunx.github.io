@@ -110,7 +110,7 @@
                 :class="{ correct: rightClass.includes(breed), incorrect: wrongClass.includes(breed) }"
                 v-on:click="cardButton(IdStore[i])">
                     <div class="cardpic" :style="{ backgroundImage: 'url(' + ImgStore[i] + ')' }"></div>
-                    <div class="cardname">{{BreedsStore[i]}}</div>
+                    <div class="cardname smalltitle">{{BreedsStore[i]}}</div>
                     <div class="cardchar">
                         <div>{{TempeStore[i]}}</div>
                         <!-- <div v-for="(char,j) in TempeStore[i]" :key="j">{{char}}</div> -->

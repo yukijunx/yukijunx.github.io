@@ -3,6 +3,7 @@ html {
     /* Ensure that the pseudo-element is positioned relative to the html element */
     font-family: 'Handjet', cursive;
     color: white;
+    font-size: 22px;
 }
 
 html::before {
@@ -183,6 +184,10 @@ th{
 }
 td{
     width:15%;
+}
+
+.smalltitle{
+    font-size: 36px;
 }
 
 .material-symbols-outlined {

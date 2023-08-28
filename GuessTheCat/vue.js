@@ -163,30 +163,56 @@ window.onload = () => {
              * Fetch an image of a given breed and insert into the given DOM.
              * @param {string} breedid The breed id that we want an image for.
              */
+            // fetchImg: async function () {
+            //     for (let i =0; i < this.IdStore.length; i++){
+            //         let currentid = this.IdStore[i];
+            //         console.log('getting image '+i+' ...');
+            //         await fetch(`https://fixed-silver-cough.glitch.me/catimage/${currentid}`, {
+            //             method: "get",
+            //             headers: {
+            //                 "Content-Type": "application/json"
+            //             },
+            //         })
+            //             .then((res) => res.json())
+            //             .then((resjson) => {
+            //                 if (resjson.length == 0) {
+            //                     this.ImgStore.push("noimage.jpg");
+            //                 } else {
+            //                     this.ImgStore.push(resjson[0].url);
+            //                 }
+            //             })
+            //             .catch(err => {
+            //                 console.log('Getting '+breedid+' cat image error... ', err);
+            //                 this.ImgStore.push("noimage.jpg");
+            //             });
+            //     }
+            // },
             fetchImg: async function () {
-                for (let i =0; i < this.IdStore.length; i++){
-                    let currentid = this.IdStore[i];
-                    console.log('getting image '+i+' ...');
-                    await fetch(`https://fixed-silver-cough.glitch.me/catimage/${currentid}`, {
-                        method: "get",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                    })
-                        .then((res) => res.json())
-                        .then((resjson) => {
-                            if (resjson.length == 0) {
-                                this.ImgStore.push("noimage.jpg");
-                            } else {
-                                this.ImgStore.push(resjson[0].url);
-                            }
-                        })
-                        .catch(err => {
-                            console.log('Getting '+breedid+' cat image error... ', err);
-                            this.ImgStore.push("noimage.jpg");
+                const fetchPromises = this.IdStore.map(async (currentid, i) => {
+                    console.log('getting image ' + i + ' ...');
+                    try {
+                        const response = await fetch(`https://fixed-silver-cough.glitch.me/catimage/${currentid}`, {
+                            method: "get",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
                         });
-                }
+            
+                        const resjson = await response.json();
+            
+                        if (resjson.length === 0) {
+                            return "noimage.jpg";
+                        } else {
+                            return resjson[0].url;
+                        }
+                    } catch (err) {
+                        console.log('Getting ' + currentid + ' cat image error... ', err);
+                        return "noimage.jpg";
+                    }
+                });
+                this.ImgStore = await Promise.all(fetchPromises);
             },
+            
             /**
              * Decide the correct answer randomly based on the breeds we have fetched.
              * Call after fetchInfo().
@@ -229,7 +255,7 @@ window.onload = () => {
              * @returns None.
              */
             hintButton: function () {
-                if (gameover) {
+                if (this.gameover) {
                     return;
                 }
                 if (this.GameInfo["NumberOfHint"]==0){
@@ -273,7 +299,7 @@ window.onload = () => {
              * @returns None.
              */
             guessButton: function () {
-                if (gameover){
+                if (this.gameover){
                     return;
                 }
                 this.GameInfo["NumberOfGuess"]++;
@@ -304,7 +330,7 @@ window.onload = () => {
              * and update the select options to eliminate the asked temperament and the breeds with/without it.
              */
             askButton: function () {
-                if (gameover){
+                if (this.gameover){
                     return;
                 }
                 let ind = this.BreedsStore.indexOf(this.GameInfo["CorrectAnswer"]);
@@ -359,6 +385,7 @@ window.onload = () => {
                 await this.fetchImg();
                 this.rollAnswer();
                 this.updateHintList();
+                console.log(this.TempeStore,this.TempeOpt)
             }
 
         },
