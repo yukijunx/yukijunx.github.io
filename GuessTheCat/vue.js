@@ -256,11 +256,11 @@ window.onload = () => {
              */
             victory: function () {
                 // Check if hint is used, if yes, return without store record.
-                if (GameInfo["NumberOfHint"] != 0) {
+                if (this.GameInfo["NumberOfHint"] != 0) {
                     return;
                 };
-                let finalscore = parseInt(GameInfo["NumberOfAsk"]) + parseInt(GameInfo["NumberOfHint"]) + parseInt(GameInfo["NumberOfGuess"]);
-                let correspondInd = GameInfo["NumberOfBreeds"] / 4 - 1;
+                let finalscore = parseInt(this.GameInfo["NumberOfAsk"]) + parseInt(this.GameInfo["NumberOfHint"]) + parseInt(this.GameInfo["NumberOfGuess"]);
+                let correspondInd = this.GameInfo["NumberOfBreeds"] / 4 - 1;
                 if (this.record[correspondInd]=='?' || finalscore < this.record[correspondInd]){
                     this.record[correspondInd]=finalscore;
                     this.highscore[correspondInd]=true;
