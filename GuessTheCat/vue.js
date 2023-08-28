@@ -163,22 +163,28 @@ window.onload = () => {
              * Fetch an image of a given breed and insert into the given DOM.
              * @param {string} breedid The breed id that we want an image for.
              */
-            fetchImg: async function (breedid) {
-                await fetch(`https://fixed-silver-cough.glitch.me/catimage/${breedid}`, {
-                    method: "get",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                })
-                    .then((res) => res.json())
-                    .then((resjson) => {
-                        if (resjson.length == 0) {
-                            return "noimage.jpg";
-                        } else {
-                            return resjson[0].url;
-                        }
+            fetchImg: async function () {
+                for (let i =0; i < this.IdStore.length; i++){
+                    consolg.log('getting image '+i+' ...');
+                    await fetch(`https://fixed-silver-cough.glitch.me/catimage/${this.IdStore[i]}`, {
+                        method: "get",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
                     })
-                    .catch(err => { console.log('Getting cat image error... ', err) });
+                        .then((res) => res.json())
+                        .then((resjson) => {
+                            if (resjson.length == 0) {
+                                this.ImgStore.push("noimage.jpg");
+                            } else {
+                                this.ImgStore.push(resjson[0].url);
+                            }
+                        })
+                        .catch(err => {
+                            console.log('Getting '+breedid+' cat image error... ', err);
+                            this.ImgStore.push("noimage.jpg");
+                        });
+                }
             },
             /**
              * Decide the correct answer randomly based on the breeds we have fetched.
@@ -337,6 +343,7 @@ window.onload = () => {
             newGameButton: async function() {
                 this.gamepage = true;
                 this.AllStore = [];
+                this.ImgStore = [];
                 this.TempeStore = [];
                 this.TempeOpt = [];
                 this.BreedsStore = [];
@@ -348,7 +355,7 @@ window.onload = () => {
                 this.highscore = [false,false,false,false];
                 console.log('starting new game...')
                 await this.fetchInfo();
-                console.log(this.AllStore,this.GameInfo)
+                await this.fetchImg();
                 this.rollAnswer();
                 this.updateHintList();
             }
