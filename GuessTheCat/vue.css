@@ -152,7 +152,7 @@ li {
 .catcards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin-left: -10px;
     margin-right: -10px;
 }

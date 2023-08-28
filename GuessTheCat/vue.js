@@ -315,10 +315,10 @@ window.onload = () => {
                 if (this.formatted(this.selectedBreed) == this.formatted(this.GameInfo["CorrectAnswer"])) {
                     this.rightClass.push(this.selectedBreed);
                     alert(`Yes, my cat is ${this.selectedBreed}! You win!
-                    \nYou have asked ${GameInfo["NumberOfAsk"]} questions,
-                    \nused ${GameInfo["NumberOfHint"]} hints,  
-                    \nmade ${GameInfo["NumberOfGuess"]} guesses.
-                    \nYour score is ${parseInt(GameInfo["NumberOfAsk"]) + parseInt(GameInfo["NumberOfHint"]) + parseInt(GameInfo["NumberOfGuess"])}!`);
+                    \nYou have asked ${this.GameInfo["NumberOfAsk"]} questions,
+                    \nused ${this.GameInfo["NumberOfHint"]} hints,  
+                    \nmade ${this.GameInfo["NumberOfGuess"]} guesses.
+                    \nYour score is ${parseInt(this.GameInfo["NumberOfAsk"]) + parseInt(this.GameInfo["NumberOfHint"]) + parseInt(this.GameInfo["NumberOfGuess"])}!`);
                     this.gameover = true;
                     this.victory();
                     return;
