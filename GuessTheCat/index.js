@@ -172,12 +172,7 @@ window.onload = () => {
                         this.updateStore();
                     })
                     .catch(err => {
-                        if (retries < maxRetries) {
-                            retries++;
-                            setTimeout(this.fetchInfo(), 3000);
-                        } else {
-                            console.error('Max retries reached', err);
-                        }
+                        console.log('fetch info error: ', err)
                     });
             },
 
@@ -200,12 +195,7 @@ window.onload = () => {
                             return resjson[0].url;
                         }
                     } catch (err) {
-                        if (retries < maxRetries) {
-                            retries++;
-                            setTimeout(this.fetchInfo(), 3000);
-                        } else {
-                            console.error('Max retries reached', err);
-                        }
+                        console.log('fetch image error: ', err)
                     }
                 });
                 this.ImgStore = await Promise.all(fetchPromises);
