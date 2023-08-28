@@ -74,8 +74,14 @@ window.onload = () => {
                     })
                     .catch(err => { console.log('get cat record error: ', err) })
             },
-            postRecord: async function () {
-                await fetch(`https://fixed-silver-cough.glitch.me/catnewrecord/${this.record[0]}/${this.record[1]}/${this.record[2]}/${this.record[3]}`, {
+            postRecord: async function (x) {
+                let newrec = undefined;
+                if (x='?'){
+                    newrec = ['?','?','?','?']
+                } else{
+                    newrec = this.record;
+                };
+                await fetch(`https://fixed-silver-cough.glitch.me/catnewrecord/${newrec[0]}/${newrec[1]}/${newrec[2]}/${newrec[3]}`, {
                     method: "get",
                     headers: {
                         "Content-Type": "application/json"
@@ -262,8 +268,10 @@ window.onload = () => {
                 let finalscore = parseInt(this.GameInfo["NumberOfAsk"]) + parseInt(this.GameInfo["NumberOfHint"]) + parseInt(this.GameInfo["NumberOfGuess"]);
                 let correspondInd = this.GameInfo["NumberOfBreeds"] / 4 - 1;
                 if (this.record[correspondInd]=='?' || finalscore < this.record[correspondInd]){
+                    console.log(finalscore,correspondInd);
                     this.record[correspondInd]=finalscore;
                     this.highscore[correspondInd]=true;
+                    console.log(this.record,this.highscore)
                     this.postRecord();
                 }
                 this.leaderboard = true;
