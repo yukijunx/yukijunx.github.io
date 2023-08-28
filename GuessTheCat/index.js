@@ -149,6 +149,8 @@ window.onload = () => {
              */
             fetchInfo: async function () {
                 this.GameInfo["NumberOfBreeds"] = this.selectedNum;
+                const maxRetries = 3;
+                let retries = 0;
                 await fetch(`https://fixed-silver-cough.glitch.me/catinfo`, {
                     method: "get",
                     headers: {
@@ -157,7 +159,6 @@ window.onload = () => {
                 })
                     .then((res) => res.json())
                     .then((resjson) => {
-                        console.log(resjson)
                         let RandIndexList = [];
                         for (let i = 0; i < this.selectedNum;) {
                             let RandIndex = Math.floor(Math.random() * resjson.length);
@@ -167,15 +168,21 @@ window.onload = () => {
                                 i++;
                             };
                         };
-                        console.log(this.AllStore)
                         this.updateStore();
                     })
                     .catch(err => {
-                        console.log('fetch info error: ', err)
+                        if (retries < maxRetries) {
+                            retries++;
+                            setTimeout(this.fetchInfo, 3000);
+                        } else {
+                            console.error('Max retries reached', err);
+                        }
                     });
             },
 
             fetchImg: async function () {
+                const maxRetries = 3;
+                let retries = 0;
                 const fetchPromises = this.IdStore.map(async (currentid, i) => {
                     console.log('getting image...');
                     try {
@@ -192,7 +199,12 @@ window.onload = () => {
                             return resjson[0].url;
                         }
                     } catch (err) {
-                        console.log('fetch image error: ', err)
+                        if (retries < maxRetries) {
+                            retries++;
+                            setTimeout(this.fetchInfo, 3000);
+                        } else {
+                            console.error('Max retries reached', err);
+                        }
                     }
                 });
                 this.ImgStore = await Promise.all(fetchPromises);
@@ -266,7 +278,6 @@ window.onload = () => {
             victory: function () {
                 // Check if hint is used, if yes, return without store record.
                 if (this.GameInfo["NumberOfHint"] != 0) {
-                    this.leaderboard = true;
                     return;
                 };
                 let finalscore = parseInt(this.GameInfo["NumberOfAsk"]) + parseInt(this.GameInfo["NumberOfHint"]) + parseInt(this.GameInfo["NumberOfGuess"]);
