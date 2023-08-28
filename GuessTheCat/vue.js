@@ -85,7 +85,7 @@ window.onload = () => {
                 console.log(newrec,JSON.stringify(newrec))
                 await fetch(`https://fixed-silver-cough.glitch.me/catnewrecord`, {
                     method: 'post',
-                    body: JSON.stringify(newrec)
+                    body: JSON.stringify({'data':newrec})
                 })
                     .then((res) => res.text())
                     .then(function (res) {
