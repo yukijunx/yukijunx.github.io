@@ -89,14 +89,29 @@ li {
     font-size: 36px;
     width: 60%;
 }
-
+.numoption {
+    width: 80%;
+}
+.numoption:hover{
+    background-color: rgba(211,211,211,0.4);
+}
 .game,
 .menu {
     margin: 20px;
     position: relative;
 }
 
-.instruction,
+.instruction {
+    position: absolute;
+    color: black;
+    background-color: lightgray;
+    width: 40%;
+    height: fit-content;
+    top: 10%;
+    left: 30%;
+    z-index: 98;
+    padding: 5px;
+}
 .leaderboard {
     position: absolute;
     color: black;
@@ -106,6 +121,7 @@ li {
     top: 30%;
     left: 30%;
     z-index: 99;
+    padding: 5px;
 }
 
 .close {

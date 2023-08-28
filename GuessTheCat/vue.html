@@ -29,7 +29,8 @@
         </div>
 
         <div class="leaderboard" v-cloak v-if="leaderboard">
-            <div v-on:click="leaderboard = !leaderboard"><span class="close material-symbols-outlined">close</span></div>
+            <div v-on:click="leaderboard = !leaderboard"><span class="close material-symbols-outlined">close</span>
+            </div>
             <div class="smalltitle">Leaderboard</div>
             <table>
                 <tr>
@@ -51,7 +52,32 @@
                 <button v-on:click="gamepage=false">main menu</button>
                 <button v-on:click="newGameButton()">new game</button>
             </div>
-            
+        </div>
+
+        <div class="instruction" v-cloak v-if="instruction">
+            <div class="close" v-on:click="instruction = !instruction">
+                <span class="material-symbols-outlined">close</span>
+            </div>
+            <div>Welcome to "Guess the Cat!" Here's how to play:</div>
+            <div>
+                <h3>Objective:</h3>
+                <p>Guess the cat breed I'm thinking of based on provided temperaments.</p>
+            </div>
+            <div>
+                <h3>How to Play:</h3>
+                <p>Based on the difficulty level chosen, 4, 8, 12, or 16 breeds card are shown.<br>
+                    Each card shows the temperaments of the breed.<br>
+                    Ask questions about temperaments of the breed I'm thinking of to narrow down options.<br>
+                    Guess the breed based on the information.<br>
+                    Use hints if needed, but no leaderboard entry.<br>
+                    Score = Questions + Guesses + Hints used <em>(lower is better!)</em></p>
+            </div>
+            <div>
+                <h3>Tips:</h3>
+                <p>Read temperaments carefully for clues.<br>
+                    Ask smart questions to eliminate breeds.<br>
+                    Think logically to guess accurately.</p>
+            </div>
         </div>
 
         <div class="menu" v-cloak v-if="!gamepage">
@@ -62,7 +88,7 @@
                 </div>
                 <div class="option withicon">
                     <span class="paw material-symbols-outlined">pets</span>
-                    <div>Leaderboard</div>
+                    <div v-on:click="leaderboard = !leaderboard">Leaderboard</div>
                 </div>
             </div>
 
@@ -72,19 +98,25 @@
                 <ul>
                     <li class="withicon">
                         <span class="paw material-symbols-outlined">pets</span>
-                        <div v-on:click="selectedNum=4; area_newgame=false; area_pickdiff=false; newGameButton()">4</div>
+                        <div class="numoption"
+                            v-on:click="selectedNum=4; area_newgame=false; area_pickdiff=false; newGameButton()">4</div>
                     </li>
                     <li class="withicon">
                         <span class="paw material-symbols-outlined">pets</span>
-                        <div v-on:click="selectedNum=8; area_newgame=false; area_pickdiff=false; newGameButton()">8</div>
+                        <div class="numoption"
+                            v-on:click="selectedNum=8; area_newgame=false; area_pickdiff=false; newGameButton()">8</div>
                     </li>
                     <li class="withicon">
                         <span class="paw material-symbols-outlined">pets</span>
-                        <div v-on:click="selectedNum=12; area_newgame=false; area_pickdiff=false; newGameButton()">12</div>
+                        <div class="numoption"
+                            v-on:click="selectedNum=12; area_newgame=false; area_pickdiff=false; newGameButton()">12
+                        </div>
                     </li>
                     <li class="withicon">
                         <span class="paw material-symbols-outlined">pets</span>
-                        <div v-on:click="selectedNum=16; area_newgame=false; area_pickdiff=false; newGameButton()">16</div>
+                        <div class="numoption"
+                            v-on:click="selectedNum=16; area_newgame=false; area_pickdiff=false; newGameButton()">16
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -102,32 +134,25 @@
         </div>
 
         <div class="game" v-cloak v-if="gamepage">
-            <div class="instruction" v-cloak v-if="instruction">
-                <div class="close" v-on:click="instruction = !instruction"><span class="material-symbols-outlined">close</span>
-                </div>
-                Instruction page...
-            </div>
             <div class="line">
                 <div>My cat is one of the following breeds...</div>
                 <div class="hint" v-on:click="hintButton()">Give me a hint!</div>
             </div>
             <div class="catcards">
-                <div v-for="(breed, i) in BreedsStore"  class="card" 
-                :key="i" :id="IdStore[i]" 
-                :class="{ correct: rightClass.includes(breed), incorrect: wrongClass.includes(breed) }"
-                v-on:click="cardButton(IdStore[i])">
+                <div v-for="(breed, i) in BreedsStore" class="card" :key="i" :id="IdStore[i]"
+                    :class="{ correct: rightClass.includes(breed), incorrect: wrongClass.includes(breed) }"
+                    v-on:click="cardButton(IdStore[i])">
                     <div class="cardpic" :style="{ backgroundImage: 'url(' + ImgStore[i] + ')' }"></div>
                     <div class="cardname smalltitle">{{BreedsStore[i]}}</div>
                     <div class="cardchar">
                         <div>{{TempeStore[i]}}</div>
-                        <!-- <div v-for="(char,j) in TempeStore[i]" :key="j">{{char}}</div> -->
                     </div>
                 </div>
             </div>
             <div class="question-container">
                 <div class="question-left">Ask questions...</div>
                 <div class="question-right">
-                    Is your cat 
+                    Is your cat
                     <select v-model="selectedChar">
                         <option v-for="(option, i) in TempeOpt">{{ option }}</option>
                     </select>
@@ -137,7 +162,7 @@
             <div class="question-container">
                 <div class="question-left">Make a guess...</div>
                 <div class="question-right">
-                    I think your cat is 
+                    I think your cat is
                     <select v-model="selectedBreed">
                         <option v-for="(option, i) in BreedsStore">{{ option }}</option>
                     </select>

@@ -38,6 +38,7 @@ window.onload = () => {
         methods: {
             backtomenu: function () {
                 if (confirm('Are you sure you want to go back? \nCurrent game will be lost!')) {
+                    this.instruction = false;
                     this.gamepage = false;
                 } else {
                     return;
@@ -101,22 +102,16 @@ window.onload = () => {
              */
             tidyTempe: function () {
                 let TempeList = [];
-                console.log('tidytempe running');
                 for (let i = 0; i < this.TempeStore.length; i++) {
                     let SplittedTempe = this.TempeStore[i].split(",");
                     for (let j = 0; j < SplittedTempe.length; j++) {
                         TempeList.push(this.formatted(SplittedTempe[j]));
                     }
                 };
-                console.log('tempelist',TempeList)
                 for (const x of TempeList) {
-                    console.log(x)
                     this.TempeInfo[x] = (this.TempeInfo[x] || 0) + 1;
                 };
-                // TempeList.forEach(function (x) { this.TempeInfo[x] = (this.TempeInfo[x] || 0) + 1; });
-                console.log('tempeinfo',this.TempeInfo)
                 for (let keys in this.TempeInfo) {
-                    console.log('inside tidytempe',keys)
                     this.TempeOpt.push(keys);
                 };
             },
@@ -167,34 +162,7 @@ window.onload = () => {
                     })
                     .catch(err => { console.log('Getting cat image error... ', err) });
             },
-            /**
-             * Fetch an image of a given breed and insert into the given DOM.
-             * @param {string} breedid The breed id that we want an image for.
-             */
-            // fetchImg: async function () {
-            //     for (let i =0; i < this.IdStore.length; i++){
-            //         let currentid = this.IdStore[i];
-            //         console.log('getting image '+i+' ...');
-            //         await fetch(`https://fixed-silver-cough.glitch.me/catimage/${currentid}`, {
-            //             method: "get",
-            //             headers: {
-            //                 "Content-Type": "application/json"
-            //             },
-            //         })
-            //             .then((res) => res.json())
-            //             .then((resjson) => {
-            //                 if (resjson.length == 0) {
-            //                     this.ImgStore.push("noimage.jpg");
-            //                 } else {
-            //                     this.ImgStore.push(resjson[0].url);
-            //                 }
-            //             })
-            //             .catch(err => {
-            //                 console.log('Getting '+breedid+' cat image error... ', err);
-            //                 this.ImgStore.push("noimage.jpg");
-            //             });
-            //     }
-            // },
+            
             fetchImg: async function () {
                 const fetchPromises = this.IdStore.map(async (currentid, i) => {
                     console.log('getting image ' + i + ' ...');
@@ -378,7 +346,9 @@ window.onload = () => {
              * Start a new game.
              */
             newGameButton: async function() {
+                this.leaderboard = false;
                 this.gamepage = true;
+                this.instruction = true;
                 this.AllStore = [];
                 this.ImgStore = [];
                 this.TempeStore = [];
@@ -395,7 +365,6 @@ window.onload = () => {
                 await this.fetchImg();
                 this.rollAnswer();
                 this.updateHintList();
-                console.log(this.TempeStore,this.TempeOpt)
             }
 
         },
