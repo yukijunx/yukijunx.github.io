@@ -168,6 +168,7 @@ window.onload = () => {
                                 i++;
                             };
                         };
+                        console.log(this.AllStore)
                         this.updateStore();
                     })
                     .catch(err => {
