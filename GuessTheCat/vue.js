@@ -78,7 +78,7 @@ window.onload = () => {
                 let newrec = undefined;
                 if (x == "/") {
                     newrec = ["/", "/", "/", "/"];
-                    this.highscore=[false,false,false,false];
+                    this.highscore = [false, false, false, false];
                 } else {
                     newrec = this.record;
                 };
@@ -137,13 +137,11 @@ window.onload = () => {
                 this.HintList = [];
                 this.selectedChar = undefined;
                 this.selectedBreed = undefined;
-                console.log('updatestore',this.AllStore)
                 for (let i = 0; i < this.AllStore.length; i++) {
                     this.BreedsStore.push(this.AllStore[i]["name"]);
                     this.TempeStore.push(this.AllStore[i]["temperament"]);
                     this.IdStore.push(this.AllStore[i]["id"]);
                 };
-                console.log(this.BreedsStore,this.TempeStore,this.IdStore)
                 this.tidyTempe();
             },
             /**
@@ -168,7 +166,6 @@ window.onload = () => {
                                 i++;
                             };
                         };
-                        console.log('fetchinfo',this.AllStore)
                         this.updateStore();
                     })
                     .catch(err => { console.log('Getting cat image error... ', err) });
@@ -357,35 +354,34 @@ window.onload = () => {
              * Start a new game.
              */
             newGameButton: async function () {
-                this.instruction=false;
-                this.leaderboard=false;
-                this.gamepage= true;
-                this.area_newgame= false;
-                this.area_pickdiff= false;
-                this.AllStore= [];
-                this.TempeStore= [];
-                this.TempeOpt= [];
-                this.BreedsStore= [];
-                this.IdStore= [];
-                this.TempeInfo= {};
-                this.HintList= [];
-                this.correctIndex= undefined;
-                this.GameInfo= {
+                this.instruction = false;
+                this.leaderboard = false;
+                this.gamepage = true;
+                this.area_newgame = false;
+                this.area_pickdiff = false;
+                this.AllStore = [];
+                this.TempeStore = [];
+                this.TempeOpt = [];
+                this.BreedsStore = [];
+                this.IdStore = [];
+                this.TempeInfo = {};
+                this.HintList = [];
+                this.correctIndex = undefined;
+                this.GameInfo = {
                     "CorrectAnswer": "",
                     "NumberOfBreeds": 0,
                     "NumberOfGuess": 0,
                     "NumberOfHint": 0,
                     "NumberOfAsk": 0
                 };
-                this.selectedNum= undefined;
-                this.ImgStore= [];
-                this.gameover= false;
-                this.selectedChar= undefined;
-                this.selectedBreed= undefined;
-                this.rightClass= [];
-                this.wrongClass= [];
-                this.record= ["/", "/", "/", "/"];
-                this.highscore= [false, false, false, false];
+                this.ImgStore = [];
+                this.gameover = false;
+                this.selectedChar = undefined;
+                this.selectedBreed = undefined;
+                this.rightClass = [];
+                this.wrongClass = [];
+                this.record = ["/", "/", "/", "/"];
+                this.highscore = [false, false, false, false];
                 console.log('starting new game...')
                 await this.fetchInfo();
                 await this.fetchImg();
