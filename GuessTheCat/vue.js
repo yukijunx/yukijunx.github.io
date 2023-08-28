@@ -137,12 +137,12 @@ window.onload = () => {
                 this.HintList = [];
                 this.selectedChar = undefined;
                 this.selectedBreed = undefined;
-                this.highscore = [false, false, false, false];
                 for (let i = 0; i < this.AllStore.length; i++) {
                     this.BreedsStore.push(this.AllStore[i]["name"]);
                     this.TempeStore.push(this.AllStore[i]["temperament"]);
                     this.IdStore.push(this.AllStore[i]["id"]);
                 };
+                console.log(this.BreedsStore,this.TempeStore,this.IdStore)
                 this.tidyTempe();
             },
             /**
