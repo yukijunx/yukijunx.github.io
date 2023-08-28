@@ -137,7 +137,7 @@ window.onload = () => {
              * Fetch selected number of cats and store the informations.
              */
             fetchInfo: async function () {
-                this.GameInfo["NumberOfBreeds"] = this.SelectedNum;
+                this.GameInfo["NumberOfBreeds"] = this.selectedNum;
                 await fetch(`https://fixed-silver-cough.glitch.me/catinfo`, {
                     method: "get",
                     headers: {
@@ -147,17 +147,14 @@ window.onload = () => {
                     .then((res) => res.json())
                     .then((resjson) => {
                         let RandIndexList = [];
-                        console.log('fetch info running',resjson)
-                        for (let i = 0; i < this.SelectedNum;) {
+                        for (let i = 0; i < this.selectedNum;) {
                             let RandIndex = Math.floor(Math.random() * resjson.length);
-                            console.log(RandIndex)
                             if (!RandIndexList.includes(RandIndex)) {
                                 this.AllStore.push(resjson[RandIndex]);
                                 RandIndexList.push(RandIndex);
                                 i++;
                             };
                         };
-                        console.log('fetchinfo',this.AllStore)
                         this.updateStore();
                     })
                     .catch(err => { console.log('Getting cat image error... ', err) });
