@@ -149,8 +149,6 @@ window.onload = () => {
              */
             fetchInfo: async function () {
                 this.GameInfo["NumberOfBreeds"] = this.selectedNum;
-                const maxRetries = 3;
-                let retries = 0;
                 await fetch(`https://fixed-silver-cough.glitch.me/catinfo`, {
                     method: "get",
                     headers: {
@@ -159,6 +157,7 @@ window.onload = () => {
                 })
                     .then((res) => res.json())
                     .then((resjson) => {
+                        console.log(resjson)
                         let RandIndexList = [];
                         for (let i = 0; i < this.selectedNum;) {
                             let RandIndex = Math.floor(Math.random() * resjson.length);
@@ -177,8 +176,6 @@ window.onload = () => {
             },
 
             fetchImg: async function () {
-                const maxRetries = 3;
-                let retries = 0;
                 const fetchPromises = this.IdStore.map(async (currentid, i) => {
                     console.log('getting image...');
                     try {
@@ -269,6 +266,7 @@ window.onload = () => {
             victory: function () {
                 // Check if hint is used, if yes, return without store record.
                 if (this.GameInfo["NumberOfHint"] != 0) {
+                    this.leaderboard = true;
                     return;
                 };
                 let finalscore = parseInt(this.GameInfo["NumberOfAsk"]) + parseInt(this.GameInfo["NumberOfHint"]) + parseInt(this.GameInfo["NumberOfGuess"]);
