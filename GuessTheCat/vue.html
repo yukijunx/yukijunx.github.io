@@ -48,10 +48,10 @@
                     <td :class="{highscoreclass: highscore[0]}">{{record[0]}}</td>
                 </tr>
             </table>
-            <div><button v-on:click="postRecord('?')">clear record</button></div>
-            <div v-show="gameover">
-                <button v-on:click="gamepage=false">main menu</button>
-                <button v-on:click="newGameButton()">new game</button>
+            <div>
+                <button v-on:click="postRecord('?')">clear record</button>
+                <button v-show="gameover" v-on:click="gamepage=false">main menu</button>
+                <button v-show="gameover" v-on:click="newGameButton()">new game</button>
             </div>
         </div>
 

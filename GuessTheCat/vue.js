@@ -29,10 +29,10 @@ window.onload = () => {
                 gameover: false,
                 selectedChar: undefined,
                 selectedBreed: undefined,
-                rightClass:[],
-                wrongClass:[],
-                record:['?','?','?','?'],
-                highscore: [false,false,false,false],
+                rightClass: [],
+                wrongClass: [],
+                record: ['?', '?', '?', '?'],
+                highscore: [false, false, false, false],
             }
         },
         methods: {
@@ -76,9 +76,9 @@ window.onload = () => {
             },
             postRecord: async function (x) {
                 let newrec = undefined;
-                if (x='?'){
-                    newrec = ['?','?','?','?']
-                } else{
+                if (x = '?') {
+                    newrec = ['?', '?', '?', '?']
+                } else {
                     newrec = this.record;
                 };
                 await fetch(`https://fixed-silver-cough.glitch.me/catnewrecord/${newrec[0]}/${newrec[1]}/${newrec[2]}/${newrec[3]}`, {
@@ -91,7 +91,8 @@ window.onload = () => {
                     .then(function (res) {
                         console.log(res);
                     })
-                    .catch(err => { console.log('post cat record error: ', err) })
+                    .catch(err => { console.log('post cat record error: ', err) });
+                this.getRecord();
             },
 
             /**
@@ -132,9 +133,9 @@ window.onload = () => {
                 this.IdStore = [];
                 this.TempeInfo = {};
                 this.HintList = [];
-                this.selectedChar=undefined;
-                this.selectedBreed=undefined;
-                this.highscore = [false,false,false,false];
+                this.selectedChar = undefined;
+                this.selectedBreed = undefined;
+                this.highscore = [false, false, false, false];
                 for (let i = 0; i < this.AllStore.length; i++) {
                     this.BreedsStore.push(this.AllStore[i]["name"]);
                     this.TempeStore.push(this.AllStore[i]["temperament"]);
@@ -168,7 +169,7 @@ window.onload = () => {
                     })
                     .catch(err => { console.log('Getting cat image error... ', err) });
             },
-            
+
             fetchImg: async function () {
                 const fetchPromises = this.IdStore.map(async (currentid, i) => {
                     console.log('getting image ' + i + ' ...');
@@ -179,9 +180,9 @@ window.onload = () => {
                                 "Content-Type": "application/json"
                             },
                         });
-            
+
                         const resjson = await response.json();
-            
+
                         if (resjson.length === 0) {
                             return "noimage.jpg";
                         } else {
@@ -194,7 +195,7 @@ window.onload = () => {
                 });
                 this.ImgStore = await Promise.all(fetchPromises);
             },
-            
+
             /**
              * Decide the correct answer randomly based on the breeds we have fetched.
              * Call after fetchInfo().
@@ -240,8 +241,8 @@ window.onload = () => {
                 if (this.gameover) {
                     return;
                 }
-                if (this.GameInfo["NumberOfHint"]==0){
-                    if (!confirm("If you use a hint you cannot enter the leaderboard,\ndo you wish to continue?")){
+                if (this.GameInfo["NumberOfHint"] == 0) {
+                    if (!confirm("If you use a hint you cannot enter the leaderboard,\ndo you wish to continue?")) {
                         return;
                     }
                 }
@@ -252,7 +253,7 @@ window.onload = () => {
                         return;
                     };
                 }
-                alert("You have used up all the hints!"); 
+                alert("You have used up all the hints!");
             },
 
             /**
@@ -267,11 +268,11 @@ window.onload = () => {
                 };
                 let finalscore = parseInt(this.GameInfo["NumberOfAsk"]) + parseInt(this.GameInfo["NumberOfHint"]) + parseInt(this.GameInfo["NumberOfGuess"]);
                 let correspondInd = this.GameInfo["NumberOfBreeds"] / 4 - 1;
-                if (this.record[correspondInd]=='?' || finalscore < this.record[correspondInd]){
-                    console.log(finalscore,correspondInd);
-                    this.record[correspondInd]=finalscore;
-                    this.highscore[correspondInd]=true;
-                    console.log(this.record,this.highscore)
+                if (this.record[correspondInd] == '?' || finalscore < this.record[correspondInd]) {
+                    console.log(finalscore, correspondInd);
+                    this.record[correspondInd] = finalscore;
+                    this.highscore[correspondInd] = true;
+                    console.log(this.record, this.highscore)
                     this.postRecord();
                 }
                 this.leaderboard = true;
@@ -283,7 +284,7 @@ window.onload = () => {
              * @returns None.
              */
             guessButton: function () {
-                if (this.gameover){
+                if (this.gameover) {
                     return;
                 }
                 console.log('guessing...')
@@ -315,7 +316,7 @@ window.onload = () => {
              * and update the select options to eliminate the asked temperament and the breeds with/without it.
              */
             askButton: function () {
-                if (this.gameover){
+                if (this.gameover) {
                     return;
                 }
                 console.log('asking...')
@@ -353,7 +354,7 @@ window.onload = () => {
             /**
              * Start a new game.
              */
-            newGameButton: async function() {
+            newGameButton: async function () {
                 this.leaderboard = false;
                 this.gamepage = true;
                 this.instruction = true;
@@ -365,9 +366,9 @@ window.onload = () => {
                 this.IdStore = [];
                 this.TempeInfo = {};
                 this.HintList = [];
-                this.selectedChar=undefined;
-                this.selectedBreed=undefined;
-                this.highscore = [false,false,false,false];
+                this.selectedChar = undefined;
+                this.selectedBreed = undefined;
+                this.highscore = [false, false, false, false];
                 console.log('starting new game...')
                 await this.fetchInfo();
                 await this.fetchImg();
