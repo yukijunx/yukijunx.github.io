@@ -77,7 +77,8 @@ window.onload = () => {
             postRecord: async function (x) {
                 let newrec = undefined;
                 if (x == "/") {
-                    newrec = ["/", "/", "/", "/"]
+                    newrec = ["/", "/", "/", "/"];
+                    this.highscore=[false,false,false,false];
                 } else {
                     newrec = this.record;
                 };

@@ -25,9 +25,9 @@ html::before {
     filter: brightness(0.25);
 }
 
-#body-container{
+#body-container {
     position: relative;
-    height:95vh;
+    height: 95vh;
 }
 
 .left {
@@ -56,7 +56,7 @@ html::before {
 }
 
 .right-label {
-    margin-top:5px;
+    margin-top: 5px;
     margin-left: 20px;
 }
 
@@ -89,12 +89,15 @@ li {
     font-size: 36px;
     width: 60%;
 }
+
 .numoption {
     width: 80%;
 }
-.numoption:hover{
-    background-color: rgba(211,211,211,0.4);
+
+.numoption:hover {
+    background-color: rgba(211, 211, 211, 0.4);
 }
+
 .game,
 .menu {
     margin: 20px;
@@ -112,6 +115,7 @@ li {
     z-index: 98;
     padding: 5px;
 }
+
 .leaderboard {
     position: absolute;
     color: black;
@@ -204,12 +208,12 @@ li {
 }
 
 .correct {
-    /* green */
+    background-color: rgb(180, 250, 180);
+    color: black;
 }
 
-.incorrect {
-    /* red */
-    pointer-events: none;
+.highscoreclass {
+    color: goldenrod;
 }
 
 table {
@@ -265,7 +269,7 @@ td {
     transition: all 0.5s ease-in-out;
     margin-left: 26px;
     opacity: 0;
-    font-size:32px;
+    font-size: 32px;
 }
 
 .logo:hover+.label {
