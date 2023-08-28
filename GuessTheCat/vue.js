@@ -271,6 +271,7 @@ window.onload = () => {
                 };
                 let finalscore = parseInt(this.GameInfo["NumberOfAsk"]) + parseInt(this.GameInfo["NumberOfHint"]) + parseInt(this.GameInfo["NumberOfGuess"]);
                 let correspondInd = this.GameInfo["NumberOfBreeds"] / 4 - 1;
+                console.log('vic',this.record[correspondInd] == "/", finalscore < this.record[correspondInd])
                 if (this.record[correspondInd] == "/" || finalscore < this.record[correspondInd]) {
                     console.log(finalscore, correspondInd);
                     this.record[correspondInd] = finalscore;
