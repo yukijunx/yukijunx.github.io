@@ -30,7 +30,6 @@ window.onload = () => {
                 selectedChar: undefined,
                 selectedBreed: undefined,
                 rightClass: [],
-                wrongClass: [],
                 record: ["/", "/", "/", "/"],
                 highscore: [false, false, false, false],
             }
@@ -71,6 +70,7 @@ window.onload = () => {
                     .then((res) => res.json())
                     .then((resjson) => {
                         this.record = resjson;
+                        console.log('getRecord',resjson,this.record)
                     })
                     .catch(err => { console.log('get cat record error: ', err) })
             },
@@ -148,6 +148,7 @@ window.onload = () => {
              * Fetch selected number of cats and store the informations.
              */
             fetchInfo: async function () {
+                console.log('fetchinfo starts running')
                 this.GameInfo["NumberOfBreeds"] = this.selectedNum;
                 await fetch(`https://fixed-silver-cough.glitch.me/catinfo`, {
                     method: "get",
@@ -157,7 +158,7 @@ window.onload = () => {
                 })
                     .then((res) => res.json())
                     .then((resjson) => {
-                        console.log(resjson)
+                        console.log('fetchInfo',resjson)
                         let RandIndexList = [];
                         for (let i = 0; i < this.selectedNum;) {
                             let RandIndex = Math.floor(Math.random() * resjson.length);
@@ -176,6 +177,7 @@ window.onload = () => {
             },
 
             fetchImg: async function () {
+                console.log('fetchimg starts running')
                 const fetchPromises = this.IdStore.map(async (currentid, i) => {
                     console.log('getting image...');
                     try {
@@ -304,8 +306,7 @@ window.onload = () => {
                 for (let i = 0; i < this.AllStore.length; i++) {
                     if (this.AllStore[i]["name"] == this.selectedBreed) {
                         this.AllStore.splice(i, 1);
-                        this.ImgStore.splice(i, 1);
-                        this.wrongClass.push(this.BreedsStore[i]);
+                        this.ImgStore.splice(i, 1);;
                         alert("No, my cat is not " + this.selectedBreed + "!");
                     }
                 };
@@ -328,7 +329,6 @@ window.onload = () => {
                     for (let i = this.AllStore.length - 1; i >= 0; i--) {
                         if (!this.formatted(this.TempeStore[i]).includes(this.formatted(this.selectedChar))) {
                             this.AllStore.splice(i, 1);
-                            this.wrongClass.push(this.BreedsStore[i]);
                         }
                     }
                 } else {
@@ -336,7 +336,6 @@ window.onload = () => {
                     for (let i = this.AllStore.length - 1; i >= 0; i--) {
                         if (this.formatted(this.TempeStore[i]).includes(this.formatted(this.selectedChar))) {
                             this.AllStore.splice(i, 1);
-                            this.wrongClass.push(this.BreedsStore[i]);
                         }
                     }
                 };
@@ -357,6 +356,7 @@ window.onload = () => {
              * Start a new game.
              */
             newGameButton: async function () {
+                console.log(this.selectedNum)
                 this.instruction = false;
                 this.leaderboard = false;
                 this.gamepage = true;
@@ -382,7 +382,6 @@ window.onload = () => {
                 this.selectedChar = undefined;
                 this.selectedBreed = undefined;
                 this.rightClass = [];
-                this.wrongClass = [];
                 this.record = ["/", "/", "/", "/"];
                 this.highscore = [false, false, false, false];
                 console.log('starting new game...')
