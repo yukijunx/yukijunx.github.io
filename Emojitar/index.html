@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Emojitar - by X.X.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sen&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/vue@next"></script>
+    <script type="module" src="index.js"></script>
+</head>
+
+<body>
+    <div id="body-container">
+
+        <div class="bigtitle">
+            EMOJITAR
+        </div>
+
+        <div class="main-content">
+
+            <div class="content" v-if="content=='make'">
+                <div class="createboard">
+                    <div class="preview-container">
+                        <div class="preview-item" v-for="item in selectedlist">
+                            <img :src="compopath+item">
+                        </div>
+                    </div>
+                    <div class="components-container">
+                        <div class="component-box">
+                            <div class="label">Pick a face:</div>
+                            <div class="image-container">
+                                <div class="image" v-for="item in facelist">
+                                    <img :src="compopath+item">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="component-box">
+                            <div class="label">Pick a hair:</div>
+                            <div class="image-container">
+                                <div class="image" v-for="item in hairlist">
+                                    <img :src="compopath+item">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="component-box">
+                            <div class="label">Pick an eyes:</div>
+                            <div class="image-container">
+                                <div class="image" v-for="item in eyeslist">
+                                    <img :src="compopath+item">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="component-box">
+                            <div class="label">Pick a mouth:</div>
+                            <div class="image-container">
+                                <div class="image" v-for="item in mouthlist">
+                                    <img :src="compopath+item">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="description">
+                    <div class="desc-label">Write a description:</div>
+                    <div class="desc-box">
+                        <input type="text" v-model="description" />
+                        <button class="button">SUBMIT</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="content" v-if="content=='view'">
+                <!-- When user is viewing all emojitars -->
+                <div v-if="emojitarviewing=='all'">
+                    <div class="filter-container">
+                        <form id="rateform">
+                            <label for="rateform">view only those with rate &gt;=: </label>
+                            <input type="radio" name="rateOption" value=1 v-model="filterRate">1
+                            <input type="radio" name="rateOption" value=2 v-model="filterRate">2
+                            <input type="radio" name="rateOption" value=3 v-model="filterRate">3
+                            <input type="radio" name="rateOption" value=4 v-model="filterRate">4
+                            <input type="radio" name="rateOption" value=5 v-model="filterRate">5
+                        </form>
+                        <label for="dateform">view only those created after: </label>
+                        <input type="date" id="dateform" name="dateOption" v-model="filterDate">
+                        <button class="button" v-on:click="applyFilter">APPLY</button>
+                        <button class="button" v-on:click="clearFilter">CLEAR</button>
+                    </div>
+                    <div class="emojitar-container">
+                        <div v-for="item in allEmojitars" class="emojitar-item">
+                            <img :src="parentPath+item.face" v-on:click="viewPage=item.id">
+                            <img :src="parentPath+item.hair" v-on:click="viewPage=item.id">
+                            <img :src="parentPath+item.eyes" v-on:click="viewPage=item.id">
+                            <img :src="parentPath+item.mouth" v-on:click="viewPage=item.id">
+                            <div>
+                                <span style="float:left">{{item.creator}}</span>
+                                <span style="float:right">{{averageRate(item.rate)}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- When user has selected one emojitar to view -->
+                <div v-for="item in allEmojitars">
+                    <div v-if="emojitarviewing==item.id" class="createboard">
+                        <div class="preview-container">
+                            <img :src="parentPath+item.face">
+                            <img :src="parentPath+item.hair">
+                            <img :src="parentPath+item.eyes">
+                            <img :src="parentPath+item.mouth">
+                        </div>
+                        <div class="components-container">
+                            <p id="emo-info">Created by {{item.creator}} on {{item.date}}.
+                                <br>{{averageRate(item.rate)}} out of 5 rated by {{item.rate.length}} people.
+                                <br>Creator's description:
+                                <br>{{item.description}}
+                            </p>
+                            <button v-on:click="viewPage='all'" class="button">Back</button>
+                            <button v-on:click="deleteEmo(item.id)" class="button">Delete</button>
+                        </div>
+                    </div>
+                    <div v-if="viewPage==item.id" class="comment-area">
+                        <div id="comments-left">
+                            <p>Comments:</p>
+                            <dl>
+                                <template v-for="comm in item.comments">
+                                    <dt>{{comm.info}}</dt>
+                                    <dd>{{comm.contend}}</dd>
+                                </template>
+                            </dl>
+                        </div>
+                        <div id=comments-right>
+                            <label for="rate-buttons">Rate this emojitar:</label>
+                            <div id="rate-container">
+                                <button class="button" v-on:click="sendRate(item.id,1)">1</button>
+                                <button class="button" v-on:click="sendRate(item.id,2)">2</button>
+                                <button class="button" v-on:click="sendRate(item.id,3)">3</button>
+                                <button class="button" v-on:click="sendRate(item.id,4)">4</button>
+                                <button class="button" v-on:click="sendRate(item.id,5)">5</button>
+                            </div>
+                            <div id="write-comment">
+                                <label for="commentinput">Enter your comment:</label>
+                                <input id="commentinput" type="text" v-model="usercomment" />
+                                <button v-on:click="sendComment(item.id,usercomment)" id="send-button">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content" v-if="content=='me'">
+                <div v-if="loggedin==false" class="logpage">
+                    <h1>SIGN UP OR LOG IN HERE!</h1>
+                    <div>
+                        <label for="username-input">Username:</label>
+                        <input id="username-input" type="text" v-model="usernameInput" />
+                    </div>
+                    <div>
+                        <label for="password-input">Password:</label>
+                        <input id="password-input" type="password" v-model="passwordInput" />
+                    </div>
+                    <div id="logbuttons-container">
+                        <button v-on:click="login" class="button">LOG-IN</button>
+                        <button v-on:click="register" class="button">SIGN-UP</button>
+                        <div class="register-msg" v-if="registermsg!=''">{{registerMsg}}</div>
+                    </div>
+                </div>
+                <div v-if="loggedin==true" class="logpage">
+                    <div class="register-msg" v-if="registerMsg!=''">{{registerMsg}}</div>
+                    <div class="welcome-msg">Welcome to Emojitar, {{currentUser}}!</div>
+                    <button class="button" v-on:click="logout">LOG-OUT</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="navigation-bar">
+            <button class="button" v-on:click="selected='make'">MAKE YOUR EMOJITAR</button>
+            <button class="button" v-on:click="selected='view',viewPage='all'">VIEW ALL EMOJITARS</button>
+            <button class="button" v-on:click="selected='me'">ME</button>
+        </div>
+
+    </div>
+</body>
+
+</html>
