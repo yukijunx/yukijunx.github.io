@@ -154,25 +154,27 @@
 
             <div class="content" v-if="content=='me'">
                 <div v-if="loggedin==false" class="logpage">
-                    <div>SIGN UP OR LOG IN HERE!</div>
-                    <div>
-                        <label for="username-input">Username:</label>
-                        <input id="username-input" type="text" v-model="usernameInput" />
-                    </div>
-                    <div>
-                        <label for="password-input">Password:</label>
-                        <input id="password-input" type="password" v-model="passwordInput" />
-                    </div>
-                    <div id="logbuttons-container">
-                        <button v-on:click="login" class="button">LOG-IN</button>
-                        <button v-on:click="register" class="button">SIGN-UP</button>
-                        <div class="register-msg" v-if="registermsg!=''">{{registerMsg}}</div>
+                    <div class="smalltitle">SIGN UP OR LOG IN HERE!</div>
+                    <div class="register-msg">{{registermsg}}</div>
+                    <div class="center-container">
+                        <div class="input-container">
+                            <label for="username-input">Username:</label>
+                            <input id="username-input" type="text" v-model="usernameInput" />
+                        </div>
+                        <div class="input-container">
+                            <label for="password-input">Password:</label>
+                            <input id="password-input" type="password" v-model="passwordInput" />
+                        </div>
+                        <div class="logbuttons-container">
+                            <button v-on:click="login" class="button">LOG-IN</button>
+                            <button v-on:click="register" class="button">SIGN-UP</button>
+                        </div>
                     </div>
                 </div>
                 <div v-if="loggedin==true" class="loggedinpage">
                     <div class="register-msg" v-if="registerMsg!=''">{{registerMsg}}</div>
-                    <div class="welcome-msg">Welcome to Emojitar, {{currentUser}}!</div>
-                    <button class="button" v-on:click="logout">LOG-OUT</button>
+                    <div class="smalltitle">Welcome to Emojitar, {{currentUser}}!</div>
+                    <div class="logout-container"><button class="button" v-on:click="logout">LOG-OUT</button></div>
                 </div>
             </div>
 
