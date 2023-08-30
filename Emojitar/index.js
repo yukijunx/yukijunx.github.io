@@ -4,7 +4,7 @@ window.onload = () => {
             return {
                 content: 'make',
                 description: '',
-                compopath:'/elements/',
+                compopath:'/Emojitar/elements/',
                 facelist:['face-1','face-2','face-3','face-4'],
                 eyeslist:['eyes-1','eyes-2','eyes-3','eyes-4'],
                 hairlist:['hair-1','hair-2','hair-3','hair-4'],

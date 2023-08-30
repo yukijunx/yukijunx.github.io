@@ -26,7 +26,7 @@
                 <div class="createboard">
                     <div class="preview-container">
                         <div class="preview-item" v-for="item in selectedlist">
-                            <img :src="compopath+item">
+                            <img :src="compopath+item.split('-')[0]+item">
                         </div>
                     </div>
                     <div class="components-container">
@@ -34,7 +34,7 @@
                             <div class="label">Pick a face:</div>
                             <div class="image-container">
                                 <div class="image" v-for="item in facelist">
-                                    <img :src="compopath+item">
+                                    <img :src="compopath+item.split('-')[0]+item">
                                 </div>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                             <div class="label">Pick a hair:</div>
                             <div class="image-container">
                                 <div class="image" v-for="item in hairlist">
-                                    <img :src="compopath+item">
+                                    <img :src="compopath+item.split('-')[0]+item">
                                 </div>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                             <div class="label">Pick an eyes:</div>
                             <div class="image-container">
                                 <div class="image" v-for="item in eyeslist">
-                                    <img :src="compopath+item">
+                                    <img :src="compopath+item.split('-')[0]+item">
                                 </div>
                             </div>
                         </div>
@@ -108,10 +108,10 @@
                 <div v-for="item in allEmojitars">
                     <div v-if="emojitarviewing==item.id" class="createboard">
                         <div class="preview-container">
-                            <img :src="parentPath+item.face">
-                            <img :src="parentPath+item.hair">
-                            <img :src="parentPath+item.eyes">
-                            <img :src="parentPath+item.mouth">
+                            <img :src="compopath+item.split('-')[0]+item">
+                            <img :src="compopath+item.split('-')[0]+item">
+                            <img :src="compopath+item.split('-')[0]+item">
+                            <img :src="compopath+item.split('-')[0]+item">
                         </div>
                         <div class="components-container">
                             <p id="emo-info">Created by {{item.creator}} on {{item.date}}.
