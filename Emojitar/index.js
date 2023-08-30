@@ -40,7 +40,8 @@ window.onload = () => {
                     };
                     if (resp.status == 401) {
                         var error = await resp.text();
-                        this.registerMsg = error;
+                        console.log('Logging in error:', error);
+                        alert('Incorrect username or password!')
                     }
                 } catch (err) {
                     console.log('Error: ', err)
@@ -52,7 +53,7 @@ window.onload = () => {
                     return
                 };
                 try {
-                    var resp = await fetch(`https://fixed-silver-cough.glitch.me/${this.usernameInput}/${this.passwordInput}`);
+                    var resp = await fetch(`https://fixed-silver-cough.glitch.me/EmojitarRegister/${this.usernameInput}/${this.passwordInput}`);
                     var dat = await resp.json();
                     if (resp.status == 400) {
                         this.registerMsg = dat;

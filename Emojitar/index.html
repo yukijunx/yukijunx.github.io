@@ -33,7 +33,7 @@
                         <div class="component-box">
                             <div class="label">Pick a face:</div>
                             <div class="image-container">
-                                <div class="image" v-for="item in facelist" v-on:click="selectedlist[0]='item'">
+                                <div class="image" v-for="item in facelist" v-on:click="selectedlist[0]=item">
                                     <img :src="compopath+item.split('-')[0]+'/'+item+'.png'">
                                 </div>
                             </div>
@@ -41,7 +41,7 @@
                         <div class="component-box">
                             <div class="label">Pick a hair:</div>
                             <div class="image-container">
-                                <div class="image" v-for="item in hairlist" v-on:click="selectedlist[1]='item'">
+                                <div class="image" v-for="item in hairlist" v-on:click="selectedlist[1]=item">
                                     <img :src="compopath+item.split('-')[0]+'/'+item+'.png'">
                                 </div>
                             </div>
@@ -49,7 +49,7 @@
                         <div class="component-box">
                             <div class="label">Pick an eyes:</div>
                             <div class="image-container">
-                                <div class="image" v-for="item in eyeslist" v-on:click="selectedlist[2]='item'">
+                                <div class="image" v-for="item in eyeslist" v-on:click="selectedlist[2]=item">
                                     <img :src="compopath+item.split('-')[0]+'/'+item+'.png'">
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                         <div class="component-box">
                             <div class="label">Pick a mouth:</div>
                             <div class="image-container">
-                                <div class="image" v-for="item in mouthlist" v-on:click="selectedlist[3]='item'">
+                                <div class="image" v-for="item in mouthlist" v-on:click="selectedlist[3]=item">
                                     <img :src="compopath+item.split('-')[0]+'/'+item+'.png'">
                                 </div>
                             </div>

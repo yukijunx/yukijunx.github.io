@@ -16,7 +16,7 @@
 }
 
 #body-container {
-    width: 80vw;
+    width: 70vw;
     height: 80vh;
     margin-left: auto;
     margin-right: auto;
@@ -27,10 +27,12 @@ body {
     font-family: 'Sen', sans-serif;
     background-color: var(--orange);
     color: white;
+    font-size: 2.8vmin;
 }
 
 .bigtitle {
-    /* font-size: 72px; */
+    font-size: 6vmin;
+    font-weight: bolder;
     height: 8vh;
     text-align: center;
     background-color: var(--pink);
@@ -47,7 +49,7 @@ body {
 .main-content {
     height: 66vh;
     background-color: var(--blue);
-    padding-bottom: 30px;
+    padding-bottom: 5vmin;
 }
 
 .button {
@@ -67,14 +69,16 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-height: 52vh;
+    width: 70vw;
 }
 
 .preview-container {
     border-radius: 12px;
     background-color: var(--green);
-    width: 38vw;
-    height: 45vh;
-    margin: 30px;
+    width: 28vw;
+    height: 46vh;
+    margin: 3vmin;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,17 +87,18 @@ body {
 
 .preview-item {
     position: absolute;
+    max-height: 25vw;
+    max-width: 40vh;
 }
 
 .preview-item img {
+        max-height: 100%;
     max-width: 100%;
-    max-height: 100%;
 }
 
 .components-container {
-    /*     flex-grow: 2; */
-    width: 38vw;
-    margin: 30px;
+    max-width: 48vw;
+    margin: 5vmin;
 }
 
 .image-container {
@@ -115,8 +120,9 @@ body {
 }
 
 .description {
-    margin: 30px;
-    margin-top: 0;
+    max-height: 10vh;
+    margin: 5vmin;
+    margin-top: 2vmin;
     margin-bottom: 0;
 }
 
@@ -124,7 +130,7 @@ body {
     display: flex;
     flex-direction: row;
     height: 6vh;
-    margin-top: 10px;
+    margin-top: vmin;
 }
 
 .desc-box .button {
@@ -141,8 +147,7 @@ body {
 }
 
 .desc-box button {
-    margin-left: 15px;
-    /*     flex-grow: 2; */
+    margin-left: 2vmin;
 }
 
 .navigation-bar {
@@ -159,19 +164,19 @@ body {
 }
 
 .smalltitle {
-    padding: 10px;
-    font-size: 32px;
+    padding: 2vmin;
+    font-size: 3vmin;
     text-align: center;
 }
 
 .center-container {
-    width: 40%;
+    width: 28vw;
     margin-left: auto;
     margin-right: auto;
 }
 
 .center-container input {
-    max-width: 100%;
+    max-width: 60%;
 }
 
 .input-container,
@@ -182,16 +187,20 @@ body {
 }
 
 .logbuttons-container .button {
-    margin-top: 10px;
+    margin-top: 1vmin;
     width: 49%
 }
 
-.logout-container {
-    display: flex;
-    align-items: center;
+.logout-container .button{
+    width:14%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2vh;
 }
 
 .register-msg {
-    height: 16px;
+    font-size:2vmin;
+    height: 2vmin;
     white-space: pre;
 }
