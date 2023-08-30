@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
-    <title>Emojitar - by X.X.</title>
+    <title>Emojitar - XX</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sen&display=swap" rel="stylesheet">
@@ -33,7 +33,7 @@
                         <div class="component-box">
                             <div class="label">Pick a face:</div>
                             <div class="image-container">
-                                <div class="image" v-for="item in facelist">
+                                <div class="image" v-for="item in facelist" v-on:click="selectedlist[0]='item'">
                                     <img :src="compopath+item.split('-')[0]+'/'+item+'.png'">
                                 </div>
                             </div>
@@ -41,7 +41,7 @@
                         <div class="component-box">
                             <div class="label">Pick a hair:</div>
                             <div class="image-container">
-                                <div class="image" v-for="item in hairlist">
+                                <div class="image" v-for="item in hairlist" v-on:click="selectedlist[1]='item'">
                                     <img :src="compopath+item.split('-')[0]+'/'+item+'.png'">
                                 </div>
                             </div>
@@ -49,7 +49,7 @@
                         <div class="component-box">
                             <div class="label">Pick an eyes:</div>
                             <div class="image-container">
-                                <div class="image" v-for="item in eyeslist">
+                                <div class="image" v-for="item in eyeslist" v-on:click="selectedlist[2]='item'">
                                     <img :src="compopath+item.split('-')[0]+'/'+item+'.png'">
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                         <div class="component-box">
                             <div class="label">Pick a mouth:</div>
                             <div class="image-container">
-                                <div class="image" v-for="item in mouthlist">
+                                <div class="image" v-for="item in mouthlist" v-on:click="selectedlist[3]='item'">
                                     <img :src="compopath+item.split('-')[0]+'/'+item+'.png'">
                                 </div>
                             </div>
@@ -67,8 +67,8 @@
                 <div class="description">
                     <div class="desc-label">Write a description:</div>
                     <div class="desc-box">
-                        <input type="text" v-model="description" />
-                        <button class="button">SUBMIT</button>
+                        <textarea rows="2" v-model="description"></textarea>
+                        <button class="button" v-on:click="submitbutton">SUBMIT</button>
                     </div>
 
                 </div>
@@ -154,7 +154,7 @@
 
             <div class="content" v-if="content=='me'">
                 <div v-if="loggedin==false" class="logpage">
-                    <h1>SIGN UP OR LOG IN HERE!</h1>
+                    <div>SIGN UP OR LOG IN HERE!</div>
                     <div>
                         <label for="username-input">Username:</label>
                         <input id="username-input" type="text" v-model="usernameInput" />
@@ -169,7 +169,7 @@
                         <div class="register-msg" v-if="registermsg!=''">{{registerMsg}}</div>
                     </div>
                 </div>
-                <div v-if="loggedin==true" class="logpage">
+                <div v-if="loggedin==true" class="loggedinpage">
                     <div class="register-msg" v-if="registerMsg!=''">{{registerMsg}}</div>
                     <div class="welcome-msg">Welcome to Emojitar, {{currentUser}}!</div>
                     <button class="button" v-on:click="logout">LOG-OUT</button>
@@ -179,9 +179,9 @@
         </div>
 
         <div class="navigation-bar">
-            <button class="button" v-on:click="selected='make'">MAKE YOUR EMOJITAR</button>
-            <button class="button" v-on:click="selected='view',viewPage='all'">VIEW ALL EMOJITARS</button>
-            <button class="button" v-on:click="selected='me'">ME</button>
+            <button class="button" v-on:click="content='make'">MAKE YOUR EMOJITAR</button>
+            <button class="button" v-on:click="content='view',viewPage='all'">VIEW ALL EMOJITARS</button>
+            <button class="button" v-on:click="content='me'">ME</button>
         </div>
 
     </div>
