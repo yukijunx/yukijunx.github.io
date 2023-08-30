@@ -118,7 +118,7 @@ window.onload = () => {
                 await this.getEmojitar();
             },
             submitbutton: async function () {
-                for (i = 0; i < this.allEmojitars.length; i++) {
+                for (let i = 0; i < this.allEmojitars.length; i++) {
                     if (
                         this.allEmojitars[i].face == this.selectedlist[0] &&
                         this.allEmojitars[i].hair == this.selectedlist[1] &&
