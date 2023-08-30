@@ -58,7 +58,7 @@
                             <div class="label">Pick a mouth:</div>
                             <div class="image-container">
                                 <div class="image" v-for="item in mouthlist">
-                                    <img :src="compopath+item">
+                                    <img :src="compopath+item.split('-')[0]+'/'+item+'.png'>
                                 </div>
                             </div>
                         </div>
