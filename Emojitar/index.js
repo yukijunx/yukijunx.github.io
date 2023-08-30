@@ -17,7 +17,6 @@ window.onload = () => {
                 currentUser: undefined,
                 usernameInput: '',
                 passwordInput: '',
-                registermsg: '',
             }
         },
         methods: {
@@ -33,10 +32,9 @@ window.onload = () => {
                     var resp = await fetch('https://fixed-silver-cough.glitch.me/EmojitarLogin', { method: 'GET', headers: { "Authorization": "Basic " + user_key } });
                     if (resp.status == 200) {
                         var dat = await resp.json();
+                        alert('Logged in succesfully!')
                         this.loggedin = true;
                         this.currentUser = dat;
-                        this.registerMsg = '';
-                        alert('Logged in succesfully!')
                     };
                     if (resp.status == 401) {
                         var error = await resp.text();
@@ -54,14 +52,13 @@ window.onload = () => {
                 };
                 try {
                     var resp = await fetch(`https://fixed-silver-cough.glitch.me/EmojitarRegister/${this.usernameInput}/${this.passwordInput}`);
-                    var dat = await resp.json();
+                    var dat = await resp.text();
                     if (resp.status == 400) {
-                        this.registerMsg = dat;
+                        alert(dat);
                     };
                     if (resp.status == 200) {
                         this.loggedin = true;
                         this.currentUser = this.usernameInput;
-                        this.registerMsg = dat;
                         this.usernameInput = '';
                         this.passwordInput = '';
                         alert('Registered and logged in succesfully!')
@@ -71,7 +68,6 @@ window.onload = () => {
             logout: function () {
                 this.loggedin = false;
                 this.currentUser = '';
-                this.registerMsg = '';
             },
             getEmojitar: async function () {
                 await fetch('https://fixed-silver-cough.glitch.me/getemojitar', {

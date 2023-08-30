@@ -155,7 +155,7 @@
             <div class="content" v-if="content=='me'">
                 <div v-if="loggedin==false" class="logpage">
                     <div class="smalltitle">SIGN UP OR LOG IN HERE!</div>
-                    <div class="register-msg">{{registermsg}}</div>
+                    <div class="register-msg"></div>
                     <div class="center-container">
                         <div class="input-container">
                             <label for="username-input">Username:</label>
@@ -172,7 +172,7 @@
                     </div>
                 </div>
                 <div v-if="loggedin==true" class="loggedinpage">
-                    <div class="register-msg" v-if="registerMsg!=''">{{registerMsg}}</div>
+                    <div class="register-msg"></div>
                     <div class="smalltitle">Welcome to Emojitar, {{currentUser}}!</div>
                     <div class="logout-container"><button class="button" v-on:click="logout">LOG-OUT</button></div>
                 </div>
