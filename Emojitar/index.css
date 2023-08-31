@@ -124,7 +124,7 @@ body {
 
 .description {
     max-height: 10vh;
-    margin: 5vmin;
+    margin: 3vmin;
     margin-top: 2vmin;
     margin-bottom: 0;
 }
@@ -295,13 +295,13 @@ body {
     overflow: scroll;
 }
 .viewcontainer .createboard{
-    max-height: 40vh;
+    max-height: 48vh;
 }
 .viewcontainer .preview-container{
-    height: 40vh;
+    height: 42vh;
 }
 .viewcontainer .components-container{
-    height: 40vh;
+    height: 42vh;
 }
 .viewcontainer .description{
     max-height: 26vh;
@@ -309,4 +309,7 @@ body {
 .viewcontainer .rate-box{
     display: flex;
     flex-direction: row;
+}
+.rated{
+    background-color: var(--blue-dark);
 }

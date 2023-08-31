@@ -128,13 +128,13 @@
                                     <div>Created by {{item.creator}} on {{item.date}}.</div>
                                     <div>{{averageRate(item.rate)}} out of 5 rated by {{item.rate.length}} people.</div>
                                     <div>Creator's description:</div>
-                                    <div style="font-style: italic;" class="emo-desc">{{item.description}}</div>
+                                    <div style="font-style: italic; font-size: 2.3vmin;" class="emo-desc">{{item.description}}</div>
                                     <button v-on:click="emojitarviewing='all'" class="button" id="backbutton">Back</button>
                                     <button v-on:click="deleteEmo(item.id)" v-show="currentUser==item.creator" class="button" id="deletebutton">Delete</button>
                                 </div>
                                 <div class="comment-container">
                                     <div>Comments:</div>
-                                    <dl style="font-style: italic;" class="comment-list">
+                                    <dl style="font-style: italic; font-size: 2.3vmin;" class="comment-list">
                                         <div v-show="item.comments.length == 0">No comments for now...</div>
                                         <template v-for="comm in item.comments">
                                             <dt>{{comm.info}}</dt>
@@ -148,16 +148,16 @@
                             <div class="rate-box">
                                 <div for="rate-container">Rate this emojitar:</div>
                                 <div id="rate-container">
-                                    <button class="button" v-on:click="sendRate(item.id,1)">1</button>
-                                    <button class="button" v-on:click="sendRate(item.id,2)">2</button>
-                                    <button class="button" v-on:click="sendRate(item.id,3)">3</button>
-                                    <button class="button" v-on:click="sendRate(item.id,4)">4</button>
-                                    <button class="button" v-on:click="sendRate(item.id,5)">5</button>
+                                    <button class="button" :class="{rated: rateSent(item,1)}" v-on:click="sendRate(item.id,1)">1</button>
+                                    <button class="button" :class="{rated: rateSent(item,2)}" v-on:click="sendRate(item.id,2)">2</button>
+                                    <button class="button" :class="{rated: rateSent(item,3)}" v-on:click="sendRate(item.id,3)">3</button>
+                                    <button class="button" :class="{rated: rateSent(item,4)}" v-on:click="sendRate(item.id,4)">4</button>
+                                    <button class="button" :class="{rated: rateSent(item,5)}" v-on:click="sendRate(item.id,5)">5</button>
                                 </div>
                             </div>
                             <div class="desc-label">Leave a comment:</div>
                             <div class="desc-box">
-                                <textarea rows="2" v-model="description"></textarea>
+                                <textarea rows="2" v-model="usercomment"></textarea>
                                 <button class="button" v-on:click="sendComment(item.id,usercomment)">SUBMIT</button>
                             </div>
 

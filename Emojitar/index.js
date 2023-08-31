@@ -19,8 +19,8 @@ window.onload = () => {
                 passwordInput: '',
                 emojitarviewing: 'all',
                 usercomment: '',
-                filterDate:'0000-00-00',
-                filterRate:0,
+                filterDate: '0000-00-00',
+                filterRate: 0,
             }
         },
         methods: {
@@ -59,7 +59,7 @@ window.onload = () => {
                     var dat = await resp.text();
                     if (dat == "occupied") {
                         alert("The username is already occupied!");
-                    }else if(resp.status == 200) {
+                    } else if (resp.status == 200) {
                         this.loggedin = true;
                         this.currentUser = this.usernameInput;
                         this.usernameInput = '';
@@ -164,7 +164,7 @@ window.onload = () => {
                                 var dat = await resp.json();
                                 this.allEmojitars = dat;
                             } catch (err) { console.log('Error: ', err) };
-                            this.viewPage = 'all';
+                            this.emojitarviewing = 'all';
                         }
                     }
                 };
@@ -197,6 +197,20 @@ window.onload = () => {
                     sum = sum + parseInt(numlist[num])
                 };
                 return (sum / rateList.length)
+            },
+            rateSent: function (item, num) {
+                let ratelist = item.rate;
+                for (let rateindex in ratelist) {
+                    if (Object.keys(ratelist[rateindex])[0] == this.currentUser) {
+                        if (Object.values(ratelist[rateindex])[0] == num) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        return false;
+                    }
+                }
             },
             sendComment: async function (emoid, commentToSend) {
                 if (this.loggedin == false) {
