@@ -225,6 +225,7 @@ window.onload = () => {
             },
         },
         mounted: function () {
+            this.getEmojitar();
         },
     });
     app.mount('#body-container');

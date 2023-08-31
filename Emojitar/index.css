@@ -214,19 +214,17 @@ body {
     color: var(--grey);
 }
 
-.filter-container .button .register-msg {
-    font-size: 2vmin;
-    height: 2vmin;
-    white-space: pre;
+.filter-container {
+    padding: 2vmin;
 }
-
 
 .emojitar-grid {
     display: grid;
-    padding: 1vmin;
+    padding: 2vmin;
     grid-template-columns: repeat(6, 1fr);
     grid-gap: 2vmin;
 }
+
 .emojitar-grid-item {
     position: relative;
     padding: 1vmin;
@@ -235,15 +233,18 @@ body {
     border-radius: 12px;
     text-align: center;
 }
+
 .emojitar-grid-item img {
     position: absolute;
-    top: 0px;
-    left: 0px;
-    max-width: 100%;
-    max-height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10vmin;
+    height: 10vmin;
     cursor: pointer;
 }
-.emojitar-grid-item div {
+
+.emojitar-grid-info {
     color: var(--green-dark);
     border-top: 2px solid var(--green-dark);
     position: absolute;
@@ -251,6 +252,6 @@ body {
     left: 0;
     right: 0;
     z-index: 1;
-    padding:1vmin;
+    padding: 1vmin;
     padding-bottom: 0;
 }
