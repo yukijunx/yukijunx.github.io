@@ -81,9 +81,7 @@ window.onload = () => {
                 })
                     .then((res) => res.json())
                     .then((resjson) => {
-                        console.log('resjson of getEmojitar', resjson)
                         this.allEmojitars = resjson;
-                        console.log('after getEmojitar', this.allEmojitars)
                     })
                     .catch(err => { console.log('get all emojitars error: ', err) })
             },

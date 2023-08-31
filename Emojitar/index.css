@@ -1,5 +1,5 @@
 * {
-    outline: 1px solid red;
+    /* outline: 1px solid red; */
     box-sizing: border-box;
 }
 
@@ -270,46 +270,99 @@ body {
     border-radius: 5px;
     margin: 0.5vmin;
 }
-.emo-info{
-    position:relative;
+
+.emo-info {
+    position: relative;
     height: 23vh;
 }
+
 #deletebutton {
-    position:absolute;
-    bottom:1vmin;
+    position: absolute;
+    bottom: 1vmin;
     left: 0;
 }
+
 #backbutton {
-    position:absolute;
-    bottom:1vmin;
+    position: absolute;
+    bottom: 1vmin;
     right: 0;
 }
-.emo-desc{
+
+.emo-desc {
     white-space: nowrap;
     overflow: scroll;
 }
-.comment-container{
+
+.comment-container {
     height: 17vh;
 }
-.comment-list{
+
+.comment-list {
+    margin: 0;
     overflow: scroll;
 }
-.viewcontainer .createboard{
+
+.viewcontainer .createboard {
     max-height: 48vh;
 }
-.viewcontainer .preview-container{
+
+.viewcontainer .preview-container {
     height: 42vh;
 }
-.viewcontainer .components-container{
+
+.viewcontainer .components-container {
     height: 42vh;
 }
-.viewcontainer .description{
+
+.viewcontainer .description {
     max-height: 26vh;
 }
-.viewcontainer .rate-box{
+
+.viewcontainer .rate-box {
     display: flex;
     flex-direction: row;
 }
-.rated{
+
+.rate-box .button {
+    margin-left: 1vmin;
+}
+
+.rated {
     background-color: var(--blue-dark);
+}
+
+
+.backhome {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 3vmin;
+    left: 3vmin;
+    width: 50%;
+}
+
+.logohome {
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.logohome div {
+    transform: scale(150%);
+    margin-bottom: -10px;
+}
+
+.labelhome {
+    transition: all 0.5s ease-in-out;
+    margin-left: 1vmin;
+    opacity: 0;
+    font-size: 2.2vmin;
+}
+
+.logohome:hover+.labelhome {
+    display: block;
+    opacity: 1;
+}
+
+.logohome:hover {
+    transform: rotate(45deg);
 }
