@@ -111,7 +111,7 @@
                 </div>
                 <!-- When user has selected one emojitar to view -->
                 <div v-for="item in allEmojitars">
-                    <div v-if="emojitarviewing==item.id">
+                    <div v-if="emojitarviewing==item.id" class="viewcontainer">
                         <div class="createboard">
                             <div class="preview-container">
                                 <div class="preview-item"><img
@@ -135,6 +135,7 @@
                                 <div class="comment-container">
                                     <div>Comments:</div>
                                     <dl style="font-style: italic;" class="comment-list">
+                                        <div v-show="item.comments.length == 0">No comments for now...</div>
                                         <template v-for="comm in item.comments">
                                             <dt>{{comm.info}}</dt>
                                             <dd>{{comm.contend}}</dd>
@@ -144,7 +145,7 @@
                             </div>
                         </div>
                         <div class="description">
-                            <div>Rate this emojitar:</div>
+                            <label for="rate-container">Rate this emojitar:</label>
                             <div id="rate-container">
                                 <button class="button" v-on:click="sendRate(item.id,1)">1</button>
                                 <button class="button" v-on:click="sendRate(item.id,2)">2</button>

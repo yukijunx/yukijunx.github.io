@@ -18,7 +18,7 @@
 }
 
 #body-container {
-    width: 70vw;
+    width: 60vw;
     height: 80vh;
     margin-left: auto;
     margin-right: auto;
@@ -61,6 +61,7 @@ body {
     box-shadow: none;
     border: none;
     padding: 5px;
+    border-radius: 6px;
 }
 
 .button:hover {
@@ -72,7 +73,7 @@ body {
     justify-content: space-between;
     align-items: center;
     max-height: 52vh;
-    width: 70vw;
+    width: 60vw;
 }
 
 .preview-container {
@@ -100,7 +101,7 @@ body {
 
 .components-container {
     max-width: 48vw;
-    margin: 5vmin;
+    margin: 3vmin;
 }
 
 .image-container {
@@ -293,4 +294,13 @@ body {
 }
 .comment-list{
     overflow: scroll;
+}
+.viewcontainer .createboard{
+    max-height: 40vh;
+}
+.viewcontainer .preview-container{
+    height: 40vh;
+}
+.viewcontainer .components-container{
+    height: 40vh;
 }
