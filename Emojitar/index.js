@@ -17,6 +17,10 @@ window.onload = () => {
                 currentUser: undefined,
                 usernameInput: '',
                 passwordInput: '',
+                emojitarviewing: 'all',
+                usercomment: '',
+                filterDate:'0000-00-00',
+                filterRate:0,
             }
         },
         methods: {
@@ -127,7 +131,7 @@ window.onload = () => {
                     }
                 };
                 if (this.loggedin == false) {
-                    alert('You have not signed in yet!');
+                    alert('You have not logged in yet!');
                     return;
                 } else if (this.description == '') {
                     alert('Description cannot be empty!')
@@ -135,7 +139,91 @@ window.onload = () => {
                 } else {
                     this.submitEmojitar();
                 }
-            }
+            },
+            applyFilter: function () {
+                for (let i = this.allEmojitars.length - 1; i >= 0; i--) {
+                    let emoDate = new Date(this.allEmojitars[i].date);
+                    let filDate = new Date(this.filterDate);
+                    if ((emoDate < filDate) || (this.averageRate(this.allEmojitars[i].rate) < this.filterRate)) {
+                        this.allEmojitars.splice(i, 1)
+                    }
+                }
+            },
+            clearFilter: async function () {
+                this.getAllEmojitars();
+                this.filterRate = 0;
+            },
+            deleteEmo: async function (emoid) {
+                if (this.loggedin == false) {
+                    alert('You have not logged in yet!');
+                    return;
+                } else {
+                    if (this.currentUser == this.allEmojitars[emoid].creator) {
+                        if (confirm('You sure you want to delete this emojitar?')) {
+                            try {
+                                var resp = await fetch(`https://fixed-silver-cough.glitch.me/deleteemojitar/${emoid}`, { credentials: 'include', withCredentials: true });
+                                var dat = await resp.json();
+                                this.allEmojitars = dat;
+                            } catch (err) { console.log('Error: ', err) };
+                            this.viewPage = 'all';
+                        }
+                    }
+                };
+            },
+            sendRate: async function (emoid, starnum) {
+                if (this.loggedin == false) {
+                    alert('You have not logged in yet!');
+                    return;
+                } else if (this.currentUser == this.allEmojitars[emoid].creator) {
+                    alert('You cannot rate your own emojitar!')
+                } else {
+                    let url = `https://fixed-silver-cough.glitch.me/rateemojitar/${emoid}/${this.currentUser}/${starnum}`;
+                    try {
+                        var resp = await fetch(url, { credentials: 'include', withCredentials: true });
+                        var dat = await resp.json();
+                        this.allEmojitars[emoid].rate = dat;
+                    } catch (err) { console.log('Error:', err) };
+                }
+            },
+            averageRate: function (rateList) {
+                if (rateList.length == 0) {
+                    return 0
+                };
+                let numlist = [];
+                for (let j in rateList) {
+                    numlist.push(Object.values(rateList[j])[0])
+                };
+                let sum = 0;
+                for (let num in numlist) {
+                    sum = sum + parseInt(numlist[num])
+                };
+                return (sum / rateList.length)
+            },
+            sendComment: async function (emoid, commentToSend) {
+                if (this.loggedin == false) {
+                    alert('You have not logged in yet!');
+                    return;
+                } else if (this.currentUser == this.allEmojitars[emoid].creator) {
+                    alert('You cannot comment on your own emojitar!')
+                } else if (this.usercomment == '') {
+                    alert('Comment cannot be empty!')
+                    return;
+                } else {
+                    let date = new Date().toLocaleDateString().replace(/[^apm\d]+/gi, '-');
+                    let time = new Date().toLocaleTimeString();
+                    let datetime = date + ' ' + time;
+                    let url = `https://fixed-silver-cough.glitch.me/commentemojitar/${emoid}/${this.currentUser}/${commentToSend}/${datetime}`;
+                    try {
+                        var resp = await fetch(url, { credentials: 'include', withCredentials: true });
+                        if (resp.ok) {
+                            this.loggedin = true;
+                            this.usercomment = '';
+                        };
+                        var dat = await resp.json();
+                        this.allEmojitars[emoid].comments = dat;
+                    } catch (err) { console.log('Error:', err) };
+                }
+            },
         },
         mounted: function () {
         },

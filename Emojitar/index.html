@@ -120,7 +120,7 @@
                                 <br>{{item.description}}
                             </p>
                             <button v-on:click="viewPage='all'" class="button">Back</button>
-                            <button v-on:click="deleteEmo(item.id)" class="button">Delete</button>
+                            <button v-on:click="deleteEmo(item.id)" v-show="currentUser==item.creator" class="button">Delete</button>
                         </div>
                     </div>
                     <div v-if="viewPage==item.id" class="comment-area">
@@ -143,8 +143,8 @@
                                 <button class="button" v-on:click="sendRate(item.id,5)">5</button>
                             </div>
                             <div id="write-comment">
-                                <label for="commentinput">Enter your comment:</label>
-                                <input id="commentinput" type="text" v-model="usercomment" />
+                                <div>Enter your comment:</div>
+                                <textarea rows="3" v-model="usercomment" />
                                 <button v-on:click="sendComment(item.id,usercomment)" id="send-button">Send</button>
                             </div>
                         </div>
@@ -158,11 +158,11 @@
                     <div class="register-msg"></div>
                     <div class="center-container">
                         <div class="input-container">
-                            <label for="username-input">Username:</label>
+                            <div>Username:</div>
                             <input id="username-input" type="text" v-model="usernameInput" />
                         </div>
                         <div class="input-container">
-                            <label for="password-input">Password:</label>
+                            <div>Password:</div>
                             <input id="password-input" type="password" v-model="passwordInput" />
                         </div>
                         <div class="logbuttons-container">
