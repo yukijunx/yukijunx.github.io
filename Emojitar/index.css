@@ -271,7 +271,6 @@ body {
     margin: 0.5vmin;
 }
 .emo-info{
-    padding:1vmin;
     position:relative;
     height: 23vh;
 }
@@ -290,7 +289,7 @@ body {
     overflow: scroll;
 }
 .comment-container{
-    height: 23vh;
+    height: 17vh;
 }
 .comment-list{
     overflow: scroll;
@@ -303,4 +302,11 @@ body {
 }
 .viewcontainer .components-container{
     height: 40vh;
+}
+.viewcontainer .description{
+    max-height: 26vh;
+}
+.viewcontainer .rate-box{
+    display: flex;
+    flex-direction: row;
 }
