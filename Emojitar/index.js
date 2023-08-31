@@ -36,9 +36,9 @@ window.onload = () => {
                     var resp = await fetch('https://fixed-silver-cough.glitch.me/EmojitarLogin', { method: 'GET', headers: { "Authorization": "Basic " + user_key } });
                     if (resp.status == 200) {
                         var dat = await resp.json();
-                        alert('Logged in succesfully!')
                         this.loggedin = true;
                         this.currentUser = dat;
+                        alert('Logged in succesfully!');
                     };
                     if (resp.status == 401) {
                         var error = await resp.text();
@@ -57,10 +57,9 @@ window.onload = () => {
                 try {
                     var resp = await fetch(`https://fixed-silver-cough.glitch.me/EmojitarRegister/${this.usernameInput}/${this.passwordInput}`);
                     var dat = await resp.text();
-                    if (resp.status == 400) {
-                        alert(dat);
-                    };
-                    if (resp.status == 200) {
+                    if (dat == "occupied") {
+                        alert("The username is already occupied!");
+                    }else if(resp.status == 200) {
                         this.loggedin = true;
                         this.currentUser = this.usernameInput;
                         this.usernameInput = '';

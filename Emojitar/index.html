@@ -91,12 +91,12 @@
                         <button class="button" v-on:click="applyFilter">APPLY</button>
                         <button class="button" v-on:click="clearFilter">CLEAR</button>
                     </div>
-                    <div class="emojitar-container">
-                        <div v-for="item in allEmojitars" class="emojitar-item">
-                            <img :src="parentPath+item.face" v-on:click="viewPage=item.id">
-                            <img :src="parentPath+item.hair" v-on:click="viewPage=item.id">
-                            <img :src="parentPath+item.eyes" v-on:click="viewPage=item.id">
-                            <img :src="parentPath+item.mouth" v-on:click="viewPage=item.id">
+                    <div class="emojitar-grid">
+                        <div v-for="item in allEmojitars" class="emojitar-grid-item">
+                            <img :src="compopath+item.split('-')[0]+'/'+item+'.png'" v-on:click="viewPage=item.id">
+                            <img :src="compopath+item.split('-')[0]+'/'+item+'.png'" v-on:click="viewPage=item.id">
+                            <img :src="compopath+item.split('-')[0]+'/'+item+'.png'" v-on:click="viewPage=item.id">
+                            <img :src="compopath+item.split('-')[0]+'/'+item+'.png'" v-on:click="viewPage=item.id">
                             <div>
                                 <span style="float:left">{{item.creator}}</span>
                                 <span style="float:right">{{averageRate(item.rate)}}</span>

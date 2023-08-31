@@ -9,6 +9,7 @@
     --yellow: #f9ed84;
     --yellow-dark: #dece44;
     --green: #bff578;
+    --green-dark: #415403;
     --blue: #8eb5f5;
     --blue-light: #81ebe9;
     --blue-dark: #59b5b4;
@@ -136,13 +137,6 @@ body {
 
 .desc-box .button {
     width: 20vw;
-    background-color: var(--yellow);
-    color: var(--grey);
-}
-
-.desc-box .button:hover {
-    background-color: var(--yellow-dark);
-    color: var(--grey);
 }
 
 .desc-box textarea {
@@ -204,20 +198,59 @@ body {
     margin-top: 2vh;
 }
 
+.desc-box .button,
+.filter-container .button,
 .logbuttons-container .button,
 .logout-container .button {
     background-color: var(--yellow);
     color: var(--grey);
 }
 
+.desc-box .button:hover,
+.filter-container .button:hover,
 .logbuttons-container .button:hover,
 .logout-container .button:hover {
     background-color: var(--yellow-dark);
     color: var(--grey);
 }
 
-.register-msg {
+.filter-container .button .register-msg {
     font-size: 2vmin;
     height: 2vmin;
     white-space: pre;
+}
+
+
+.emojitar-grid {
+    display: grid;
+    padding: 1vmin;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 2vmin;
+}
+.emojitar-grid-item {
+    position: relative;
+    padding: 1vmin;
+    height: 20vmin;
+    background-color: var(--green);
+    border-radius: 12px;
+    text-align: center;
+}
+.emojitar-grid-item img {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    max-width: 100%;
+    max-height: 100%;
+    cursor: pointer;
+}
+.emojitar-grid-item div {
+    color: var(--green-dark);
+    border-top: 2px solid var(--green-dark);
+    position: absolute;
+    bottom: 3vmin;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    padding:1vmin;
+    padding-bottom: 0;
 }
