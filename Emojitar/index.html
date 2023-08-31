@@ -93,10 +93,10 @@
                     </div>
                     <div class="emojitar-grid">
                         <div v-for="item in allEmojitars" class="emojitar-grid-item">
-                            <img :src="compopath+item.split('-')[0]+'/'+item+'.png'" v-on:click="viewPage=item.id">
-                            <img :src="compopath+item.split('-')[0]+'/'+item+'.png'" v-on:click="viewPage=item.id">
-                            <img :src="compopath+item.split('-')[0]+'/'+item+'.png'" v-on:click="viewPage=item.id">
-                            <img :src="compopath+item.split('-')[0]+'/'+item+'.png'" v-on:click="viewPage=item.id">
+                            <img :src="compopath+item.face.split('-')[0]+'/'+item+'.png'" v-on:click="viewPage=item.id">
+                            <img :src="compopath+item.hair.split('-')[0]+'/'+item+'.png'" v-on:click="viewPage=item.id">
+                            <img :src="compopath+item.eyes.split('-')[0]+'/'+item+'.png'" v-on:click="viewPage=item.id">
+                            <img :src="compopath+item.mouth.split('-')[0]+'/'+item+'.png'" v-on:click="viewPage=item.id">
                             <div>
                                 <span style="float:left">{{item.creator}}</span>
                                 <span style="float:right">{{averageRate(item.rate)}}</span>

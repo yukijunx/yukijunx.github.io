@@ -149,7 +149,7 @@ window.onload = () => {
                 }
             },
             clearFilter: async function () {
-                this.getAllEmojitars();
+                this.getEmojitar();
                 this.filterRate = 0;
             },
             deleteEmo: async function (emoid) {
