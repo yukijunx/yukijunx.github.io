@@ -70,7 +70,6 @@
                         <textarea rows="2" v-model="description"></textarea>
                         <button class="button" v-on:click="submitbutton">SUBMIT</button>
                     </div>
-
                 </div>
             </div>
 
@@ -94,10 +93,14 @@
                     <div class="emojitar-grid">
                         <div v-for="item in allEmojitars" class="emojitar-grid-item">
                             <div class="emojitar-grid-imgs">
-                                <img :src="compopath+item.face.split('-')[0]+'/'+item.face+'.png'" v-on:click="emojitarviewing=item.id">
-                                <img :src="compopath+item.hair.split('-')[0]+'/'+item.hair+'.png'" v-on:click="emojitarviewing=item.id">
-                                <img :src="compopath+item.eyes.split('-')[0]+'/'+item.eyes+'.png'" v-on:click="emojitarviewing=item.id">
-                                <img :src="compopath+item.mouth.split('-')[0]+'/'+item.mouth+'.png'" v-on:click="emojitarviewing=item.id">
+                                <img :src="compopath+item.face.split('-')[0]+'/'+item.face+'.png'"
+                                    v-on:click="emojitarviewing=item.id">
+                                <img :src="compopath+item.hair.split('-')[0]+'/'+item.hair+'.png'"
+                                    v-on:click="emojitarviewing=item.id">
+                                <img :src="compopath+item.eyes.split('-')[0]+'/'+item.eyes+'.png'"
+                                    v-on:click="emojitarviewing=item.id">
+                                <img :src="compopath+item.mouth.split('-')[0]+'/'+item.mouth+'.png'"
+                                    v-on:click="emojitarviewing=item.id">
                             </div>
                             <div class="emojitar-grid-info">
                                 <span style="float:left">{{item.creator}}</span>
@@ -108,35 +111,40 @@
                 </div>
                 <!-- When user has selected one emojitar to view -->
                 <div v-for="item in allEmojitars">
-                    <div v-if="emojitarviewing==item.id" class="createboard">
-                        <div class="preview-container">
-                            <img :src="compopath+item.face.split('-')[0]+'/'+item.face+'.png'">
-                            <img :src="compopath+item.hair.split('-')[0]+'/'+item.hair+'.png'">
-                            <img :src="compopath+item.eyes.split('-')[0]+'/'+item.eyes+'.png'">
-                            <img :src="compopath+item.mouth.split('-')[0]+'/'+item.mouth+'.png'">
+                    <div v-if="emojitarviewing==item.id">
+                        <div class="createboard">
+                            <div class="preview-container">
+                                <div class="preview-item"><img
+                                        :src="compopath+item.face.split('-')[0]+'/'+item.face+'.png'"></div>
+                                <div class="preview-item"><img
+                                        :src="compopath+item.hair.split('-')[0]+'/'+item.hair+'.png'"></div>
+                                <div class="preview-item"><img
+                                        :src="compopath+item.eyes.split('-')[0]+'/'+item.eyes+'.png'"></div>
+                                <div class="preview-item"><img
+                                        :src="compopath+item.mouth.split('-')[0]+'/'+item.mouth+'.png'"></div>
+                            </div>
+                            <div class="components-container">
+                                <div class="emo-info">
+                                    <div>Created by {{item.creator}} on {{item.date}}.</div>
+                                    <div>{{averageRate(item.rate)}} out of 5 rated by {{item.rate.length}} people.</div>
+                                    <div>Creator's description:</div>
+                                    <div style="font-style: italic;" class="emo-desc">{{item.description}}</div>
+                                    <button v-on:click="emojitarviewing='all'" class="button" id="backbutton">Back</button>
+                                    <button v-on:click="deleteEmo(item.id)" v-show="currentUser==item.creator" class="button" id="deletebutton">Delete</button>
+                                </div>
+                                <div class="comment-container">
+                                    <div>Comments:</div>
+                                    <dl style="font-style: italic;" class="comment-list">
+                                        <template v-for="comm in item.comments">
+                                            <dt>{{comm.info}}</dt>
+                                            <dd>{{comm.contend}}</dd>
+                                        </template>
+                                    </dl>
+                                </div>
+                            </div>
                         </div>
-                        <div class="components-container">
-                            <p id="emo-info">Created by {{item.creator}} on {{item.date}}.
-                                <br>{{averageRate(item.rate)}} out of 5 rated by {{item.rate.length}} people.
-                                <br>Creator's description:
-                                <br>{{item.description}}
-                            </p>
-                            <button v-on:click="emojitarviewing='all'" class="button">Back</button>
-                            <button v-on:click="deleteEmo(item.id)" v-show="currentUser==item.creator" class="button">Delete</button>
-                        </div>
-                    </div>
-                    <div v-if="emojitarviewing==item.id" class="comment-area">
-                        <div id="comments-left">
-                            <p>Comments:</p>
-                            <dl>
-                                <template v-for="comm in item.comments">
-                                    <dt>{{comm.info}}</dt>
-                                    <dd>{{comm.contend}}</dd>
-                                </template>
-                            </dl>
-                        </div>
-                        <div id=comments-right>
-                            <label for="rate-buttons">Rate this emojitar:</label>
+                        <div class="description">
+                            <div>Rate this emojitar:</div>
                             <div id="rate-container">
                                 <button class="button" v-on:click="sendRate(item.id,1)">1</button>
                                 <button class="button" v-on:click="sendRate(item.id,2)">2</button>
@@ -144,10 +152,12 @@
                                 <button class="button" v-on:click="sendRate(item.id,4)">4</button>
                                 <button class="button" v-on:click="sendRate(item.id,5)">5</button>
                             </div>
-                            <div id="write-comment">
-                                <div>Enter your comment:</div>
-                                <textarea rows="3" v-model="usercomment"></textarea>
-                                <button v-on:click="sendComment(item.id,usercomment)" id="send-button">Send</button>
+                            <div class="description">
+                                <div class="desc-label">Leave a comment:</div>
+                                <div class="desc-box">
+                                    <textarea rows="2" v-model="description"></textarea>
+                                    <button class="button" v-on:click="sendComment(item.id,usercomment)">SUBMIT</button>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -132,19 +132,15 @@ body {
     display: flex;
     flex-direction: row;
     height: 6vh;
-    margin-top: vmin;
 }
 
 .desc-box .button {
     width: 20vw;
+    margin-left: 2vmin;
 }
 
 .desc-box textarea {
     width: 75%;
-}
-
-.desc-box button {
-    margin-left: 2vmin;
 }
 
 .navigation-bar {
@@ -198,6 +194,7 @@ body {
     margin-top: 2vh;
 }
 
+.emo-info .button,
 .desc-box .button,
 .filter-container .button,
 .logbuttons-container .button,
@@ -206,6 +203,7 @@ body {
     color: var(--grey);
 }
 
+.emo-info .button:hover,
 .desc-box .button:hover,
 .filter-container .button:hover,
 .logbuttons-container .button:hover,
@@ -236,22 +234,63 @@ body {
 
 .emojitar-grid-imgs {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 10vmin;
-    height: 10vmin;
+    width: 90%;
+    height: 12vmin;
     cursor: pointer;
 }
 
+.emojitar-grid-imgs img {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    max-height: 100%;
+    max-width: 100%;
+}
+
 .emojitar-grid-info {
+    height: 5vmin;
     color: var(--green-dark);
     border-top: 2px solid var(--green-dark);
     position: absolute;
-    bottom: 3vmin;
+    bottom: 0;
     left: 0;
     right: 0;
     z-index: 1;
     padding: 1vmin;
     padding-bottom: 0;
+}
+
+.emojitar-grid-info span {
+    max-width: 50%;
+}
+
+.filter-container .button {
+    border-radius: 5px;
+    margin: 0.5vmin;
+}
+.emo-info{
+    padding:1vmin;
+    position:relative;
+    height: 23vh;
+}
+#deletebutton {
+    position:absolute;
+    bottom:1vmin;
+    left: 0;
+}
+#backbutton {
+    position:absolute;
+    bottom:1vmin;
+    right: 0;
+}
+.emo-desc{
+    white-space: nowrap;
+    overflow: scroll;
+}
+.comment-container{
+    height: 23vh;
+}
+.comment-list{
+    overflow: scroll;
 }
