@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<style>
+  table{
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th,td{
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    text-align:left;
+  }
+  tr:hover {background-color:lightgrey;}
+  th{
+    background-color: firebrick;
+    color: white;
+  }
+
+  .header img{
+    float:left;
+    height:80px;
+  }
+  .header h1{
+    position:relative;
+    top:18px;
+    left:20px;
+  }
+
+  .outer{
+    text-align: center;
+  }
+  .pagination{
+    display:inline-block;
+  }
+  .pagination button{
+    border: none;
+    color:black;
+    float: left;
+    text-align: center;
+    padding:8px 8px;
+    text-decoration: none;
+    transition: background-color .3s;
+  }
+  .pagination button.active{
+    background-color: coral;
+    color: white;
+  }
+</style>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>Rolling Stone's Top 500 Songs - XX</title>
+  <!--Load the separate JSON file-->
+  <script src="jsonFile.js"></script>
+</head>
+
+<body>
+
+  <div class="header">
+    <img src=rs.png />
+    <h1 style="color:maroon;font-style:oblique;">Rolling Stone's Top 500 Songs of All Time</h1>
+  </div>
+  <p style="color:maroon; font-size: large; font-style: oblique;"> - the 2010 version. </p>
+
+  <p style="text-align:left;">
+    Displaying 
+    <text id="resultStats1"></text>
+    of 
+    <text id="resultStats2"></text>
+    results.
+
+    <span style="float:right;">
+    <label for="selectYearStart">Filter by year: from </label>
+    <select id="selectYearStart">
+    <!-- Insert years as options here -->
+    </select>
+    <label for="selectYearEnd">to </label>
+    <select id="selectYearEnd">
+    </select>
+    <label for="selectArtist">Search by artist: </label>
+    <!--Added autocomplete so that the input will be deleted after refresh-->
+    <input type="text" id="selectArtist" name="selectArtist" autocomplete="off">
+    <!--Added button so the result will not show until the button is pressed-->
+    <button id="goButton" onclick="updateTable();">Go</button>
+    </span>
+  </p>
+<!--Blank paragraph added so the layout is better looking-->
+<p></p>
+
+  <table id="songTable">
+    <tbody><tr>
+      <th>Rank</th>
+      <th>Title</th>
+      <th>Artist</th>
+      <th>Album</th>
+      <th>Year</th>
+    </tr>
+  </tbody></table>
+
+  <p></p>
+  <div class="outer">
+    <div class="pagination" id="pageButtons">
+    </div>
+  </div>
+  <!--Moved the main script below the table-->
+  <script src="songs.js"></script>
+
+</body></html>
